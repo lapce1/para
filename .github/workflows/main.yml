@@ -1,26 +1,41 @@
-name: Run Script
+name: Move Para-Web Files to Root
 
-on: [workflow_dispatch]
+on:
+  workflow_dispatch: # Allows you to run this manually from the Actions tab
+
+permissions:
+  contents: write # Grants permission to push changes back to your repo
 
 jobs:
-  execute-file:
+  move-files:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write # Required to push files
     steps:
-      - name: Check out repository code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Make script executable
-        run: chmod +x generate-para-site.sh
-
-      - name: Run script
-        run: ./generate-para-site.sh
-
-      - name: Commit and Push Files
+      - name: Configure Git
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@://github.com"
-          git add .
-          git commit -m "Add generated site files" || echo "No changes"
-          git push
+
+      - name: Move files to root
+        run: |
+          if [ -d "para-web" ]; then
+            echo "Moving files out of para-web..."
+            shopt -s dotglob nullglob # Includes hidden files like .env or .gitignore
+            mv para-web/* .
+            rmdir para-web            # Deletes the empty para-web folder
+          else
+            echo "Error: para-web directory not found!"
+            exit 1
+          fi
+
+      - name: Commit and Push changes
+        run: |
+          git add -A
+          if git diff-index --quiet HEAD --; then
+            echo "No changes to commit."
+          else
+            git commit -m "Actions: Move para-web files to root [skip ci]"
+            git push origin ${{ github.ref_name }}
+          fi
