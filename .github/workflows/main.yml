@@ -5,6 +5,8 @@ on: [workflow_dispatch]
 jobs:
   execute-file:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # Required to push files
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -14,3 +16,11 @@ jobs:
 
       - name: Run script
         run: ./generate-para-site.sh
+
+      - name: Commit and Push Files
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@://github.com"
+          git add .
+          git commit -m "Add generated site files" || echo "No changes"
+          git push
