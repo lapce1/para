@@ -17,5 +17,9 @@
     "paths": { "@/*": ["./src/*"] }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  // src/worker is the Cloudflare Worker: it targets @cloudflare/workers-types, not
+  // the Next/DOM lib, and is type-checked separately via tsconfig.worker.json
+  // (npm run cf:typecheck). Excluding it keeps `next build` from choking on
+  // D1Database / Fetcher / ExecutionContext.
+  "exclude": ["node_modules", "src/worker"]
 }

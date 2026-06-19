@@ -45,8 +45,8 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/5 px-5 py-5 text-center text-xs text-bone/40">
-        © {new Date().getFullYear()} {site.name} · {site.city} · Demo sajt — zameni
-        placeholder kontakte i linkove u src/data/site.ts pre objave.
+        © {new Date().getFullYear()} {site.name} — vijetnamska phở kuhinja i dostava, {site.city}.
+        Sva prava zadržana.
       </div>
     </footer>
   );

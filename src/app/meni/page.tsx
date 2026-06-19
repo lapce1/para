@@ -1,6 +1,21 @@
+import type { Metadata } from "next";
 import MenuCard from "@/components/MenuCard";
+import JsonLd from "@/components/JsonLd";
 import { menu, addons } from "@/data/menu";
 import { rsd } from "@/lib/format";
+import { site } from "@/data/site";
+import { menuSchema } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: "Meni — phở, prilozi i piće",
+  description: `Ceo PARA meni: goveđa i pileća phở supa, posna (vegan) varijanta, prolećne rolnice i vijetnamska kafa. Dostava u ${site.city}u.`,
+  alternates: { canonical: "/meni" },
+  openGraph: {
+    title: `Meni · ${site.name}`,
+    description: `Phở supe, prilozi i piće — dostava u ${site.city}u.`,
+    url: `${site.url}/meni`,
+  },
+};
 
 const groups = [
   { key: "supe", title: "Supe", sub: "Phở — srce svega" },
@@ -11,6 +26,7 @@ const groups = [
 export default function MenuPage() {
   return (
     <div className="mx-auto max-w-6xl px-5 py-14">
+      <JsonLd data={menuSchema()} />
       <header className="mb-10">
         <h1 className="font-display text-4xl font-extrabold text-steam md:text-5xl">Meni</h1>
         <p className="mt-2 text-bone/60">

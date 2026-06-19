@@ -1,0 +1,15 @@
+# Copy to .dev.vars for `wrangler dev`. NEVER commit .dev.vars.
+# In production set each of these with:  wrangler secret put NAME
+
+# --- AllSecure (from your merchant onboarding) ---
+ALLSECURE_API_KEY=
+ALLSECURE_API_USER=
+ALLSECURE_API_PASSWORD=
+ALLSECURE_SHARED_SECRET=
+
+# --- Email (Resend; verify para.rs as a sending domain first) ---
+RESEND_API_KEY=
+
+# --- Fiscalization (your chosen ESIR/PFR vendor; leave blank to run payment-only) ---
+FISCAL_API_BASE=
+FISCAL_API_KEY=

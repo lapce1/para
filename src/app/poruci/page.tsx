@@ -5,12 +5,49 @@ import { useMemo, useState } from "react";
 import { useCart } from "@/lib/cart";
 import { rsd } from "@/lib/format";
 import { site } from "@/data/site";
+import { startCardCheckout } from "@/client/checkout";
+
+const PAY_ERRORS: Record<string, string> = {
+  missing_fields: "Nedostaju podaci. Proverite korpu i imejl.",
+  invalid_email: "Imejl adresa nije ispravna.",
+  invalid_cart: "Nešto nije u redu sa korpom. Osvežite stranicu i pokušajte ponovo.",
+  too_many_items: "Previše stavki u korpi.",
+  payment_init_failed: "Plaćanje trenutno nije moguće. Pokušajte ponovo ili poručite preko Vibera/WhatsApp-a.",
+  forbidden: "Zahtev je odbijen. Osvežite stranicu i pokušajte ponovo.",
+};
+const payErrorText = (code: string) =>
+  PAY_ERRORS[code] ?? "Plaćanje nije uspelo. Pokušajte ponovo ili nas kontaktirajte.";
 
 export default function OrderPage() {
   const { lines, setQty, remove, subtotal, clear, count } = useCart();
   const [name, setName] = useState("");
   const [addr, setAddr] = useState("");
   const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [paying, setPaying] = useState(false);
+  const [payError, setPayError] = useState<string | null>(null);
+
+  const emailValid = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+
+  const onPayCard = async () => {
+    setPayError(null);
+    if (!emailValid) {
+      setPayError("Unesite ispravnu imejl adresu — na nju šaljemo fiskalni račun.");
+      return;
+    }
+    setPaying(true);
+    try {
+      const [firstName, ...rest] = name.trim().split(/\s+/).filter(Boolean);
+      await startCardCheckout(
+        lines.map((l) => ({ id: l.id, qty: l.qty })),
+        { email, firstName: firstName || undefined, lastName: rest.join(" ") || undefined },
+      );
+      // On success startCardCheckout redirects the browser to AllSecure; no code runs after.
+    } catch (e) {
+      setPaying(false);
+      setPayError(payErrorText((e as Error).message));
+    }
+  };
 
   const fee = subtotal >= site.freeDeliveryOver || subtotal === 0 ? 0 : site.deliveryFee;
   const total = subtotal + fee;
@@ -110,6 +147,15 @@ export default function OrderPage() {
             placeholder="Telefon"
             className="rounded-xl border border-white/10 bg-charsoft px-4 py-3 text-bone placeholder:text-bone/30 focus:border-broth focus:outline-none"
           />
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            inputMode="email"
+            autoComplete="email"
+            placeholder="Imejl (za fiskalni račun)"
+            className="rounded-xl border border-white/10 bg-charsoft px-4 py-3 text-bone placeholder:text-bone/30 focus:border-broth focus:outline-none"
+          />
         </div>
       </div>
 
@@ -134,7 +180,30 @@ export default function OrderPage() {
           </div>
         </div>
 
-        <div className="mt-5 rounded-xl bg-char p-4">
+        <div className="mt-5 rounded-xl border border-broth/30 bg-broth-ambient p-4">
+          <p className="text-sm font-semibold text-steam">Plati karticom online</p>
+          <p className="mt-1 text-xs text-bone/60">
+            Sigurno plaćanje (Visa, Mastercard, DinaCard) uz 3-D Secure. Fiskalni račun
+            stiže na tvoj imejl odmah po uspešnom plaćanju.
+          </p>
+          <button
+            onClick={onPayCard}
+            disabled={paying || count === 0}
+            className="mt-3 w-full rounded-full bg-ember px-5 py-3 text-center font-semibold text-steam transition hover:bg-broth hover:text-char disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {paying ? "Povezivanje sa bankom…" : `Plati ${rsd(total)} karticom`}
+          </button>
+          {payError && (
+            <p role="alert" className="mt-2 text-xs text-ember">
+              {payError}
+            </p>
+          )}
+          <p className="mt-2 text-[11px] text-bone/40">
+            Bićeš preusmeren na zaštićenu stranicu banke. PARA ne čuva podatke o kartici.
+          </p>
+        </div>
+
+        <div className="mt-4 rounded-xl bg-char p-4">
           <p className="text-sm font-semibold text-broth">Poruči direktno — 15% jeftinije</p>
           <p className="mt-1 text-xs text-bone/50">
             Direktna porudžbina ide preko Vibera ili WhatsApp-a. Plaćanje pouzećem ili

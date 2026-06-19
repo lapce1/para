@@ -1,4 +1,17 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { site } from "@/data/site";
+
+export const metadata: Metadata = {
+  title: "Priča",
+  description: `Zašto PARA: vijetnamska phở kuhinja samo za dostavu u ${site.city}u. Supa kuvana 14 sati, pakovana odvojeno da stigne kao iz kuhinje.`,
+  alternates: { canonical: "/prica" },
+  openGraph: {
+    title: `Priča · ${site.name}`,
+    description: `Vijetnamska phở kuhinja samo za dostavu u ${site.city}u.`,
+    url: `${site.url}/prica`,
+  },
+};
 
 const values = [
   {
