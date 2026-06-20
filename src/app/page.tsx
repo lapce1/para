@@ -1,8 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Hero from "@/components/Hero";
 import MenuCard from "@/components/MenuCard";
 import { menu } from "@/data/menu";
 import { site } from "@/data/site";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 const trust = [
   { k: "14h", v: "supa se kuva" },

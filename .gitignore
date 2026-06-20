@@ -6,3 +6,18 @@
 *.pem
 .env*
 next-env.d.ts
+
+# payments: secrets + cloudflare local state
+.dev.vars
+.wrangler/
+
+# SSH keys must never be committed (the repo root currently holds a private key)
+/aa
+/aa.pub
+*.key
+id_*
+*_ed25519
+*_rsa
+
+# local reference material handed to Claude (zips, patches, extracts)
+/Files_for_claude/

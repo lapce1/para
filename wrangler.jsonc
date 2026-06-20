@@ -1,0 +1,30 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "para",
+  "main": "src/worker/index.ts",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Your built static site. Next.js static export goes to ./out
+  // (next.config: output: 'export'). The Worker handles /api/* and falls
+  // through to these assets for everything else.
+  "assets": {
+    "directory": "./out",
+    "binding": "ASSETS"
+  },
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "para-orders",
+      "database_id": "a7359ef3-8ed0-4876-9a23-db650cecc9f6"
+    }
+  ],
+
+  // Non-secret config. Secrets are set separately (see .dev.vars.example / README).
+  "vars": {
+    "PUBLIC_BASE_URL": "https://para.rs",
+    "RECEIPT_FROM": "PARA <racun@para.rs>",
+    "ALLSECURE_SIGN_OUTGOING": "false"
+  }
+}
