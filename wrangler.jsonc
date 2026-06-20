@@ -17,7 +17,7 @@
     {
       "binding": "DB",
       "database_name": "para-orders",
-      "database_id": "REPLACE_WITH_D1_ID_FROM_wrangler_d1_create"
+      "database_id": "a7359ef3-8ed0-4876-9a23-db650cecc9f6"
     }
   ],
 
