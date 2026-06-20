@@ -5,11 +5,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        char: "#14100C",
-        charsoft: "#1E1813",
+        char: "#0C110B", // deepest tone — nav, insets, pops of contrast
+        charsoft: "#1C261B", // raised surface (green-charcoal, steps clearly above body)
         broth: "#E0A43B",
+        brothlight: "#F4CE78",
         ember: "#B5471F",
         herb: "#8CB33A",
+        herblight: "#9CC246",
         bone: "#F3E9D6",
         steam: "#FCF8F0",
       },

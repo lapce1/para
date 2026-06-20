@@ -15,7 +15,7 @@ export const menu: MenuItem[] = [
     vi: "Phở Bò Tái",
     sr: "Phở sa sirovom govedinom",
     desc:
-      "Bistra goveđa supa kuvana 14 sati. Tanko sečena junetina koja se skuva u vrelini supe, pirinčani rezanci, mladi luk i svež začin.",
+      "Bistra goveđa supa, krčkana 6 sati na govedoj kosti, đumbiru i anisu. Tanko sečena junetina koja se skuva u vrelini supe, pirinčani rezanci, mladi luk i sveže biljke — nana i bosiljak.",
     price: 950,
     category: "supe",
     swatch: ["#7A3B12", "#241307"],
@@ -25,7 +25,7 @@ export const menu: MenuItem[] = [
     vi: "Phở Đặc Biệt",
     sr: "Specijalna PARA phở",
     desc:
-      "Naša najbogatija činija: oxtail i juneći grudni deo, dupla porcija mesa i supa kuvana do dubokog, punog ukusa.",
+      "Naša najbogatija činija: oxtail i juneći grudni deo, dupla porcija mesa i supa krčkana do dubokog, punog ukusa. Pirinčani rezanci, nana, bosiljak i limeta sa strane.",
     price: 1090,
     category: "supe",
     tag: "signature",

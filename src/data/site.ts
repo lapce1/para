@@ -2,15 +2,15 @@
 export const site = {
   name: "PARA",
   tagline: "Supa koja putuje.",
-  support: "14 sati ključanja. 25 minuta do tebe.",
+  support: "Supa se krčka 6 sati. Stiže vrela, na tvoja vrata.",
   city: "Novi Sad",
 
   // Canonical origin (no trailing slash). Used for SEO metadata + structured data.
   url: "https://para.rs",
   description:
     "PARA — vijetnamska phở kuhinja u Novom Sadu. Prava goveđa i pileća phở supa, " +
-    "kuvana 14 sati i dostavljena vrela. Supa i rezanci putuju odvojeno. Plaćanje " +
-    "karticom ili pouzećem.",
+    "krčkana 6 sati na govedoj kosti, đumbiru i anisu, dostavljena vrela. Supa, " +
+    "pirinčani rezanci i sveže biljke putuju odvojeno. Plaćanje karticom ili pouzećem.",
 
   // --- replace these placeholders ---
   phone: "+381 60 1234567",

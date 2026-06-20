@@ -52,7 +52,7 @@ export default function MenuCard({ item }: { item: MenuItem }) {
           <span className="font-display text-lg font-bold text-bone">{rsd(item.price)}</span>
           <button
             onClick={onAdd}
-            className="rounded-full bg-broth px-4 py-2 text-sm font-semibold text-char transition hover:bg-steam"
+            className="min-h-[44px] rounded-full bg-broth px-5 py-2.5 text-sm font-semibold text-char transition hover:bg-steam"
           >
             {added ? "Dodato ✓" : "Dodaj"}
           </button>

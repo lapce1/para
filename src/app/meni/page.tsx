@@ -30,7 +30,8 @@ export default function MenuPage() {
       <header className="mb-10">
         <h1 className="font-display text-4xl font-extrabold text-steam md:text-5xl">Meni</h1>
         <p className="mt-2 text-bone/60">
-          Sve sveže. Supa i rezanci putuju odvojeno — ti ih spajaš za 90 sekundi.
+          Sve sveže. Supa, pirinčani rezanci i <span className="text-herb">biljke</span> putuju
+          odvojeno — ti ih spajaš za 90 sekundi.
         </p>
       </header>
 

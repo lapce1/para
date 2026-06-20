@@ -21,10 +21,13 @@ export const metadata: Metadata = {
     "phở",
     "pho",
     "phở Novi Sad",
+    "pho dostava Novi Sad",
     "vijetnamska kuhinja",
     "vijetnamska hrana Novi Sad",
+    "vijetnamski restoran Novi Sad",
     "dostava hrane Novi Sad",
-    "supa dostava",
+    "goveđa supa dostava",
+    "pirinčani rezanci",
     "azijska hrana Novi Sad",
   ],
   authors: [{ name: site.name }],
@@ -58,7 +61,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#14100C",
+  themeColor: "#0C110B",
   colorScheme: "dark",
 };
 

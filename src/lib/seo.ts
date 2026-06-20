@@ -5,6 +5,7 @@
 
 import { site } from "@/data/site";
 import { menu, addons, type MenuItem } from "@/data/menu";
+import { faq } from "@/data/faq";
 
 const abs = (path: string) => `${site.url}${path.startsWith("/") ? path : `/${path}`}`;
 
@@ -44,6 +45,19 @@ export function restaurantSchema(): Record<string, unknown> {
       target: abs("/poruci"),
       deliveryMethod: "http://purl.org/goodrelations/v1#DeliveryModeOwnFleet",
     },
+  };
+}
+
+/** FAQ rich-results schema — lives on the home page, mirrors src/data/faq. */
+export function faqSchema(): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faq.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
   };
 }
 
