@@ -53,13 +53,13 @@ export function receiptEmailHtml(args: {
   // http(s) link — never inject an arbitrary scheme (javascript:, data:) into href.
   const safeUrl = /^https?:\/\//i.test(args.verificationUrl) ? esc(args.verificationUrl) : "#";
   return `<div style="font-family:system-ui,sans-serif;max-width:520px;margin:0 auto">
-  <h2 style="color:#B5471F">PARA — fiskalni račun</h2>
+  <h2 style="color:#D85A33">PARA — fiskalni račun</h2>
   <p>Hvala na porudžbini. Vaše plaćanje je uspešno primljeno.</p>
   <p><strong>Iznos:</strong> ${esc(args.amountText)} RSD<br>
      <strong>Broj računa:</strong> ${esc(args.invoiceNumber)}<br>
      <strong>Referenca:</strong> ${esc(args.merchantTxId)}</p>
   <p><a href="${safeUrl}"
-        style="display:inline-block;background:#B5471F;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none">
+        style="display:inline-block;background:#D85A33;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none">
      Pogledaj fiskalni račun</a></p>
   <p style="color:#666;font-size:13px">Račun možete proveriti na portalu Poreske uprave preko gornjeg linka.</p>
 </div>`;

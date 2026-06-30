@@ -10,20 +10,20 @@ export default function Logo({ className = "" }: { className?: string }) {
       >
         <path
           d="M5 28 C2 22 8 20 5 14 C3 10 7 8 5 3"
-          stroke="#E0A43B"
+          stroke="#E8B24A"
           strokeWidth="2"
           strokeLinecap="round"
         />
         <path
           d="M11 28 C8 21 14 19 11 12 C9 8 13 6 11 1"
-          stroke="#E0A43B"
+          stroke="#E8B24A"
           strokeWidth="2"
           strokeLinecap="round"
           opacity="0.8"
         />
         <path
           d="M17 28 C14 22 20 20 17 14 C15 10 19 8 17 4"
-          stroke="#E0A43B"
+          stroke="#E8B24A"
           strokeWidth="2"
           strokeLinecap="round"
           opacity="0.55"

@@ -15,26 +15,27 @@ html {
 }
 
 body {
-  /* Green-charcoal: a clean, cool dark so the warm gold/ember and green
-     accents pop with real contrast (the old warm brown muddied them). */
-  background: #1c281a;
+  /* Cool neutral graphite: a clean dark canvas with no brown or green tint, so the
+     gold broth, terracotta ember and fresh herb-green accents pop on a modern base. */
+  background: #141619;
   color: #f3e9d6;
   font-family: Inter, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-/* One faint top vignette only — no heavy multi-stop gradients. */
+/* Warm gold glow from the top — the appetizing "broth" ambient. */
 .bg-broth-ambient {
   background:
-    radial-gradient(75% 60% at 50% -12%, rgba(224, 164, 59, 0.14), transparent 72%),
-    #1c281a;
+    radial-gradient(80% 70% at 50% -15%, rgba(232, 178, 74, 0.16), transparent 70%),
+    #141619;
 }
 
-/* Faint herb-green wash for the "fresh / assemble at home" accent blocks. */
+/* Fresh herb-green glow for the "fresh / assemble at home" accent blocks —
+   a soft wash on the neutral canvas, not a flat green field. */
 .bg-herb-ambient {
   background:
-    radial-gradient(70% 60% at 0% 0%, rgba(140, 179, 58, 0.12), transparent 70%),
-    #213013;
+    radial-gradient(60% 80% at 0% 0%, rgba(87, 199, 123, 0.12), transparent 68%),
+    #141619;
 }
 
 @keyframes wisp {
@@ -66,7 +67,7 @@ body {
 a:focus-visible,
 button:focus-visible,
 input:focus-visible {
-  outline: 2px solid #e0a43b;
+  outline: 2px solid #e8b24a;
   outline-offset: 2px;
 }
 

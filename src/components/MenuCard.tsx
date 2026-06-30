@@ -12,6 +12,14 @@ const tagLabel: Record<string, string> = {
   spicy: "Ljuto",
 };
 
+// Each tag gets its own accent so the menu reads colourful at a glance.
+const tagColor: Record<string, string> = {
+  signature: "text-broth",
+  push: "text-ember",
+  vegan: "text-herb",
+  spicy: "text-chili",
+};
+
 export default function MenuCard({ item }: { item: MenuItem }) {
   const { add } = useCart();
   const [added, setAdded] = useState(false);
@@ -23,7 +31,7 @@ export default function MenuCard({ item }: { item: MenuItem }) {
   };
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl border border-white/5 bg-charsoft transition hover:border-broth/30">
+    <article className="group flex flex-col overflow-hidden rounded-2xl border border-white/5 bg-charsoft transition duration-300 hover:-translate-y-1 hover:border-broth/40 hover:shadow-lift">
       <div
         className="relative aspect-[4/3] overflow-hidden"
         style={{
@@ -38,7 +46,9 @@ export default function MenuCard({ item }: { item: MenuItem }) {
           }}
         />
         {item.tag && (
-          <span className="absolute left-3 top-3 rounded-full bg-char/70 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-broth">
+          <span
+            className={`absolute left-3 top-3 rounded-full bg-char/70 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide ${tagColor[item.tag] ?? "text-broth"}`}
+          >
             {tagLabel[item.tag]}
           </span>
         )}

@@ -51,7 +51,7 @@ export const menu: MenuItem[] = [
     price: 750,
     category: "supe",
     tag: "vegan",
-    swatch: ["#5C7A1E", "#1A2208"],
+    swatch: ["#4E9E4A", "#16210E"],
   },
   {
     id: "goi-cuon",
@@ -61,7 +61,7 @@ export const menu: MenuItem[] = [
       "Pirinčani papir, rezanci, svež začin i salata. Stiže uz domaći kikiriki umak.",
     price: 390,
     category: "prilozi",
-    swatch: ["#5E7A2A", "#1C2410"],
+    swatch: ["#5AA94C", "#17220F"],
   },
   {
     id: "cha-gio",

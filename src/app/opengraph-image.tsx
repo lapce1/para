@@ -20,14 +20,14 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "90px",
-          background: "linear-gradient(135deg, #241a12 0%, #120e0a 100%)",
+          background: "linear-gradient(135deg, #1E2024 0%, #0C0D10 100%)",
           color: "#F3E9D6",
         }}
       >
         <div style={{ display: "flex", fontSize: 158, fontWeight: 800, color: "#FCF8F0", letterSpacing: -2 }}>
           PARA
         </div>
-        <div style={{ display: "flex", fontSize: 46, color: "#E0A43B", marginTop: 6 }}>
+        <div style={{ display: "flex", fontSize: 46, color: "#E8B24A", marginTop: 6 }}>
           Vijetnamska pho kuhinja - Novi Sad
         </div>
         <div style={{ display: "flex", fontSize: 34, marginTop: 26, color: "#F3E9D6" }}>

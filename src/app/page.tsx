@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Hero from "@/components/Hero";
 import MenuCard from "@/components/MenuCard";
-import StarAnise from "@/components/StarAnise";
+import HerbSprig from "@/components/HerbSprig";
 import JsonLd from "@/components/JsonLd";
 import { menu } from "@/data/menu";
 import { faq } from "@/data/faq";
@@ -91,7 +91,7 @@ export default function Home() {
       </section>
 
       <section className="relative overflow-hidden border-y border-white/5 bg-herb-ambient">
-        <StarAnise className="pointer-events-none absolute -left-10 bottom-0 h-52 w-52 text-herb/[0.07]" />
+        <HerbSprig className="pointer-events-none absolute -left-10 bottom-0 h-52 w-52 text-herb/[0.1]" />
         <div className="relative mx-auto max-w-6xl px-5 py-20">
           <h2 className="font-display text-3xl font-extrabold text-steam md:text-4xl">
             Šta je u <span className="text-broth">činiji</span>
@@ -104,7 +104,7 @@ export default function Home() {
             {inBowl.map((b) => (
               <div key={b.t} className="rounded-2xl border border-white/5 bg-charsoft p-6">
                 <div className="flex items-center gap-2">
-                  {b.star && <StarAnise className="h-5 w-5 text-broth" />}
+                  {b.star && <HerbSprig className="h-5 w-5 text-herb" />}
                   <h3 className={`font-display text-lg font-bold ${accent[b.c]}`}>{b.t}</h3>
                 </div>
                 <p className="mt-2 text-sm leading-relaxed text-bone/60">{b.d}</p>
@@ -130,7 +130,7 @@ export default function Home() {
 
       <section className="mx-auto max-w-6xl px-5 py-16">
         <div className="relative overflow-hidden rounded-3xl bg-ember p-8 text-steam md:p-12">
-          <StarAnise className="pointer-events-none absolute -bottom-12 -right-8 h-56 w-56 text-black/10" />
+          <HerbSprig className="pointer-events-none absolute -bottom-12 -right-8 h-56 w-56 text-char/20" />
           <span className="inline-flex rounded-full bg-herb px-3 py-1 text-xs font-bold uppercase tracking-wider text-char">
             PARA Combo
           </span>

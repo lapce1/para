@@ -1,14 +1,12 @@
 import Link from "next/link";
 import BowlArt from "./BowlArt";
+import Greenery from "./Greenery";
 import StarAnise from "./StarAnise";
 import { site } from "@/data/site";
 
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-broth-ambient">
-      {/* Faint star-anise watermark — a subtle nod to Vietnam and the broth's aromatics. */}
-      <StarAnise className="pointer-events-none absolute -right-12 -top-10 h-56 w-56 text-broth/[0.06] md:h-72 md:w-72" />
-
       <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 md:grid-cols-2 md:py-24">
         <div>
           <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-herb/40 bg-herb/5 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-herb">
@@ -46,7 +44,8 @@ export default function Hero() {
         </div>
 
         <div className="relative mx-auto w-full max-w-sm">
-          <BowlArt className="w-full" />
+          <Greenery className="pointer-events-none absolute inset-0 z-0 h-full w-full scale-[1.18]" />
+          <BowlArt className="relative z-10 w-full" />
         </div>
       </div>
     </section>

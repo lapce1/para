@@ -8,13 +8,13 @@ export default function BowlArt({ className = "" }: { className?: string }) {
     >
       <defs>
         <radialGradient id="brothG" cx="50%" cy="42%" r="58%">
-          <stop offset="0%" stopColor="#F4CE78" />
-          <stop offset="55%" stopColor="#E0A43B" />
-          <stop offset="100%" stopColor="#A8651C" />
+          <stop offset="0%" stopColor="#F6D488" />
+          <stop offset="55%" stopColor="#E8B24A" />
+          <stop offset="100%" stopColor="#AD6B1E" />
         </radialGradient>
         <linearGradient id="bowlG" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#272019" />
-          <stop offset="100%" stopColor="#0E0B07" />
+          <stop offset="0%" stopColor="#272A2F" />
+          <stop offset="100%" stopColor="#0C0D10" />
         </linearGradient>
       </defs>
 
@@ -35,9 +35,9 @@ export default function BowlArt({ className = "" }: { className?: string }) {
         <ellipse cx="120" cy="146" rx="20" ry="6" fill="#7A3B1E" />
         <ellipse cx="160" cy="156" rx="22" ry="6" fill="#8A4322" />
         <ellipse cx="196" cy="146" rx="18" ry="5" fill="#6E3318" />
-        <circle cx="138" cy="140" r="3" fill="#8CB33A" />
-        <circle cx="178" cy="142" r="3" fill="#8CB33A" />
-        <circle cx="150" cy="160" r="3" fill="#9CC246" />
+        <circle cx="138" cy="140" r="3" fill="#57C77B" />
+        <circle cx="178" cy="142" r="3" fill="#57C77B" />
+        <circle cx="150" cy="160" r="3" fill="#86E0A3" />
         <circle cx="200" cy="158" r="2.5" fill="#F3E9D6" />
         <circle cx="124" cy="158" r="2.5" fill="#F3E9D6" />
       </g>

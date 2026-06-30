@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import StarAnise from "@/components/StarAnise";
+import HerbSprig from "@/components/HerbSprig";
 import JsonLd from "@/components/JsonLd";
 import { site } from "@/data/site";
 import { phoIntro, phoSections, phoTypes, phoHowTo } from "@/data/pho";
@@ -22,7 +22,7 @@ export default function Pho() {
     <div className="relative mx-auto max-w-3xl px-5 py-16">
       <JsonLd data={phoGuideSchema()} />
       <JsonLd data={phoHowToSchema()} />
-      <StarAnise className="pointer-events-none absolute -right-6 top-10 h-40 w-40 text-broth/[0.06] md:-right-16 md:h-52 md:w-52" />
+      <HerbSprig className="pointer-events-none absolute -right-6 top-10 h-40 w-40 text-herb/[0.1] md:-right-16 md:h-52 md:w-52" />
 
       <h1 className="font-display text-4xl font-extrabold text-steam md:text-5xl">
         Šta je <span className="text-broth">phở</span>?
