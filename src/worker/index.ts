@@ -123,6 +123,12 @@ async function route(request: Request, env: Env, ctx: ExecutionContext): Promise
     return json({ error: "internal_error" }, 500);
   }
 
+  // The old /prica page was replaced by the SEO guide at /pho. Permanently
+  // redirect so the already-indexed URL keeps its link equity instead of 404ing.
+  if (pathname === "/prica" || pathname === "/prica/") {
+    return Response.redirect(`${url.origin}/pho`, 301);
+  }
+
   // Next emits the OG image as an extensionless file (out/opengraph-image); force a
   // PNG content-type so social scrapers (which require image/*) accept the card.
   if (pathname === "/opengraph-image") {

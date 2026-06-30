@@ -15,9 +15,9 @@ html {
 }
 
 body {
-  /* Deep green-charcoal: a clean, cool dark so the warm gold/ember and green
+  /* Green-charcoal: a clean, cool dark so the warm gold/ember and green
      accents pop with real contrast (the old warm brown muddied them). */
-  background: #121a11;
+  background: #1c281a;
   color: #f3e9d6;
   font-family: Inter, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -27,14 +27,14 @@ body {
 .bg-broth-ambient {
   background:
     radial-gradient(75% 60% at 50% -12%, rgba(224, 164, 59, 0.14), transparent 72%),
-    #121a11;
+    #1c281a;
 }
 
 /* Faint herb-green wash for the "fresh / assemble at home" accent blocks. */
 .bg-herb-ambient {
   background:
     radial-gradient(70% 60% at 0% 0%, rgba(140, 179, 58, 0.12), transparent 70%),
-    #16210f;
+    #213013;
 }
 
 @keyframes wisp {

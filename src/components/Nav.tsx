@@ -8,7 +8,7 @@ import { useCart } from "@/lib/cart";
 const links = [
   { href: "/", label: "Početna" },
   { href: "/meni", label: "Meni" },
-  { href: "/prica", label: "Priča" },
+  { href: "/pho", label: "Šta je phở" },
 ];
 
 export default function Nav() {

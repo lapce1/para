@@ -6,6 +6,7 @@
 import { site } from "@/data/site";
 import { menu, addons, type MenuItem } from "@/data/menu";
 import { faq } from "@/data/faq";
+import { phoIntro, phoHowTo } from "@/data/pho";
 
 const abs = (path: string) => `${site.url}${path.startsWith("/") ? path : `/${path}`}`;
 
@@ -57,6 +58,43 @@ export function faqSchema(): Record<string, unknown> {
       "@type": "Question",
       name: f.q,
       acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+}
+
+/** Article schema for the /pho guide — eligible for article rich results. */
+export function phoGuideSchema(): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: "Šta je phở — vodič kroz vijetnamsku supu",
+    description: phoIntro,
+    inLanguage: "sr-RS",
+    mainEntityOfPage: abs("/pho"),
+    image: abs("/icon.svg"),
+    author: { "@type": "Organization", name: site.name, url: site.url },
+    publisher: {
+      "@type": "Organization",
+      name: site.name,
+      url: site.url,
+      logo: { "@type": "ImageObject", url: abs("/icon.svg") },
+    },
+  };
+}
+
+/** HowTo schema for assembling the delivered phở — lives on /pho. */
+export function phoHowToSchema(): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: phoHowTo.name,
+    description: phoHowTo.description,
+    inLanguage: "sr-RS",
+    step: phoHowTo.steps.map((s, i) => ({
+      "@type": "HowToStep",
+      position: i + 1,
+      name: s.name,
+      text: s.text,
     })),
   };
 }
