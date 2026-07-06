@@ -128,9 +128,9 @@ body {
   animation-delay: 2.4s;
 }
 
-a:focus-visible,
-button:focus-visible,
-input:focus-visible {
+/* One consistent keyboard-focus affordance for every interactive element —
+   hover is never the only cue. */
+:is(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
   outline: 2px solid #e8b24a;
   outline-offset: 2px;
 }

@@ -8,11 +8,11 @@ import { menuSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Meni — phở, prilozi i piće",
-  description: `Ceo PARA meni: goveđa i pileća phở supa, posna (vegan) varijanta, prolećne rolnice i vijetnamska kafa. Dostava u ${site.city}u.`,
+  description: `Ceo PARA meni: goveđa i pileća phở supa, posna (vegan) varijanta, prolećne rolnice i vijetnamska kafa. Dostava u ${site.cityLoc}.`,
   alternates: { canonical: "/meni" },
   openGraph: {
     title: `Meni · ${site.name}`,
-    description: `Phở supe, prilozi i piće — dostava u ${site.city}u.`,
+    description: `Phở supe, prilozi i piće — dostava u ${site.cityLoc}.`,
     url: `${site.url}/meni`,
   },
 };
@@ -42,7 +42,7 @@ export default function MenuPage() {
           <section key={g.key} className="mb-14">
             <div className="mb-5 flex items-baseline gap-3">
               <h2 className="font-display text-2xl font-bold text-broth">{g.title}</h2>
-              <span className="text-sm text-bone/40">{g.sub}</span>
+              <span className="text-sm text-bone/55">{g.sub}</span>
             </div>
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {items.map((m) => (

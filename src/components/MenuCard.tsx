@@ -15,7 +15,7 @@ const tagLabel: Record<string, string> = {
 // Each tag gets its own accent so the menu reads colourful at a glance.
 const tagColor: Record<string, string> = {
   signature: "text-broth",
-  push: "text-ember",
+  push: "text-emberlight",
   vegan: "text-herb",
   spicy: "text-chili",
 };

@@ -37,7 +37,13 @@ export const metadata: Metadata = {
   // NB: canonical is set per-page (a layout-level canonical would cascade "/" onto
   // every route). See each page's metadata export.
   manifest: "/manifest.webmanifest",
-  icons: { icon: [{ url: "/icon.svg", type: "image/svg+xml" }] },
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+  },
   openGraph: {
     type: "website",
     locale: "sr_RS",

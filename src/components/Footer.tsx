@@ -44,7 +44,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/5 px-5 py-5 text-center text-xs text-bone/40">
+      <div className="border-t border-white/5 px-5 py-5 text-center text-xs text-bone/55">
         © {new Date().getFullYear()} {site.name} — vijetnamska phở kuhinja i dostava, {site.city}.
         Sva prava zadržana.
       </div>

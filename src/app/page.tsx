@@ -82,7 +82,7 @@ export default function Home() {
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {steps.map((s) => (
             <div key={s.n} className="rounded-2xl border border-white/5 bg-charsoft p-6">
-              <div className="font-display text-sm font-bold text-ember">{s.n}</div>
+              <div className="font-display text-sm font-bold text-emberlight">{s.n}</div>
               <h3 className="mt-2 font-display text-xl font-bold text-bone">{s.t}</h3>
               <p className="mt-2 text-sm text-bone/60">{s.d}</p>
             </div>
@@ -129,7 +129,7 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-16">
-        <div className="relative overflow-hidden rounded-3xl bg-ember p-8 text-steam md:p-12">
+        <div className="relative overflow-hidden rounded-3xl bg-emberdark p-8 text-steam md:p-12">
           <HerbSprig className="pointer-events-none absolute -bottom-12 -right-8 h-56 w-56 text-char/20" />
           <span className="inline-flex rounded-full bg-herb px-3 py-1 text-xs font-bold uppercase tracking-wider text-char">
             PARA Combo
@@ -137,14 +137,14 @@ export default function Home() {
           <h2 className="relative mt-4 font-display text-3xl font-extrabold md:text-4xl">
             Činija + ledena kafa
           </h2>
-          <p className="relative mt-2 max-w-md text-steam/85">
+          <p className="relative mt-2 max-w-md text-steam">
             Bilo koja phở činija + vijetnamska ledena kafa,{" "}
             <span className="font-semibold text-herblight">100 din jeftinije</span>. Najbolji
             način da zaokružiš obrok.
           </p>
           <Link
             href="/meni"
-            className="relative mt-6 inline-block rounded-full bg-steam px-7 py-3 font-semibold text-ember transition hover:bg-herb hover:text-char"
+            className="relative mt-6 inline-block rounded-full bg-steam px-7 py-3 font-semibold text-emberdark transition hover:bg-herb hover:text-char"
           >
             Sastavi combo
           </Link>
@@ -165,7 +165,7 @@ export default function Home() {
 
       <section className="mx-auto max-w-6xl px-5 pb-24 text-center">
         <h2 className="font-display text-2xl font-bold text-bone">
-          Dostavljamo u <span className="text-herb">{site.city}u</span>
+          Dostavljamo u <span className="text-herb">{site.cityLoc}</span>
         </h2>
         <p className="mx-auto mt-3 max-w-lg text-bone/60">{site.zones.join(" · ")}</p>
         <Link

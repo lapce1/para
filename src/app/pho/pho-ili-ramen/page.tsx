@@ -88,7 +88,7 @@ export default function PhoIliRamen() {
       <div className="mt-14 text-center">
         <Link
           href="/poruci"
-          className="inline-block rounded-full bg-ember px-8 py-3 font-semibold text-steam hover:bg-broth hover:text-char"
+          className="inline-block rounded-full bg-emberdark px-8 py-3 font-semibold text-steam hover:bg-broth hover:text-char"
         >
           {site.orderingLive ? "Poruči phở" : "Uskoro — upiši se"}
         </Link>

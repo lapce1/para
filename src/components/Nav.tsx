@@ -34,7 +34,7 @@ export default function Nav() {
           ))}
           <Link
             href="/poruci"
-            className="rounded-full bg-ember px-5 py-2 text-sm font-semibold text-steam transition hover:bg-broth hover:text-char"
+            className="rounded-full bg-emberdark px-5 py-2 text-sm font-semibold text-steam transition hover:bg-broth hover:text-char"
           >
             Poruči{count > 0 ? ` · ${count}` : ""}
           </Link>
@@ -67,7 +67,7 @@ export default function Nav() {
           <Link
             href="/poruci"
             onClick={() => setOpen(false)}
-            className="mt-2 inline-block rounded-full bg-ember px-5 py-2 text-sm font-semibold text-steam"
+            className="mt-2 inline-block rounded-full bg-emberdark px-5 py-2 text-sm font-semibold text-steam"
           >
             Poruči{count > 0 ? ` · ${count}` : ""}
           </Link>

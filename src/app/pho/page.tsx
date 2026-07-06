@@ -8,11 +8,11 @@ import { phoGuideSchema, phoHowToSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Šta je phở — vodič kroz vijetnamsku supu",
-  description: `Šta je phở supa, od čega se pravi, vrste i kako se jede. Vodič kroz vijetnamsku phở supu i dostava sveže u ${site.city}u — supa krčkana 6 sati.`,
+  description: `Šta je phở supa, od čega se pravi, vrste i kako se jede. Vodič kroz vijetnamsku phở supu i dostava sveže u ${site.cityLoc} — supa krčkana 6 sati.`,
   alternates: { canonical: "/pho" },
   openGraph: {
     title: `Šta je phở · ${site.name}`,
-    description: `Vodič kroz vijetnamsku phở supu — i dostava sveže u ${site.city}u.`,
+    description: `Vodič kroz vijetnamsku phở supu — i dostava sveže u ${site.cityLoc}.`,
     url: `${site.url}/pho`,
   },
 };
@@ -59,7 +59,7 @@ export default function Pho() {
               key={step.name}
               className="flex gap-4 rounded-2xl border border-white/5 bg-charsoft p-5"
             >
-              <span className="font-display text-lg font-extrabold text-ember">
+              <span className="font-display text-lg font-extrabold text-emberlight">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <div>
@@ -86,11 +86,11 @@ export default function Pho() {
       <div className="mt-14 text-center">
         <Link
           href="/poruci"
-          className="inline-block rounded-full bg-ember px-8 py-3 font-semibold text-steam hover:bg-broth hover:text-char"
+          className="inline-block rounded-full bg-emberdark px-8 py-3 font-semibold text-steam hover:bg-broth hover:text-char"
         >
           {site.orderingLive ? "Poruči phở" : "Uskoro — upiši se"}
         </Link>
-        <p className="mt-4 text-sm text-bone/45">
+        <p className="mt-4 text-sm text-bone/55">
           <span className="text-herb">Chúc ngon miệng</span> — prijatno.
         </p>
       </div>

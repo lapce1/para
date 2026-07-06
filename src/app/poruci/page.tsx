@@ -31,7 +31,7 @@ export default function OrderPage() {
         </h1>
         <p className="mt-4 text-lg text-bone/70">
           Kuhinja se zahuktava. Ostavi imejl i javljamo ti prvom čim otvorimo
-          dostavu u {site.city}u — bez spama, samo jedna poruka.
+          dostavu u {site.cityLoc} — bez spama, samo jedna poruka.
         </p>
         <div className="mt-8">
           <WaitlistForm source="poruci" />
@@ -130,7 +130,7 @@ function OrderForm() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setQty(l.id, l.qty - 1)}
-                  className="h-8 w-8 rounded-full border border-white/10 text-bone"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-bone"
                   aria-label="Manje"
                 >
                   –
@@ -138,7 +138,7 @@ function OrderForm() {
                 <span className="w-6 text-center text-bone">{l.qty}</span>
                 <button
                   onClick={() => setQty(l.id, l.qty + 1)}
-                  className="h-8 w-8 rounded-full border border-white/10 text-bone"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-bone"
                   aria-label="Više"
                 >
                   +
@@ -149,7 +149,7 @@ function OrderForm() {
               </span>
               <button
                 onClick={() => remove(l.id)}
-                className="text-bone/40 hover:text-ember"
+                className="flex h-11 w-11 items-center justify-center text-bone/60 hover:text-emberlight"
                 aria-label="Ukloni stavku"
               >
                 ✕
@@ -184,7 +184,10 @@ function OrderForm() {
             inputMode="email"
             autoComplete="email"
             placeholder="Imejl (za fiskalni račun)"
-            className="rounded-xl border border-white/10 bg-charsoft px-4 py-3 text-bone placeholder:text-bone/30 focus:border-broth focus:outline-none"
+            aria-invalid={email !== "" && !emailValid}
+            className={`rounded-xl border bg-charsoft px-4 py-3 text-bone placeholder:text-bone/30 focus:border-broth focus:outline-none ${
+              email !== "" && !emailValid ? "border-emberlight/60" : "border-white/10"
+            }`}
           />
         </div>
       </div>
@@ -219,16 +222,16 @@ function OrderForm() {
           <button
             onClick={onPayCard}
             disabled={paying || count === 0}
-            className="mt-3 w-full rounded-full bg-ember px-5 py-3 text-center font-semibold text-steam transition hover:bg-broth hover:text-char disabled:cursor-not-allowed disabled:opacity-60"
+            className="mt-3 w-full rounded-full bg-emberdark px-5 py-3 text-center font-semibold text-steam transition hover:bg-broth hover:text-char disabled:cursor-not-allowed disabled:opacity-60"
           >
             {paying ? "Povezivanje sa bankom…" : `Plati ${rsd(total)} karticom`}
           </button>
           {payError && (
-            <p role="alert" className="mt-2 text-xs text-ember">
+            <p role="alert" className="mt-2 text-xs text-emberlight">
               {payError}
             </p>
           )}
-          <p className="mt-2 text-[11px] text-bone/40">
+          <p className="mt-2 text-[11px] text-bone/55">
             Bićeš preusmeren na zaštićenu stranicu banke. PARA ne čuva podatke o kartici.
           </p>
         </div>
@@ -264,7 +267,7 @@ function OrderForm() {
         </div>
 
         <div className="mt-4">
-          <p className="text-xs uppercase tracking-wider text-bone/40">Ili preko aplikacije</p>
+          <p className="text-xs uppercase tracking-wider text-bone/55">Ili preko aplikacije</p>
           <div className="mt-2 flex gap-2">
             <a href={site.aggregators.wolt} className="flex-1 rounded-full border border-white/10 py-2 text-center text-sm text-bone/80 hover:border-broth">Wolt</a>
             <a href={site.aggregators.glovo} className="flex-1 rounded-full border border-white/10 py-2 text-center text-sm text-bone/80 hover:border-broth">Glovo</a>
@@ -274,7 +277,7 @@ function OrderForm() {
 
         <button
           onClick={clear}
-          className="mt-4 w-full text-center text-xs text-bone/40 hover:text-ember"
+          className="mt-4 w-full min-h-[44px] text-center text-xs text-bone/55 hover:text-emberlight"
         >
           Isprazni korpu
         </button>
