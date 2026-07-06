@@ -3,6 +3,7 @@ import Link from "next/link";
 import Hero from "@/components/Hero";
 import MenuCard from "@/components/MenuCard";
 import HerbSprig from "@/components/HerbSprig";
+import Reveal from "@/components/motion/Reveal";
 import JsonLd from "@/components/JsonLd";
 import { menu } from "@/data/menu";
 import { faq } from "@/data/faq";
@@ -72,20 +73,24 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-20">
-        <h2 className="font-display text-3xl font-extrabold text-steam md:text-4xl">
-          Otvori. Sipaj. <span className="text-herb">Para.</span>
-        </h2>
-        <p className="mt-2 max-w-lg text-bone/60">
-          Phở ne podnosi da rezanci čame u supi. Zato ništa ne mešamo unapred — ti
-          spajaš činiju, sveže, kod kuće.
-        </p>
+        <Reveal>
+          <h2 className="font-display text-3xl font-extrabold text-steam md:text-4xl">
+            Otvori. Sipaj. <span className="text-herb">Para.</span>
+          </h2>
+          <p className="mt-2 max-w-lg text-bone/60">
+            Phở ne podnosi da rezanci čame u supi. Zato ništa ne mešamo unapred — ti
+            spajaš činiju, sveže, kod kuće.
+          </p>
+        </Reveal>
         <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {steps.map((s) => (
-            <div key={s.n} className="rounded-2xl border border-white/5 bg-charsoft p-6">
-              <div className="font-display text-sm font-bold text-ember">{s.n}</div>
-              <h3 className="mt-2 font-display text-xl font-bold text-bone">{s.t}</h3>
-              <p className="mt-2 text-sm text-bone/60">{s.d}</p>
-            </div>
+          {steps.map((s, i) => (
+            <Reveal key={s.n} delay={i * 0.1}>
+              <div className="h-full rounded-2xl border border-white/5 bg-charsoft p-6 transition duration-300 hover:-translate-y-1 hover:border-broth/30">
+                <div className="font-display text-sm font-bold text-ember">{s.n}</div>
+                <h3 className="mt-2 font-display text-xl font-bold text-bone">{s.t}</h3>
+                <p className="mt-2 text-sm text-bone/60">{s.d}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -93,22 +98,26 @@ export default function Home() {
       <section className="relative overflow-hidden border-y border-white/5 bg-herb-ambient">
         <HerbSprig className="pointer-events-none absolute -left-10 bottom-0 h-52 w-52 text-herb/[0.1]" />
         <div className="relative mx-auto max-w-6xl px-5 py-20">
-          <h2 className="font-display text-3xl font-extrabold text-steam md:text-4xl">
-            Šta je u <span className="text-broth">činiji</span>
-          </h2>
-          <p className="mt-2 max-w-xl text-bone/60">
-            Bez prečica i bez kocki. Prava goveđa čorba, pirinčani rezanci i sveže
-            biljke — svako stiže tačno kako treba.
-          </p>
+          <Reveal>
+            <h2 className="font-display text-3xl font-extrabold text-steam md:text-4xl">
+              Šta je u <span className="text-broth">činiji</span>
+            </h2>
+            <p className="mt-2 max-w-xl text-bone/60">
+              Bez prečica i bez kocki. Prava goveđa čorba, pirinčani rezanci i sveže
+              biljke — svako stiže tačno kako treba.
+            </p>
+          </Reveal>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {inBowl.map((b) => (
-              <div key={b.t} className="rounded-2xl border border-white/5 bg-charsoft p-6">
-                <div className="flex items-center gap-2">
-                  {b.star && <HerbSprig className="h-5 w-5 text-herb" />}
-                  <h3 className={`font-display text-lg font-bold ${accent[b.c]}`}>{b.t}</h3>
+            {inBowl.map((b, i) => (
+              <Reveal key={b.t} delay={i * 0.08}>
+                <div className="h-full rounded-2xl border border-white/5 bg-charsoft p-6 transition duration-300 hover:-translate-y-1 hover:border-broth/30">
+                  <div className="flex items-center gap-2">
+                    {b.star && <HerbSprig className="h-5 w-5 text-herb" />}
+                    <h3 className={`font-display text-lg font-bold ${accent[b.c]}`}>{b.t}</h3>
+                  </div>
+                  <p className="mt-2 text-sm leading-relaxed text-bone/60">{b.d}</p>
                 </div>
-                <p className="mt-2 text-sm leading-relaxed text-bone/60">{b.d}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -122,13 +131,15 @@ export default function Home() {
           </Link>
         </div>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {featured.map((m) => (
-            <MenuCard key={m.id} item={m} />
+          {featured.map((m, i) => (
+            <Reveal key={m.id} delay={i * 0.1}>
+              <MenuCard item={m} />
+            </Reveal>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-16">
+      <Reveal className="mx-auto max-w-6xl px-5 py-16">
         <div className="relative overflow-hidden rounded-3xl bg-ember p-8 text-steam md:p-12">
           <HerbSprig className="pointer-events-none absolute -bottom-12 -right-8 h-56 w-56 text-char/20" />
           <span className="inline-flex rounded-full bg-herb px-3 py-1 text-xs font-bold uppercase tracking-wider text-char">
@@ -149,16 +160,18 @@ export default function Home() {
             Sastavi combo
           </Link>
         </div>
-      </section>
+      </Reveal>
 
       <section className="mx-auto max-w-3xl px-5 py-16">
         <h2 className="font-display text-3xl font-extrabold text-steam">Često pitate</h2>
         <dl className="mt-8 space-y-4">
-          {faq.map((f) => (
-            <div key={f.q} className="rounded-2xl border border-white/5 bg-charsoft p-5">
-              <dt className="font-display font-bold text-broth">{f.q}</dt>
-              <dd className="mt-2 text-sm leading-relaxed text-bone/70">{f.a}</dd>
-            </div>
+          {faq.map((f, i) => (
+            <Reveal key={f.q} delay={i * 0.05}>
+              <div className="rounded-2xl border border-white/5 bg-charsoft p-5">
+                <dt className="font-display font-bold text-broth">{f.q}</dt>
+                <dd className="mt-2 text-sm leading-relaxed text-bone/70">{f.a}</dd>
+              </div>
+            </Reveal>
           ))}
         </dl>
       </section>

@@ -6,7 +6,8 @@ export type MenuItem = {
   price: number;              // RSD, direktni kanal
   category: "supe" | "prilozi" | "pice";
   tag?: "signature" | "push" | "vegan" | "spicy";
-  swatch: [string, string];   // gradijent za vizuelni prikaz (bez fotografije)
+  swatch: [string, string];   // gradijent placeholder dok nema fotografije
+  image?: string;             // npr. "/photos/pho-bo-tai.jpg" — kad ubaciš pravu fotku
 };
 
 export const menu: MenuItem[] = [

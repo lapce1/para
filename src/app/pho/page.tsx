@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import HerbSprig from "@/components/HerbSprig";
+import Photo from "@/components/Photo";
+import Reveal from "@/components/motion/Reveal";
 import JsonLd from "@/components/JsonLd";
 import { site } from "@/data/site";
 import { phoIntro, phoSections, phoTypes, phoHowTo } from "@/data/pho";
@@ -29,12 +31,21 @@ export default function Pho() {
       </h1>
       <p className="mt-4 text-lg text-bone/70">{phoIntro}</p>
 
+      <Photo
+        alt="Vijetnamska phở supa"
+        colors={["#3a2c12", "#16120b"]}
+        ratio="16 / 9"
+        className="group mt-8 rounded-3xl border border-white/5"
+      />
+
       <div className="mt-12 space-y-10">
         {phoSections.map((s) => (
-          <section key={s.h}>
-            <h2 className="font-display text-2xl font-bold text-broth">{s.h}</h2>
-            <p className="mt-3 leading-relaxed text-bone/70">{s.p}</p>
-          </section>
+          <Reveal key={s.h}>
+            <section>
+              <h2 className="font-display text-2xl font-bold text-broth">{s.h}</h2>
+              <p className="mt-3 leading-relaxed text-bone/70">{s.p}</p>
+            </section>
+          </Reveal>
         ))}
       </div>
 

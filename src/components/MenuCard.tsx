@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useCart } from "@/lib/cart";
 import { rsd } from "@/lib/format";
+import Photo from "./Photo";
 import type { MenuItem } from "@/data/menu";
 
 const tagLabel: Record<string, string> = {
@@ -32,19 +33,7 @@ export default function MenuCard({ item }: { item: MenuItem }) {
 
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-white/5 bg-charsoft transition duration-300 hover:-translate-y-1 hover:border-broth/40 hover:shadow-lift">
-      <div
-        className="relative aspect-[4/3] overflow-hidden"
-        style={{
-          background: `radial-gradient(70% 70% at 50% 40%, ${item.swatch[0]}, ${item.swatch[1]})`,
-        }}
-      >
-        <div
-          className="absolute left-1/2 top-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-black/10 transition group-hover:scale-105"
-          style={{
-            background: `radial-gradient(circle at 50% 35%, #F0C26B, ${item.swatch[0]})`,
-            boxShadow: "inset 0 -8px 20px rgba(0,0,0,0.25)",
-          }}
-        />
+      <Photo src={item.image} alt={item.vi} colors={item.swatch} ratio="4 / 3">
         {item.tag && (
           <span
             className={`absolute left-3 top-3 rounded-full bg-char/70 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide ${tagColor[item.tag] ?? "text-broth"}`}
@@ -52,7 +41,7 @@ export default function MenuCard({ item }: { item: MenuItem }) {
             {tagLabel[item.tag]}
           </span>
         )}
-      </div>
+      </Photo>
 
       <div className="flex flex-1 flex-col p-5">
         <h3 className="font-display text-xl font-bold text-steam">{item.vi}</h3>
