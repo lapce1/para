@@ -24,6 +24,38 @@ export default function OpengraphImage() {
           color: "#F3E9D6",
         }}
       >
+        {/* Steam motif (the logo wisps, scaled up) anchors the brand even at
+            small link-preview sizes. */}
+        <svg
+          width="330"
+          height="450"
+          viewBox="0 0 22 30"
+          style={{ position: "absolute", right: 70, top: 90, opacity: 0.5 }}
+        >
+          <path
+            d="M5 28 C2 22 8 20 5 14 C3 10 7 8 5 3"
+            stroke="#E8B24A"
+            strokeWidth="2"
+            strokeLinecap="round"
+            fill="none"
+          />
+          <path
+            d="M11 28 C8 21 14 19 11 12 C9 8 13 6 11 1"
+            stroke="#E8B24A"
+            strokeWidth="2"
+            strokeLinecap="round"
+            fill="none"
+            opacity="0.75"
+          />
+          <path
+            d="M17 28 C14 22 20 20 17 14 C15 10 19 8 17 4"
+            stroke="#E8B24A"
+            strokeWidth="2"
+            strokeLinecap="round"
+            fill="none"
+            opacity="0.5"
+          />
+        </svg>
         <div style={{ display: "flex", fontSize: 158, fontWeight: 800, color: "#FCF8F0", letterSpacing: -2 }}>
           PARA
         </div>

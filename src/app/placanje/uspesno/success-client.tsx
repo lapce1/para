@@ -56,7 +56,7 @@ function Inner() {
       <Shell>
         <h1 className="font-display text-3xl font-extrabold text-steam">Potvrđujemo plaćanje…</h1>
         <p className="mt-3 text-bone/60">Sačekaj trenutak, proveravamo status sa bankom.</p>
-        <div className="mx-auto mt-6 h-8 w-8 animate-spin rounded-full border-2 border-broth/30 border-t-broth" />
+        <div className="mx-auto mt-6 h-8 w-8 animate-spin rounded-full border-2 border-broth/30 border-t-broth motion-reduce:animate-none" />
       </Shell>
     );
   }
@@ -101,7 +101,7 @@ function Inner() {
         </p>
         <Link
           href="/poruci"
-          className="mt-6 inline-block rounded-full bg-ember px-7 py-3 font-semibold text-steam hover:bg-broth hover:text-char"
+          className="mt-6 inline-block rounded-full bg-emberdark px-7 py-3 font-semibold text-steam hover:bg-broth hover:text-char"
         >
           Pokušaj ponovo
         </Link>

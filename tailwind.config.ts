@@ -9,8 +9,9 @@ const config: Config = {
         charsoft: "#1E2024", // raised surface (neutral graphite, steps clearly above body)
         broth: "#E8B24A", // signature gold (≈ Pantone 142/143 C)
         brothlight: "#F6D488",
-        ember: "#D85A33", // terracotta CTA (≈ Pantone 7416 C)
-        emberdark: "#B5471F",
+        ember: "#D85A33", // terracotta accent (≈ Pantone 7416 C)
+        emberdark: "#B5471F", // solid CTA surface — steam text passes AA (5.1:1)
+        emberlight: "#F07F5A", // a11y tint of ember for small/error text on dark (6:1+)
         herb: "#57C77B", // fresh jade-leaf green — clean accent, not olive
         herblight: "#86E0A3",
         lime: "#A7D84F", // bright lime — citrus garnish pop

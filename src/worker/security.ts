@@ -5,8 +5,8 @@
  * CSP notes: the static Next.js export ships inline hydration scripts and the menu
  * cards use inline style attributes for their gradients, so 'unsafe-inline' is
  * required for script/style in a static (nonce-less) export. Everything else is
- * locked down: no framing, no plugins, self-only connections/forms, and only the
- * Google Fonts origins the layout actually loads.
+ * locked down: no framing, no plugins, self-only forms, self-hosted fonts, and
+ * only the Meta Pixel origins the analytics layer actually uses.
  */
 
 const CSP = [
@@ -17,8 +17,9 @@ const CSP = [
   "form-action 'self'",
   // www.facebook.com: the pixel's <img> fallback + event beacons.
   "img-src 'self' data: https://www.facebook.com",
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "font-src 'self' https://fonts.gstatic.com",
+  // Fonts are self-hosted (public/fonts) — no third-party font origins.
+  "style-src 'self' 'unsafe-inline'",
+  "font-src 'self'",
   // connect.facebook.net serves fbevents.js (Meta Pixel; inert until configured).
   "script-src 'self' 'unsafe-inline' https://connect.facebook.net",
   "connect-src 'self' https://connect.facebook.net https://www.facebook.com",

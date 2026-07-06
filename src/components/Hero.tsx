@@ -29,7 +29,7 @@ export default function Hero() {
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/poruci"
-              className="rounded-full bg-ember px-7 py-3 font-semibold text-steam shadow-glow transition hover:bg-broth hover:text-char"
+              className="rounded-full bg-emberdark px-7 py-3 font-semibold text-steam shadow-glow transition hover:bg-broth hover:text-char"
             >
               {site.orderingLive ? "Poruči odmah" : "Uskoro — upiši se"}
             </Link>

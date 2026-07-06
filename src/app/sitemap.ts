@@ -4,13 +4,20 @@ import { site } from "@/data/site";
 // Static export: emit a real /sitemap.xml at build time.
 export const dynamic = "force-static";
 
+// Evergreen content pages carry the date their copy last actually changed —
+// bump these when you edit the page. Stamping `now` on everything told crawlers
+// the whole site changed on every deploy, which devalues the signal.
+const PHO_UPDATED = new Date("2026-06-30");
+const PHO_RAMEN_UPDATED = new Date("2026-07-06");
+const PORUCI_UPDATED = new Date("2026-07-06"); // waitlist gate landed
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+  const buildDate = new Date();
   return [
-    { url: `${site.url}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },
-    { url: `${site.url}/meni`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${site.url}/pho`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${site.url}/pho/pho-ili-ramen`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${site.url}/poruci`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${site.url}/`, lastModified: buildDate, changeFrequency: "weekly", priority: 1 },
+    { url: `${site.url}/meni`, lastModified: buildDate, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${site.url}/pho`, lastModified: PHO_UPDATED, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${site.url}/pho/pho-ili-ramen`, lastModified: PHO_RAMEN_UPDATED, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${site.url}/poruci`, lastModified: PORUCI_UPDATED, changeFrequency: "monthly", priority: 0.7 },
   ];
 }

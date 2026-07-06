@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Plaćanje otkazano — PARA",
+  title: "Plaćanje otkazano",
   robots: { index: false, follow: false },
 };
 
@@ -17,7 +17,7 @@ export default function Page() {
       <div className="mt-6 flex flex-wrap justify-center gap-3">
         <Link
           href="/poruci"
-          className="rounded-full bg-ember px-7 py-3 font-semibold text-steam hover:bg-broth hover:text-char"
+          className="rounded-full bg-emberdark px-7 py-3 font-semibold text-steam hover:bg-broth hover:text-char"
         >
           Nazad na korpu
         </Link>

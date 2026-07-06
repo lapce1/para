@@ -60,12 +60,12 @@ export default function WaitlistForm({ source = "site" }: { source?: string }) {
       <button
         type="submit"
         disabled={!emailValid || state === "sending"}
-        className="min-h-[48px] rounded-full bg-ember px-7 py-3 font-semibold text-steam transition hover:bg-broth hover:text-char disabled:cursor-not-allowed disabled:opacity-60"
+        className="min-h-[48px] rounded-full bg-emberdark px-7 py-3 font-semibold text-steam transition hover:bg-broth hover:text-char disabled:cursor-not-allowed disabled:opacity-60"
       >
         {state === "sending" ? "Upisivanje…" : "Upiši se"}
       </button>
       {state === "error" && (
-        <p role="alert" className="text-sm text-ember sm:self-center">
+        <p role="alert" className="text-sm text-emberlight sm:self-center">
           Nije prošlo. Pokušaj ponovo.
         </p>
       )}

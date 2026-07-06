@@ -4,6 +4,7 @@ export const site = {
   tagline: "Supa koja putuje.",
   support: "Supa se krčka 6 sati. Stiže vrela, na tvoja vrata.",
   city: "Novi Sad",
+  cityLoc: "Novom Sadu", // lokativ — "u Novom Sadu" (nikad "u Novi Sadu")
 
   // Canonical origin (no trailing slash). Used for SEO metadata + structured data.
   url: "https://para.rs",

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { site } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Greška pri plaćanju — PARA",
+  title: "Greška pri plaćanju",
   robots: { index: false, follow: false },
 };
 
@@ -18,7 +18,7 @@ export default function Page() {
       <div className="mt-6 flex flex-wrap justify-center gap-3">
         <Link
           href="/poruci"
-          className="rounded-full bg-ember px-7 py-3 font-semibold text-steam hover:bg-broth hover:text-char"
+          className="rounded-full bg-emberdark px-7 py-3 font-semibold text-steam hover:bg-broth hover:text-char"
         >
           Pokušaj ponovo
         </Link>
