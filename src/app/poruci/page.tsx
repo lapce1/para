@@ -6,6 +6,8 @@ import { useCart } from "@/lib/cart";
 import { rsd } from "@/lib/format";
 import { site } from "@/data/site";
 import { startCardCheckout } from "@/client/checkout";
+import { track } from "@/lib/analytics";
+import WaitlistForm from "@/components/WaitlistForm";
 
 const PAY_ERRORS: Record<string, string> = {
   missing_fields: "Nedostaju podaci. Proverite korpu i imejl.",
@@ -19,6 +21,33 @@ const payErrorText = (code: string) =>
   PAY_ERRORS[code] ?? "Plaćanje nije uspelo. Pokušajte ponovo ili nas kontaktirajte.";
 
 export default function OrderPage() {
+  // Waitlist gate: until ordering is live, /poruci is only the signup — none of
+  // the payment paths (card, Viber, WhatsApp, phone) are rendered or reachable.
+  if (!site.orderingLive) {
+    return (
+      <div className="mx-auto max-w-2xl px-5 py-24">
+        <h1 className="font-display text-4xl font-extrabold text-steam md:text-5xl">
+          Uskoro krećemo
+        </h1>
+        <p className="mt-4 text-lg text-bone/70">
+          Kuhinja se zahuktava. Ostavi imejl i javljamo ti prvom čim otvorimo
+          dostavu u {site.city}u — bez spama, samo jedna poruka.
+        </p>
+        <div className="mt-8">
+          <WaitlistForm source="poruci" />
+        </div>
+        <p className="mt-6 text-sm text-bone/50">
+          Dotle: pogledaj <a href="/meni" className="text-broth hover:text-steam">meni</a> ili
+          pročitaj <a href="/pho" className="text-broth hover:text-steam">šta je phở</a>.
+        </p>
+      </div>
+    );
+  }
+
+  return <OrderForm />;
+}
+
+function OrderForm() {
   const { lines, setQty, remove, subtotal, clear, count } = useCart();
   const [name, setName] = useState("");
   const [addr, setAddr] = useState("");
@@ -36,6 +65,7 @@ export default function OrderPage() {
       return;
     }
     setPaying(true);
+    track("InitiateCheckout", { value: total, currency: "RSD", num_items: count });
     try {
       const [firstName, ...rest] = name.trim().split(/\s+/).filter(Boolean);
       await startCardCheckout(

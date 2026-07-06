@@ -15,11 +15,13 @@ const CSP = [
   "object-src 'none'",
   "frame-ancestors 'none'",
   "form-action 'self'",
-  "img-src 'self' data:",
+  // www.facebook.com: the pixel's <img> fallback + event beacons.
+  "img-src 'self' data: https://www.facebook.com",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
-  "script-src 'self' 'unsafe-inline'",
-  "connect-src 'self'",
+  // connect.facebook.net serves fbevents.js (Meta Pixel; inert until configured).
+  "script-src 'self' 'unsafe-inline' https://connect.facebook.net",
+  "connect-src 'self' https://connect.facebook.net https://www.facebook.com",
   "upgrade-insecure-requests",
 ].join("; ");
 
