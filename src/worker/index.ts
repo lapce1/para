@@ -231,7 +231,8 @@ async function handleCheckout(request: Request, env: Env, selfOrigin: string): P
 async function handleStatus(env: Env, mtx: string): Promise<Response> {
   const order = await getOrder(env.DB, decodeURIComponent(mtx));
   if (!order) return json({ error: "not_found" }, 404);
-  return json({ status: order.status, receiptUrl: order.fiscal_receipt_url });
+  // amountRsd feeds the client-side Purchase conversion event (value in RSD).
+  return json({ status: order.status, receiptUrl: order.fiscal_receipt_url, amountRsd: order.amount });
 }
 
 /* ------------------------------------------------ POST /allsecure/callback */

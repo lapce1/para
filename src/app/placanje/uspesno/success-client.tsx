@@ -5,6 +5,7 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { pollOrderStatus } from "@/client/checkout";
 import { useCart } from "@/lib/cart";
+import { track } from "@/lib/analytics";
 
 type View = "loading" | "paid" | "pending" | "failed";
 
@@ -36,6 +37,9 @@ function Inner() {
       if (res.status === "PAID") {
         setView("paid");
         clear(); // order is settled server-side; empty the local cart
+        // Purchase fires only on the verified (postback-confirmed) PAID status —
+        // the bank redirect alone is never treated as a conversion.
+        track("Purchase", { value: res.amountRsd ?? 0, currency: "RSD" });
       } else if (res.status === "FAILED") {
         setView("failed");
       } else {

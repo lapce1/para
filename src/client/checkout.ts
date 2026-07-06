@@ -34,20 +34,28 @@ export async function startCardCheckout(
  * and the fiscal receipt link appears. The browser redirect alone is NOT proof of
  * payment — the callback is. Times out gracefully.
  */
+export interface OrderStatus {
+  status: "PENDING" | "PAID" | "FAILED";
+  receiptUrl: string | null;
+  /** Order total in integer RSD — the value for the Purchase conversion event. */
+  amountRsd: number | null;
+}
+
 export async function pollOrderStatus(
   merchantTxId: string,
   opts: { intervalMs?: number; timeoutMs?: number } = {},
-): Promise<{ status: "PENDING" | "PAID" | "FAILED"; receiptUrl: string | null }> {
+): Promise<OrderStatus> {
   const interval = opts.intervalMs ?? 2000;
   const deadline = Date.now() + (opts.timeoutMs ?? 30000);
 
   while (Date.now() < deadline) {
     const res = await fetch(`/api/order/${encodeURIComponent(merchantTxId)}/status`);
     if (res.ok) {
-      const data = (await res.json()) as { status: "PENDING" | "PAID" | "FAILED"; receiptUrl: string | null };
-      if (data.status !== "PENDING") return data;
+      const data = (await res.json()) as OrderStatus;
+      // amountRsd ?? null: tolerate a stale Worker that predates the field.
+      if (data.status !== "PENDING") return { ...data, amountRsd: data.amountRsd ?? null };
     }
     await new Promise((r) => setTimeout(r, interval));
   }
-  return { status: "PENDING", receiptUrl: null };
+  return { status: "PENDING", receiptUrl: null, amountRsd: null };
 }

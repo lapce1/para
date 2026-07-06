@@ -4,6 +4,7 @@ import { CartProvider } from "@/lib/cart";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
+import MetaPixel from "@/components/MetaPixel";
 import { site } from "@/data/site";
 import { restaurantSchema } from "@/lib/seo";
 
@@ -82,6 +83,7 @@ export default function RootLayout({
       </head>
       <body>
         <JsonLd data={restaurantSchema()} />
+        <MetaPixel />
         <CartProvider>
           <Nav />
           <main>{children}</main>

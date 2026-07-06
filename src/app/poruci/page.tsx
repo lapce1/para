@@ -6,6 +6,7 @@ import { useCart } from "@/lib/cart";
 import { rsd } from "@/lib/format";
 import { site } from "@/data/site";
 import { startCardCheckout } from "@/client/checkout";
+import { track } from "@/lib/analytics";
 
 const PAY_ERRORS: Record<string, string> = {
   missing_fields: "Nedostaju podaci. Proverite korpu i imejl.",
@@ -36,6 +37,7 @@ export default function OrderPage() {
       return;
     }
     setPaying(true);
+    track("InitiateCheckout", { value: total, currency: "RSD", num_items: count });
     try {
       const [firstName, ...rest] = name.trim().split(/\s+/).filter(Boolean);
       await startCardCheckout(
