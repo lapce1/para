@@ -5,8 +5,9 @@
 
 import { site } from "@/data/site";
 import { menu, addons, type MenuItem } from "@/data/menu";
-import { faq } from "@/data/faq";
+import { faq, type Faq } from "@/data/faq";
 import { phoIntro, phoHowTo } from "@/data/pho";
+import { phoRamenFaq } from "@/data/phoRamen";
 
 const abs = (path: string) => `${site.url}${path.startsWith("/") ? path : `/${path}`}`;
 
@@ -49,15 +50,38 @@ export function restaurantSchema(): Record<string, unknown> {
   };
 }
 
-/** FAQ rich-results schema — lives on the home page, mirrors src/data/faq. */
-export function faqSchema(): Record<string, unknown> {
+function faqPage(list: Faq[]): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faq.map((f) => ({
+    mainEntity: list.map((f) => ({
       "@type": "Question",
       name: f.q,
       acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+}
+
+/** FAQ rich-results schema — lives on the home page, mirrors src/data/faq. */
+export function faqSchema(): Record<string, unknown> {
+  return faqPage(faq);
+}
+
+/** FAQPage for /pho/pho-ili-ramen — mirrors the visible FAQ from src/data/phoRamen. */
+export function phoRamenFaqSchema(): Record<string, unknown> {
+  return faqPage(phoRamenFaq);
+}
+
+/** BreadcrumbList for nested content pages; order the items root-first. */
+export function breadcrumbSchema(items: { name: string; path: string }[]): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((it, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: it.name,
+      item: abs(it.path),
     })),
   };
 }

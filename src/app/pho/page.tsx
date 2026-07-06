@@ -71,12 +71,24 @@ export default function Pho() {
         </ol>
       </section>
 
+      <section className="mt-12 rounded-2xl border border-white/5 bg-charsoft p-5">
+        <h2 className="text-xs font-semibold uppercase tracking-wider text-bone/50">
+          Dalje čitanje
+        </h2>
+        <p className="mt-2 text-sm text-bone/70">
+          <Link href="/pho/pho-ili-ramen" className="text-broth hover:text-steam">
+            Phở ili ramen — u čemu je razlika
+          </Link>{" "}
+          — poreklo, supa, rezanci i dodaci, jedno pored drugog.
+        </p>
+      </section>
+
       <div className="mt-14 text-center">
         <Link
           href="/poruci"
           className="inline-block rounded-full bg-ember px-8 py-3 font-semibold text-steam hover:bg-broth hover:text-char"
         >
-          Poruči phở
+          {site.orderingLive ? "Poruči phở" : "Uskoro — upiši se"}
         </Link>
         <p className="mt-4 text-sm text-bone/45">
           <span className="text-herb">Chúc ngon miệng</span> — prijatno.
