@@ -11,6 +11,21 @@ import { phoRamenFaq } from "@/data/phoRamen";
 
 const abs = (path: string) => `${site.url}${path.startsWith("/") ? path : `/${path}`}`;
 
+/**
+ * Structured form of site.seo.openingHours ("Mo-Su 11:00-22:00") — the object
+ * form is what Google's rich-result parser actually consumes. Parses the hours
+ * out of the string so the two representations can't drift.
+ */
+function openingHoursSpec(): Record<string, unknown> {
+  const m = site.seo.openingHours.match(/(\d{2}:\d{2})-(\d{2}:\d{2})/);
+  return {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    opens: m?.[1] ?? "11:00",
+    closes: m?.[2] ?? "22:00",
+  };
+}
+
 /** Restaurant / LocalBusiness — sitewide, lives in the root layout. */
 export function restaurantSchema(): Record<string, unknown> {
   const address: Record<string, string> = {
@@ -38,7 +53,7 @@ export function restaurantSchema(): Record<string, unknown> {
     email: site.email,
     address,
     areaServed: site.zones.map((z) => ({ "@type": "City", name: `${z}, ${site.city}` })),
-    openingHours: site.seo.openingHours,
+    openingHoursSpecification: openingHoursSpec(),
     sameAs: [site.instagram],
     hasMenu: abs("/meni"),
     acceptsReservations: false,

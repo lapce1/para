@@ -3,7 +3,7 @@ import Link from "next/link";
 import { site } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Greška pri plaćanju — PARA",
+  title: "Greška pri plaćanju",
   robots: { index: false, follow: false },
 };
 
