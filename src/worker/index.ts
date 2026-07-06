@@ -96,9 +96,37 @@ function sameOriginOk(request: Request, env: Env, selfOrigin: string): boolean {
 
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-    return withSecurityHeaders(await route(request, env, ctx));
+    const res = withSecurityHeaders(await route(request, env, ctx));
+    // API responses must never end up in an index; assets are governed by robots.txt.
+    if (new URL(request.url).pathname.startsWith("/api/")) {
+      res.headers.set("X-Robots-Tag", "noindex");
+    }
+    return res;
   },
 } satisfies ExportedHandler<Env>;
+
+/* -------------------------------------------------------------- rate limit */
+
+/**
+ * Fixed-window per-IP limiter on the colo-local Cache API — no paid bindings.
+ * Scope is per-colo and the count is best-effort (concurrent requests can race
+ * a step), which is exactly enough to damp abuse of the charging/insert
+ * endpoints without punishing real users.
+ */
+async function rateLimited(kind: string, request: Request, limit: number, windowSec = 60): Promise<boolean> {
+  const ip = request.headers.get("CF-Connecting-IP") ?? "unknown";
+  const windowId = Math.floor(Date.now() / (windowSec * 1000));
+  const key = new Request(`https://rate-limit.internal/${kind}/${windowId}/${encodeURIComponent(ip)}`);
+  const cache = caches.default;
+  const prev = await cache.match(key);
+  const count = prev ? Number(await prev.text()) + 1 : 1;
+  if (count > limit) return true;
+  await cache.put(
+    key,
+    new Response(String(count), { headers: { "Cache-Control": `max-age=${windowSec * 2}` } }),
+  );
+  return false;
+}
 
 async function route(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
   const url = new URL(request.url);
@@ -151,6 +179,9 @@ async function route(request: Request, env: Env, ctx: ExecutionContext): Promise
 async function handleCheckout(request: Request, env: Env, selfOrigin: string): Promise<Response> {
   if (!sameOriginOk(request, env, selfOrigin)) {
     return json({ error: "forbidden" }, 403);
+  }
+  if (await rateLimited("checkout", request, 10)) {
+    return json({ error: "rate_limited" }, 429);
   }
 
   const raw = await request.text();
@@ -237,6 +268,9 @@ const MAX_WAITLIST_BODY_BYTES = 1024;
 async function handleWaitlist(request: Request, env: Env, selfOrigin: string): Promise<Response> {
   if (!sameOriginOk(request, env, selfOrigin)) {
     return json({ error: "forbidden" }, 403);
+  }
+  if (await rateLimited("waitlist", request, 5)) {
+    return json({ error: "rate_limited" }, 429);
   }
 
   const raw = await request.text();

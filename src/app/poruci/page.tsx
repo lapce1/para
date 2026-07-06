@@ -16,6 +16,7 @@ const PAY_ERRORS: Record<string, string> = {
   too_many_items: "Previše stavki u korpi.",
   payment_init_failed: "Plaćanje trenutno nije moguće. Pokušajte ponovo ili poručite preko Vibera/WhatsApp-a.",
   forbidden: "Zahtev je odbijen. Osvežite stranicu i pokušajte ponovo.",
+  rate_limited: "Previše pokušaja. Sačekaj minut, pa pokušaj ponovo.",
 };
 const payErrorText = (code: string) =>
   PAY_ERRORS[code] ?? "Plaćanje nije uspelo. Pokušajte ponovo ili nas kontaktirajte.";
