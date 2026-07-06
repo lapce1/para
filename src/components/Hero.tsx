@@ -31,7 +31,7 @@ export default function Hero() {
               href="/poruci"
               className="rounded-full bg-ember px-7 py-3 font-semibold text-steam shadow-glow transition hover:bg-broth hover:text-char"
             >
-              Poruči odmah
+              {site.orderingLive ? "Poruči odmah" : "Uskoro — upiši se"}
             </Link>
             <Link
               href="/meni"

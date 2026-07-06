@@ -18,3 +18,10 @@ CREATE TABLE IF NOT EXISTS orders (
 
 CREATE INDEX IF NOT EXISTS idx_orders_status  ON orders (status);
 CREATE INDEX IF NOT EXISTS idx_orders_created ON orders (created_at);
+
+-- Pre-launch waitlist (POST /api/waitlist). PK on email keeps inserts idempotent.
+CREATE TABLE IF NOT EXISTS waitlist (
+  email      TEXT PRIMARY KEY,
+  source     TEXT,                -- attribution: which surface captured the signup
+  created_at TEXT NOT NULL
+);

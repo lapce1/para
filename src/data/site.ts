@@ -24,6 +24,10 @@ export const site = {
   // GO-LIVE LEVER: set the real pixel id only when ads/tracking should start.
   metaPixelId: "",
 
+  // GO-LIVE LEVER: while false, /poruci shows the waitlist instead of the order
+  // form (no payment/Viber/WhatsApp paths) and CTAs advertise the signup.
+  orderingLive: false,
+
   hours: "Svaki dan 11–22h",
   deliveryFee: 200,           // RSD, direktna dostava
   freeDeliveryOver: 1800,     // RSD, prag za besplatnu dostavu

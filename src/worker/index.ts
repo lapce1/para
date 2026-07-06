@@ -115,6 +115,9 @@ async function route(request: Request, env: Env, ctx: ExecutionContext): Promise
     if (pathname === "/api/allsecure/callback" && request.method === "POST") {
       return await handleCallback(request, env, ctx);
     }
+    if (pathname === "/api/waitlist" && request.method === "POST") {
+      return await handleWaitlist(request, env, url.origin);
+    }
     if (pathname.startsWith("/api/")) {
       return json({ error: "not_found" }, 404);
     }
@@ -224,6 +227,45 @@ async function handleCheckout(request: Request, env: Env, selfOrigin: string): P
 
   await attachGatewayRefs(env.DB, merchantTxId, debit.uuid, debit.purchaseId);
   return json({ merchantTxId, redirectUrl: debit.redirectUrl });
+}
+
+/* ------------------------------------------------------------ POST /waitlist */
+
+/** Pre-launch email capture. Idempotent: re-submitting an email is a no-op. */
+const MAX_WAITLIST_BODY_BYTES = 1024;
+
+async function handleWaitlist(request: Request, env: Env, selfOrigin: string): Promise<Response> {
+  if (!sameOriginOk(request, env, selfOrigin)) {
+    return json({ error: "forbidden" }, 403);
+  }
+
+  const raw = await request.text();
+  if (raw.length > MAX_WAITLIST_BODY_BYTES) {
+    return json({ error: "payload_too_large" }, 413);
+  }
+
+  let input: { email?: unknown; source?: unknown };
+  try {
+    input = JSON.parse(raw) as typeof input;
+  } catch {
+    return json({ error: "bad_request" }, 400);
+  }
+
+  const email = typeof input.email === "string" ? input.email.trim().toLowerCase() : "";
+  if (email.length > 254 || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+    return json({ error: "invalid_email" }, 400);
+  }
+  // Free-form but bounded; only used for attribution in the table.
+  const source = typeof input.source === "string" ? input.source.slice(0, 32) : "site";
+
+  await env.DB.prepare(
+    `INSERT INTO waitlist (email, source, created_at) VALUES (?, ?, ?)
+     ON CONFLICT(email) DO NOTHING`,
+  )
+    .bind(email, source, new Date().toISOString())
+    .run();
+
+  return json({ ok: true });
 }
 
 /* ------------------------------------------------------- GET /order/:mtx/status */
