@@ -10,17 +10,17 @@ export default function Hero() {
       <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 md:grid-cols-2 md:py-24">
         <div>
           <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-herb/40 bg-herb/5 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-herb">
-            <span className="h-1.5 w-1.5 rounded-full bg-herb" /> Phở kuhinja · {site.city}
+            <span className="h-1.5 w-1.5 rounded-full bg-herb" /> {site.address} · {site.city}
           </p>
           <h1 className="font-display text-5xl font-extrabold leading-[0.95] text-steam md:text-7xl">
             Supa koja
             <br />
-            <span className="text-broth">putuje.</span>
+            <span className="text-broth">se puši.</span>
           </h1>
           <p className="mt-6 max-w-md text-lg text-bone/75">
-            Prava vijetnamska phở supa, <span className="font-semibold text-broth">krčkana 6 sati</span>{" "}
-            i dostavljena <span className="font-semibold text-herb">vrela</span>. Otvori, sipaj,
-            gledaj kako se diže para.
+            Prava vijetnamska phở supa, <span className="font-semibold text-broth">krčkana 6 sati</span>.
+            Sedni za naš sto dok se još puši, ili je poruči —{" "}
+            <span className="font-semibold text-herb">vrela</span> stiže i na tvoja vrata.
           </p>
           <p className="mt-4 flex items-center gap-2 text-sm text-bone/55">
             <StarAnise className="h-4 w-4 shrink-0 text-broth/70" />

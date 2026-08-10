@@ -25,14 +25,15 @@ export const phoSections: { h: string; p: string }[] = [
     p:
       "Phở se sklapa u činiji i jede dok je vrelo. Prvo srkneš čistu čorbu da osetiš " +
       "začine, pa onda mešaš rezance, meso i biljke. Limeta, nana, bosiljak i čili " +
-      "dodaju se po sopstvenom ukusu — zato i putuju odvojeno, da ti odlučiš.",
+      "dodaju se po sopstvenom ukusu — uvek stižu sa strane, da ti odlučiš.",
   },
   {
-    h: "Zašto PARA phở stiže savršen",
+    h: "Gde se jede PARA phở",
     p:
-      "Na srpskom, para je ono što se diže iznad vrele činije. Zato supu, pirinčane " +
-      "rezance i sveže biljke pakujemo odvojeno — da rezanci nikad ne stignu raskuvani. " +
-      "Ti ih spojiš kod kuće za 90 sekundi i dobiješ činiju kakva je tek izašla iz kuhinje.",
+      "Na srpskom, para je ono što se diže iznad vrele činije. Najbolje je gledaš uživo: " +
+      "lokal nam je u centru Novog Sada, Stražilovska 10, nekoliko stolova blizu fakulteta. " +
+      "A kad naručiš dostavu, supu, rezance i biljke pakujemo odvojeno — spojiš ih kod " +
+      "kuće za 90 sekundi i činija je kao da je tek izašla iz kuhinje.",
   },
 ];
 
@@ -55,10 +56,10 @@ export const phoTypes: { vi: string; sr: string; d: string }[] = [
 ];
 
 export const phoHowTo = {
-  name: "Kako spojiti i jesti PARA phở",
+  name: "Kako spojiti PARA phở iz dostave",
   description:
-    "Vrela supa, pirinčani rezanci i sveže biljke stižu odvojeno. Spajaš ih kod kuće " +
-    "za 90 sekundi i dobiješ restoransku činiju phở-a.",
+    "Za stolom činija stiže sklopljena. Iz dostave vrela supa, pirinčani rezanci i " +
+    "sveže biljke stižu odvojeno — spajaš ih kod kuće za 90 sekundi.",
   steps: [
     {
       name: "Otvori",

@@ -8,11 +8,11 @@ import { phoGuideSchema, phoHowToSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Šta je phở — vodič kroz vijetnamsku supu",
-  description: `Šta je phở supa, od čega se pravi, vrste i kako se jede. Vodič kroz vijetnamsku phở supu i dostava sveže u ${site.cityLoc} — supa krčkana 6 sati.`,
+  description: `Šta je phở supa, od čega se pravi, vrste i kako se jede. Vodič kroz vijetnamsku phở supu — probaj je za stolom ili na dostavu u ${site.cityLoc}; supa krčkana 6 sati.`,
   alternates: { canonical: "/pho" },
   openGraph: {
     title: `Šta je phở · ${site.name}`,
-    description: `Vodič kroz vijetnamsku phở supu — i dostava sveže u ${site.cityLoc}.`,
+    description: `Vodič kroz vijetnamsku phở supu — za stolom ili na dostavu u ${site.cityLoc}.`,
     url: `${site.url}/pho`,
   },
 };

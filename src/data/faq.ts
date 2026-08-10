@@ -12,12 +12,16 @@ export const faq: Faq[] = [
     a: "Goveđa supa se krčka 6 sati, svaki dan — bez kocki, bez prečica i bez konzervanasa.",
   },
   {
-    q: "Da li dostavljate u Novom Sadu?",
-    a: "Da. Dostavljamo vrelo i sveže širom Novog Sada: Centar, Liman, Grbavica, Novo Naselje, Detelinara i Podbara.",
+    q: "Gde se nalazite i mogu li da jedem kod vas?",
+    a: "Da. Lokal nam je u centru Novog Sada, Stražilovska 10, blizu fakulteta. Imamo nekoliko stolova, bez rezervacije — sedneš i činija stiže sklopljena, vrela.",
   },
   {
-    q: "Da li rezanci stignu raskuvani?",
-    a: "Ne. Supu, pirinčane rezance i sveže biljke pakujemo odvojeno. Ti ih spojiš kod kuće za 90 sekundi, pa rezanci ostaju savršeni.",
+    q: "Da li dostavljate u Novom Sadu?",
+    a: "Da. Pored stolova u lokalu, dostavljamo vrelo i sveže širom Novog Sada: Centar, Liman, Grbavica, Novo Naselje, Detelinara i Podbara.",
+  },
+  {
+    q: "Da li rezanci iz dostave stignu raskuvani?",
+    a: "Ne. Za dostavu supu, pirinčane rezance i sveže biljke pakujemo odvojeno. Ti ih spojiš kod kuće za 90 sekundi, pa rezanci ostaju savršeni.",
   },
   {
     q: "Kako mogu da platim?",

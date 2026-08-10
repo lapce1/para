@@ -8,11 +8,11 @@ import { menuSchema } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Meni — phở, prilozi i piće",
-  description: `Ceo PARA meni: goveđa i pileća phở supa, posna (vegan) varijanta, prolećne rolnice i vijetnamska kafa. Dostava u ${site.cityLoc}.`,
+  description: `Ceo PARA meni: goveđa i pileća phở supa, posna (vegan) varijanta, prolećne rolnice i vijetnamska kafa. Za stolom ili na dostavu u ${site.cityLoc}.`,
   alternates: { canonical: "/meni" },
   openGraph: {
     title: `Meni · ${site.name}`,
-    description: `Phở supe, prilozi i piće — dostava u ${site.cityLoc}.`,
+    description: `Phở supe, prilozi i piće — za stolom ili na dostavu u ${site.cityLoc}.`,
     url: `${site.url}/meni`,
   },
 };
@@ -30,8 +30,8 @@ export default function MenuPage() {
       <header className="mb-10">
         <h1 className="font-display text-4xl font-extrabold text-steam md:text-5xl">Meni</h1>
         <p className="mt-2 text-bone/60">
-          Sve sveže. Supa, pirinčani rezanci i <span className="text-herb">biljke</span> putuju
-          odvojeno — ti ih spajaš za 90 sekundi.
+          Sve sveže, sve vrelo. Za našim stolom, za poneti ili na{" "}
+          <span className="text-herb">dostavu</span> — ista činija, ista supa.
         </p>
       </header>
 

@@ -7,9 +7,9 @@ export const dynamic = "force-static";
 // Evergreen content pages carry the date their copy last actually changed —
 // bump these when you edit the page. Stamping `now` on everything told crawlers
 // the whole site changed on every deploy, which devalues the signal.
-const PHO_UPDATED = new Date("2026-06-30");
-const PHO_RAMEN_UPDATED = new Date("2026-07-06");
-const PORUCI_UPDATED = new Date("2026-07-06"); // waitlist gate landed
+const PHO_UPDATED = new Date("2026-08-10"); // dine-in pivot copy
+const PHO_RAMEN_UPDATED = new Date("2026-08-10"); // dine-in pivot copy
+const PORUCI_UPDATED = new Date("2026-08-10"); // waitlist copy: lokal + dostava
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const buildDate = new Date();
