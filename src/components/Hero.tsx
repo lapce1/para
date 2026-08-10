@@ -1,81 +1,67 @@
 import Link from "next/link";
-import BowlPlate from "./BowlPlate";
 import StarAnise from "./StarAnise";
 import { site } from "@/data/site";
 
-/** The contents block, printed the way a label prints what is inside. */
+/** What actually goes into the pot, printed the way a label prints contents. */
 const spec: { k: string; v: string }[] = [
   { k: "Osnova", v: "Goveđa kost, oxtail i juneći grudni deo" },
   { k: "Aromati", v: "Pečeni đumbir i crni luk" },
-  { k: "Začini", v: "Anis · cimet · karanfilić · kardamom · đumbir" },
-  { k: "Kuvanje", v: "6 sati, od jutra, svakog dana" },
+  { k: "Začini", v: "Anis, cimet, karanfilić, kardamom i đumbir" },
+  { k: "Kuvanje", v: "Šest sati, od jutra, svakog dana" },
   { k: "Bez", v: "Kocki, pojačivača ukusa i konzervanasa" },
 ];
 
 export default function Hero() {
-  // overflow-hidden: the product panel bleeds off the right edge by design —
-  // clip it at the viewport rather than letting it scroll the page sideways.
   return (
-    <section className="tooth overflow-hidden border-b-[3px] border-ink">
-      <div className="mx-auto grid max-w-6xl gap-x-10 px-5 pt-10 md:grid-cols-12 md:pt-16">
-        {/* headline plate */}
-        <div className="md:col-span-7">
-          <h1 className="wordset text-[3.25rem] text-ink sm:text-7xl md:text-[5.5rem]">
-            Šest sati
-            <br />
-            na kosti.
+    <section className="border-b-[3px] border-chalk">
+      <div className="mx-auto grid max-w-6xl items-start gap-x-12 gap-y-12 px-5 pb-[var(--section)] pt-12 md:grid-cols-12 md:pt-16">
+        {/* min-w-0: the display face is wide, and a long word like "VIJETNAMSKA"
+            would otherwise set a min-content floor that pushes the track past the
+            viewport. The base size is fluid for the same reason. */}
+        <div className="min-w-0 md:col-span-7">
+          <h1 className="wordset text-[clamp(1.75rem,8vw,2.75rem)] text-chalk sm:text-6xl md:text-[4.5rem]">
+            Vijetnamska phở supa u centru Novog Sada.
           </h1>
-          <p className="mt-6 max-w-[62ch] text-lg leading-relaxed text-ink/85 md:text-xl">
-            Prava vijetnamska <span className="font-semibold">phở</span> — čorba se krčka
-            od jutra, bistri se i skida joj se pena dok ne postane providna. Kuvamo je
-            u {site.addressLoc}, i služimo je vrelu za stolom, za poneti i na dostavu.
+          <p className="mt-7 max-w-[62ch] text-lg leading-relaxed text-chalk/85 md:text-xl">
+            Kuvamo jednu stvar i trudimo se da je kuvamo kako treba. Kosti se krčkaju
+            šest sati od jutra, dok čorba ne postane bistra. Možeš da sedneš kod nas u{" "}
+            {site.addressLoc}, da poneseš, ili da ti pošaljemo na adresu.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-9 flex flex-wrap items-center gap-3">
             <Link
               href="/poruci"
-              className="misreg bg-paprika px-7 py-4 font-display text-base font-extrabold uppercase tracking-tightest text-paper hover:bg-ink"
+              className="bg-chili px-7 py-4 font-display text-base font-extrabold uppercase tracking-tightest text-ground hover:bg-gold"
             >
-              {site.orderingLive ? "Poruči činiju" : "Uskoro — upiši se"}
+              {site.orderingLive ? "Poruči činiju" : "Javi mi kad otvorite"}
             </Link>
             <Link
               href="/meni"
-              className="misreg border-[3px] border-ink px-7 py-4 font-display text-base font-extrabold uppercase tracking-tightest text-ink hover:bg-lime"
+              className="border-[3px] border-chalk px-7 py-4 font-display text-base font-extrabold uppercase tracking-tightest text-chalk hover:bg-chalk hover:text-ground"
             >
-              Ceo meni
+              Pogledaj meni
             </Link>
           </div>
         </div>
 
-        {/* product plate — drawn, on its own ink field, bleeding right */}
-        <div className="relative mt-10 md:col-span-5 md:mt-0">
-          <div className="tooth relative border-[3px] border-ink bg-board px-6 pb-6 pt-5 md:-mr-16">
-            <p className="stamp text-inksoft">Phở bò · činija</p>
-            <BowlPlate className="mx-auto mt-1 w-full max-w-[19rem]" />
+        {/* the contents, printed as contents */}
+        <div className="min-w-0 md:col-span-5">
+          <div className="border-[3px] border-chalk bg-raised px-6 py-5">
+            <h2 className="stamp text-jade">Šta je u čorbi</h2>
+            <dl className="mt-4">
+              {spec.map((s) => (
+                <div key={s.k} className="border-b border-chalk/20 py-3 last:border-0">
+                  <dt className="stamp flex items-center gap-1.5 text-chalksoft">
+                    {s.k === "Začini" && (
+                      <StarAnise className="h-3.5 w-3.5 shrink-0 text-gold" />
+                    )}
+                    {s.k}
+                  </dt>
+                  <dd className="mt-1.5 text-[0.9375rem] leading-snug text-chalk">{s.v}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
-        </div>
-      </div>
-
-      {/* specification panel — the contents, printed as contents */}
-      <div className="mx-auto mt-12 max-w-6xl px-5 md:mt-16">
-        <div className="border-t-[3px] border-ink">
-          <h2 className="stamp mt-4 text-paprika">Šta je u čorbi</h2>
-          <dl className="mt-4 md:grid md:grid-cols-2 md:gap-x-12">
-            {spec.map((s) => (
-              <div
-                key={s.k}
-                className="flex flex-wrap items-baseline gap-x-4 border-b border-ink/20 py-3"
-              >
-                <dt className="stamp flex w-24 shrink-0 items-center gap-1.5 text-inksoft">
-                  {s.k === "Začini" && (
-                    <StarAnise className="h-3.5 w-3.5 shrink-0 text-paprika" />
-                  )}
-                  {s.k}
-                </dt>
-                <dd className="flex-1 text-[0.9375rem] leading-snug text-ink">{s.v}</dd>
-              </div>
-            ))}
-          </dl>
         </div>
       </div>
     </section>

@@ -8,7 +8,7 @@ import MetaPixel from "@/components/MetaPixel";
 import { site } from "@/data/site";
 import { restaurantSchema } from "@/lib/seo";
 
-const ogTitle = `${site.name} — Phở kuhinja · ${site.city}`;
+const ogTitle = `${site.name} · Phở kuhinja u ${site.cityLoc}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -70,8 +70,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#EDE2CE",
-  colorScheme: "light",
+  themeColor: "#0A0A0A",
+  colorScheme: "dark",
 };
 
 /**
@@ -79,18 +79,19 @@ export const viewport: Viewport = {
  * production build and can be audited against the rendered page.
  */
 const CONTRACT = `
-THESIS: The bowl is presented as a packaged good, not a plated dish — a label sells
-food without a photograph, which is exactly this project's constraint. Refuses the
-category default (dark page, gold accent, big food photo) and its minimal opposite.
-OWN-WORLD: Oat board stock, espresso-brown ink, one committed paprika field, acid-lime
-accent. Flat process inks only: no gradients, no glow, no glass. Archivo expanded caps
-for display, Chivo for text, Chivo Mono for prices and lot codes. Heavy 3px rules.
-STORY: The visitor learns the broth is cooked six hours from bones, believes it because
-the contents are printed as contents, and goes to Stražilovska 10 or orders.
-FIRST VIEWPORT: Asymmetric — headline plate left (7 cols), drawn bowl on a bordered
-board panel right (5 cols) bleeding off-edge, specification panel beneath the rule.
-Primary action sits under the deck.
-FORM: Printed food label; candidate 6 of the grounded list; seed key ed4c0ba7.
+THESIS: A kitchen that cooks one dish should look like it has nothing to hide, so the
+page states contents and prices at full contrast and shows no picture of the food.
+There is no photography and none is coming; type and flat colour carry the product.
+OWN-WORLD: True black ground, white type and rules, three saturated inks used at full
+strength: chili red, jade green, gold yellow. Colour fields carry black type, never
+white. No gradients, no glow, no tints, no illustration. Archivo expanded caps for
+display, Chivo for text, Chivo Mono for prices. Heavy 3px rules.
+STORY: The visitor learns the broth is cooked six hours from bones, sees that the menu
+is two lines long, and either walks to Stražilovska 10 or orders.
+FIRST VIEWPORT: Asymmetric. Headline and deck left (7 cols), the contents panel boxed
+on the right (5 cols). Primary action sits under the deck.
+MOTION: None on hover. Interactive elements swap colour instantly, with no transition,
+transform or shadow. The only animation left is the payment spinner.
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
 `;
 
@@ -103,7 +104,7 @@ export default function RootLayout({
     <html lang="sr">
       <head>
         {/* Fonts are self-hosted (globals.css @font-face). Preload the two latin
-            files — the critical path for first paint; the vietnamese/latin-ext
+            files, the critical path for first paint; the vietnamese/latin-ext
             subsets stream in via unicode-range as their glyphs appear. */}
         <link
           rel="preload"

@@ -7,8 +7,8 @@ import { site } from "@/data/site";
 export const metadata: Metadata = {
   title: site.orderingLive ? "Poruči" : "Uskoro krećemo",
   description: site.orderingLive
-    ? "Tvoja PARA korpa — poruči phở online uz plaćanje karticom, ili direktno preko Vibera/WhatsApp-a."
-    : `PARA otvara vijetnamsku phở kuhinju u ${site.addressLoc}, ${site.cityLoc}. Ostavi imejl i javljamo ti čim otvorimo vrata.`,
+    ? "Tvoja PARA korpa. Poruči phở online uz plaćanje karticom, ili direktno preko Vibera i WhatsApp-a."
+    : `PARA otvara vijetnamsku phở kuhinju u ${site.addressLoc}, ${site.cityLoc}. Ostavi imejl pa ti javimo čim otvorimo.`,
   alternates: { canonical: "/poruci" },
 };
 

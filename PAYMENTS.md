@@ -1,4 +1,4 @@
-# PARA — card payments, receipts & SEO
+# PARA: card payments, receipts & SEO
 
 Card payments (AllSecure Exchange), e-fiscal receipts, and on-page SEO for the
 static PARA site, **all on Cloudflare**. The Next.js static export stays as-is; one
@@ -11,7 +11,7 @@ zero-fee fallback.
 ```
 src/worker/
   index.ts          Router + security headers + static-asset fallthrough (entrypoint)
-  allsecure.ts      AllSecure v3 adapter — debit, request signing, postback verification
+  allsecure.ts      AllSecure v3 adapter, debit, request signing, postback verification
   security.ts       Security headers (CSP, HSTS, frame/permissions policy)
   fiscalization.ts  ESIR/PFR provider interface + stub  <-- the seam you fill in
   email.ts          Receipt email via Resend (HTML-escaped)
@@ -22,7 +22,7 @@ src/client/
   checkout.ts       startCardCheckout() + pollOrderStatus() (used by the Next app)
 src/app/
   poruci/           "Plati karticom" button + email field wired into the cart
-  placanje/uspesno  success page — polls the verified postback, not the redirect
+  placanje/uspesno  success page, polls the verified postback, not the redirect
   placanje/otkazano cancelled page
   placanje/greska   error page
   sitemap.ts, robots.ts, manifest.ts, opengraph-image.tsx, icon (public/icon.svg)
@@ -55,17 +55,17 @@ and the **amount is recomputed server-side** from `menu.ts`, never taken from th
 
 ## Security (what's hardened)
 
-- **Server-authoritative pricing** — client sends `{id, qty}` only; total is recomputed.
-- **Signed-postback verification** — HMAC-SHA512, constant-time compare; unverifiable
+- **Server-authoritative pricing**, client sends `{id, qty}` only; total is recomputed.
+- **Signed-postback verification**, HMAC-SHA512, constant-time compare; unverifiable
   postbacks are rejected (401) so the gateway retries rather than us trusting a forgery.
-- **PAID is terminal** — a late/duplicate FAILED postback can't un-pay a settled order.
-- **Once-only receipts** — `claimReceiptIssuance()` is an atomic guarded UPDATE.
+- **PAID is terminal**, a late/duplicate FAILED postback can't un-pay a settled order.
+- **Once-only receipts**, `claimReceiptIssuance()` is an atomic guarded UPDATE.
 - **Same-origin guard + payload caps** on `/api/checkout` (body ≤ 16 KB, ≤ 100 lines).
-- **Security headers on every response** — CSP, HSTS, `X-Content-Type-Options`,
+- **Security headers on every response**, CSP, HSTS, `X-Content-Type-Options`,
   `X-Frame-Options: DENY`, `Referrer-Policy`, `Permissions-Policy`, COOP (`security.ts`).
 - **HTML-escaped receipt email**; `href` restricted to http(s).
 - **Secrets** only via Worker secrets / `.dev.vars` (git-ignored). No card data ever
-  touches our server — AllSecure hosts the card form.
+  touches our server, AllSecure hosts the card form.
 
 ## Setup
 
@@ -91,21 +91,21 @@ and the **amount is recomputed server-side** from `menu.ts`, never taken from th
 ## The fiscalization seam
 
 `fiscalization.ts` ships as a stub that throws `FISCALIZATION_NOT_CONFIGURED`. While it's
-a stub the payment leg works end-to-end — orders settle to PAID and are flagged for manual
+a stub the payment leg works end-to-end, orders settle to PAID and are flagged for manual
 fiscalization (the receipt-issued claim is released so a later retry/cron can fiscalize).
 Implement `issueReceipt()` against your licensed ESIR/PFR vendor's HTTP API (skeleton in
 the file), set `FISCAL_API_BASE`/`FISCAL_API_KEY`, and receipts issue + email automatically.
 
-## Confirm during onboarding (the known unknowns — don't guess)
+## Confirm during onboarding (the known unknowns: don't guess)
 
-- **RSD amount format** — `"950.00"` vs `"950"`, currency `"RSD"` vs ISO `941`. All in `money.ts`.
-- **Outgoing signing** — if the debit call returns `1004 Invalid signature`, set
+- **RSD amount format**, `"950.00"` vs `"950"`, currency `"RSD"` vs ISO `941`. All in `money.ts`.
+- **Outgoing signing**, if the debit call returns `1004 Invalid signature`, set
   `ALLSECURE_SIGN_OUTGOING=true`. (Incoming postback verification is always on.)
-- **Postback success field** — code treats `result === "OK"` + no `errors[]` as success;
+- **Postback success field**, code treats `result === "OK"` + no `errors[]` as success;
   confirm the failure-case payload shape.
-- **DinaCard + IPS QR** — ask whether your connector includes DinaCard, and whether IPS QR
+- **DinaCard + IPS QR**, ask whether your connector includes DinaCard, and whether IPS QR
   (instant account-to-account, far cheaper than card MDR) can be enabled alongside cards.
-- **VAT labels** — `menu.ts` tags every item `"Ђ"` (10%) as a placeholder; your knjigovođa
+- **VAT labels**, `menu.ts` tags every item `"Ђ"` (10%) as a placeholder; your knjigovođa
   confirms the correct rate per item before it prints on the fiscal receipt.
 
 ## SEO
@@ -115,7 +115,7 @@ the file), set `FISCAL_API_BASE`/`FISCAL_API_KEY`, and receipts issue + email au
 - `Restaurant` + `Menu` JSON-LD (`src/lib/seo.ts`), driven by `src/data` so it can't drift.
 - `sitemap.xml`, `robots.txt` (disallows `/placanje/` + `/api/`), web manifest, SVG favicon,
   and a build-time OG image (`opengraph-image.tsx`).
-- Fill `site.seo.streetAddress` / `postalCode` once the business address is registered —
+- Fill `site.seo.streetAddress` / `postalCode` once the business address is registered , 
   the schema omits them while empty rather than emitting a fake address.
 
 ## Verification done here

@@ -1,18 +1,9 @@
 /**
- * The PARA logo — unchanged brand. The three steam wisps and the wordmark's
- * face (Bricolage Grotesque) are carried over verbatim from the previous
- * identity; only the ink adapts, because gold on board stock is unreadable.
+ * The PARA logo, unchanged brand. The three steam wisps and the wordmark's face
+ * (Bricolage Grotesque) are carried over verbatim from the previous identity;
+ * only the ink adapts, because the ground is now black.
  */
-export default function Logo({
-  className = "",
-  tone = "ink",
-}: {
-  className?: string;
-  tone?: "ink" | "paper";
-}) {
-  const color = tone === "paper" ? "text-paper" : "text-paprika";
-  const word = tone === "paper" ? "text-paper" : "text-ink";
-
+export default function Logo({ className = "" }: { className?: string }) {
   return (
     <span className={`inline-flex items-end gap-2 ${className}`}>
       <svg
@@ -21,7 +12,7 @@ export default function Logo({
         viewBox="0 0 22 30"
         fill="none"
         aria-hidden="true"
-        className={color}
+        className="text-chili"
       >
         <path
           d="M5 28 C2 22 8 20 5 14 C3 10 7 8 5 3"
@@ -44,9 +35,7 @@ export default function Logo({
           opacity="0.55"
         />
       </svg>
-      <span
-        className={`font-mark text-2xl font-extrabold leading-none tracking-tight ${word}`}
-      >
+      <span className="font-mark text-2xl font-extrabold leading-none tracking-tight text-chalk">
         PARA
       </span>
     </span>

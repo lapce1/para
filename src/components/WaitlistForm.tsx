@@ -35,10 +35,10 @@ export default function WaitlistForm({ source = "site" }: { source?: string }) {
 
   if (state === "done") {
     return (
-      <p role="status" className="border-[3px] border-ink bg-lime px-5 py-4 text-ink">
+      <p role="status" className="border-[3px] border-chalk bg-jade px-5 py-4 text-ground">
         <span className="stamp block">Upisano</span>
         <span className="mt-1 block text-[0.9375rem]">
-          Javljamo ti čim otvorimo vrata.
+          Javljamo ti se čim otvorimo.
         </span>
       </p>
     );
@@ -59,20 +59,20 @@ export default function WaitlistForm({ source = "site" }: { source?: string }) {
         required
         aria-invalid={email !== "" && !emailValid}
         placeholder="tvoj@imejl.rs"
-        className={`min-h-[52px] flex-1 border-[3px] bg-paper px-4 py-3 text-ink placeholder:text-inksoft/70 focus:border-paprika focus:outline-none ${
-          email !== "" && !emailValid ? "border-paprikabright" : "border-ink"
+        className={`min-h-[52px] flex-1 border-[3px] bg-raised px-4 py-3 text-chalk placeholder:text-chalksoft/70 focus:outline-none ${
+          email !== "" && !emailValid ? "border-chili" : "border-chalk"
         }`}
       />
       <button
         type="submit"
         disabled={!emailValid || state === "sending"}
-        className="misreg min-h-[52px] bg-paprika px-7 font-display text-base font-extrabold uppercase tracking-tightest text-paper hover:bg-ink disabled:cursor-not-allowed disabled:opacity-55"
+        className="min-h-[52px] bg-chili px-7 font-display text-base font-extrabold uppercase tracking-tightest text-ground hover:bg-gold disabled:cursor-not-allowed disabled:opacity-55"
       >
         {state === "sending" ? "Šaljem…" : "Upiši se"}
       </button>
       {state === "error" && (
-        <p role="alert" className="stamp text-paprikabright sm:self-center">
-          Nije prošlo — probaj ponovo
+        <p role="alert" className="stamp text-chili sm:self-center">
+          Nije prošlo, probaj ponovo
         </p>
       )}
     </form>

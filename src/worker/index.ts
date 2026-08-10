@@ -1,5 +1,5 @@
 /**
- * PARA Worker — payments API in front of the static Next.js export.
+ * PARA Worker: payments API in front of the static Next.js export.
  *
  * Routes:
  *   POST /api/checkout              -> price cart, create order, AllSecure debit, return { redirectUrl }
@@ -108,7 +108,7 @@ export default {
 /* -------------------------------------------------------------- rate limit */
 
 /**
- * Fixed-window per-IP limiter on the colo-local Cache API — no paid bindings.
+ * Fixed-window per-IP limiter on the colo-local Cache API, no paid bindings.
  * Scope is per-colo and the count is best-effort (concurrent requests can race
  * a step), which is exactly enough to damp abuse of the charging/insert
  * endpoints without punishing real users.
@@ -210,7 +210,7 @@ async function handleCheckout(request: Request, env: Env, selfOrigin: string): P
     return json({ error: "invalid_email" }, 400);
   }
 
-  // Authoritative price — the client's total is never trusted.
+  // Authoritative price: the client's total is never trusted.
   let priced;
   try {
     priced = priceCart(input.items);
@@ -400,7 +400,7 @@ async function issueReceiptAndEmail(env: Env, mtx: string): Promise<void> {
   await sendReceiptEmail(
     env,
     order.customer_email,
-    "PARA — fiskalni račun za vašu porudžbinu",
+    "PARA · fiskalni račun za vašu porudžbinu",
     receiptEmailHtml({
       merchantTxId: mtx,
       amountText: toGatewayAmount(order.amount),

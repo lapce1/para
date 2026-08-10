@@ -2,7 +2,7 @@
  * Typed wrapper around the Meta Pixel. The closed union keeps us on standard
  * events only (custom events would silently miss Meta's optimization models).
  * Every call is a safe no-op until the pixel is configured (site.metaPixelId)
- * and its bootstrap has run — so call sites never need to guard.
+ * and its bootstrap has run, so call sites never need to guard.
  */
 
 export type MetaEvent =
