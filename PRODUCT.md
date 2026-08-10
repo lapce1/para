@@ -8,19 +8,19 @@ web
 
 ## Users
 
-Primary: students and young professionals in central Novi Sad, at **lunchtime**, plus the surrounding neighborhood. The lokal sits at Stražilovska 10, ground floor, near the faculties — walk-in traffic on foot, deciding fast, usually on a phone. Mobile is the dominant surface (~90% of traffic expected from Instagram/TikTok).
+Primary: students and young professionals in central Novi Sad, at **lunchtime**, plus the surrounding neighborhood. The lokal sits at Stražilovska 10, ground floor, near the faculties: walk-in traffic on foot, deciding fast, usually on a phone. Mobile is the dominant surface (~90% of traffic expected from Instagram/TikTok).
 
 Three ways the same person meets the product: eating in at one of the few tables, taking away, or ordering delivery across Novi Sad.
 
 ## Product Purpose
 
-PARA cooks real Vietnamese phở in Novi Sad and serves it hot — at its own tables, for takeaway, and on delivery. Success is a person who came for lunch coming back next week, and telling someone.
+PARA cooks real Vietnamese phở in Novi Sad and serves it hot, at its own tables, for takeaway, and on delivery. Success is a person who came for lunch coming back next week, and telling someone.
 
 ## Positioning
 
-The broth is the product. It simmers **6 hours every day** on beef bones, oxtail and brisket with roasted ginger and onion and five spices — star anise, cinnamon, clove, cardamom, ginger. No bouillon cubes, no shortcuts, no preservatives. That is the claim a neighboring kitchen cannot truthfully copy, and it is the thing to sell.
+The broth is the product. It simmers **6 hours every day** on beef bones, oxtail and brisket with roasted ginger and onion and five spices: star anise, cinnamon, clove, cardamom, ginger. No bouillon cubes, no shortcuts, no preservatives. That is the claim a neighboring kitchen cannot truthfully copy, and it is the thing to sell.
 
-Explicit owner direction (2026-08-10): **the separate-packaging / assemble-at-home ritual is a short-lived gimmick and must not be the theme.** It remains a true operational detail of delivery only. The product — the bowl and the broth — is the selling point.
+Explicit owner direction (2026-08-10): **the separate-packaging / assemble-at-home ritual is a short-lived gimmick and must not be the theme.** It remains a true operational detail of delivery only. The product, the bowl and the broth, is the selling point.
 
 ## Operating Context
 
@@ -31,10 +31,12 @@ Explicit owner direction (2026-08-10): **the separate-packaging / assemble-at-ho
 
 ## Capabilities and Constraints
 
-- Menu (RSD, direct channel): Phở Bò Tái 950 · Phở Đặc Biệt 1090 (signature, oxtail + brisket, double meat) · Phở Gà 790 · Phở Chay 750 (vegan) · Gỏi cuốn 390 · plus sides and Vietnamese coffee. A combo pairs any bowl with iced Vietnamese coffee for 100 RSD less. **Prices and menu data are product truth; never invent or alter them.**
+- Menu (RSD, direct channel), set by the owner on 2026-08-10: **Phở Bò 650** and **Pilsner Urquell 350**. That is the entire menu. There are no sides, no add-ons, no chicken or vegan bowl and no coffee; all of those were removed at the owner's direction, and the copy now says plainly that the menu is two items. **Prices and menu data are product truth; never invent or alter them.**
+  - Open item: the beer's serving format (draught or bottle, and volume) is not recorded anywhere and must not be invented.
+  - Open item: `src/worker/menu.ts` prices every line at the reduced VAT label "Ђ" (10%). Alcohol is normally the standard "Е" (20%); the override is present but commented out and needs a decision before ordering goes live.
 - Payments: card online via AllSecure (3-D Secure) and cash/card on delivery. Fiscal receipt emailed on payment.
 - Stack: Next.js 14 App Router with `output: "export"` (fully static), TypeScript, Tailwind. Cloudflare Worker serves the export via the ASSETS binding and owns the API (checkout, D1 orders, fiscalization seam, Resend receipts).
-  - `next.config` redirects are ignored under static export — redirects live in `src/worker/index.ts`.
+  - `next.config` redirects are ignored under static export, so redirects live in `src/worker/index.ts`.
   - No middleware, no ISR, no server components with dynamic data.
   - CSP lives in `src/worker/security.ts` and applies to every response; any new external origin must be added there in the same commit.
   - Fonts are self-hosted in `public/fonts` (no third-party font origins).
@@ -42,10 +44,12 @@ Explicit owner direction (2026-08-10): **the separate-packaging / assemble-at-ho
 
 ## Brand Commitments
 
-- Name: PARA. In Serbian, *para* is the steam rising off a hot bowl — the name is the product's own physical evidence, and the one piece of wordplay the brand owns.
+- Name: PARA. In Serbian, *para* is the steam rising off a hot bowl, so the name is the product's own physical evidence, and the one piece of wordplay the brand owns.
 - Voice: dry, credible, urban. Not cute, not hypey.
-- Vietnamese dish names are used as the real names (Phở Bò Tái, Phở Đặc Biệt, Gỏi cuốn), with Serbian description alongside.
+- Vietnamese dish names are used as the real names (Phở Bò), with Serbian description alongside.
 - Owner direction (2026-08-10): the previous look reads as generic/AI-default and is treated as **anti-reference**, not authority. Full visual-world replacement is authorized.
+- Owner direction (2026-08-10, second pass): the printed-label look that replaced it was also rejected. Cream grounds, muted colour, the drawn bowl and all hover animation are out. The surface is now black with bright saturated inks. See DESIGN.md.
+- Voice correction (2026-08-10): the clipped declarative style, where every line reads like a punchline, is explicitly not wanted. Write plain connected sentences. **No em-dashes anywhere**, in copy or code comments.
 
 ## Evidence on Hand
 
@@ -64,4 +68,4 @@ Explicit owner direction (2026-08-10): **the separate-packaging / assemble-at-ho
 
 ## Accessibility & Inclusion
 
-WCAG AA contrast for text is an established project standard (previously audited and fixed); keyboard focus is visible on all interactive elements; motion respects `prefers-reduced-motion`. Serbian diacritics and Vietnamese diacritics must both render — any chosen typeface must cover Latin Extended and Vietnamese, or carry a fallback that does.
+WCAG AA contrast for text is an established project standard (previously audited and fixed); keyboard focus is visible on all interactive elements; motion respects `prefers-reduced-motion`. Serbian diacritics and Vietnamese diacritics must both render, so any chosen typeface must cover Latin Extended and Vietnamese, or carry a fallback that does.

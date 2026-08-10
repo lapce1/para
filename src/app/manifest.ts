@@ -5,13 +5,13 @@ export const dynamic = "force-static";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: `${site.name} — Phở kuhinja`,
+    name: `${site.name} · Phở kuhinja`,
     short_name: site.name,
     description: site.description,
     start_url: "/",
     display: "standalone",
-    background_color: "#EDE2CE",
-    theme_color: "#EDE2CE",
+    background_color: "#0A0A0A",
+    theme_color: "#0A0A0A",
     lang: "sr-RS",
     categories: ["food", "food and drink", "shopping"],
     icons: [

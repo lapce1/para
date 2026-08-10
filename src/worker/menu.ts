@@ -2,8 +2,8 @@
  * Server-authoritative pricing.
  *
  * The client cart sends only { id, qty }. The amount charged is ALWAYS recomputed
- * here — never from a total the browser sends — otherwise a user can edit the
- * request and pay 1 RSD for a 950 RSD order.
+ * here, never from a total the browser sends, otherwise a user can edit the
+ * request and pay 1 RSD for a 650 RSD order.
  *
  * Prices/items are imported directly from the real catalog (src/data/menu.ts) and
  * delivery rules from src/data/site.ts, so this can never drift from what the
@@ -11,7 +11,7 @@
  * fiscal receipt needs and the catalog doesn't carry.
  */
 
-import { menu, addons } from "../data/menu";
+import { menu } from "../data/menu";
 import { site } from "../data/site";
 
 export interface CatalogItem {
@@ -23,13 +23,17 @@ export interface CatalogItem {
 
 /**
  * VAT labels for the fiscal receipt. Prepared food/delivery is commonly the
- * reduced rate ("Ђ" = 10%), but CONFIRM per item with your knjigovođa — this
+ * reduced rate ("Ђ" = 10%), but CONFIRM per item with your knjigovođa: this
  * prints on the fiscal receipt and must be correct. Add per-id overrides here;
  * anything not listed uses DEFAULT_TAX.
+ *
+ * OPEN ITEM: alcohol is normally the standard rate ("Е" = 20%), not the reduced
+ * food rate. Confirm the label for pilsner-urquell and uncomment the override
+ * below before ordering goes live, or the receipt will understate the VAT.
  */
 const DEFAULT_TAX = "Ђ";
 const TAX_OVERRIDES: Record<string, string> = {
-  // e.g. "ca-phe-sua-da": "Е",
+  // "pilsner-urquell": "Е",
 };
 
 const DELIVERY_ID = "delivery";
@@ -37,7 +41,6 @@ const DELIVERY_ID = "delivery";
 function buildCatalog(): Record<string, CatalogItem> {
   const entries: CatalogItem[] = [
     ...menu.map((m) => ({ id: m.id, name: m.vi, price: m.price, tax: TAX_OVERRIDES[m.id] ?? DEFAULT_TAX })),
-    ...addons.map((a) => ({ id: a.id, name: a.name, price: a.price, tax: TAX_OVERRIDES[a.id] ?? DEFAULT_TAX })),
     { id: DELIVERY_ID, name: "Dostava", price: site.deliveryFee, tax: TAX_OVERRIDES[DELIVERY_ID] ?? DEFAULT_TAX },
   ];
   return Object.fromEntries(entries.map((e) => [e.id, e]));

@@ -1,6 +1,6 @@
 /**
  * Client-side glue for the existing PARA order tray (Next.js client component).
- * Same-origin calls — no CORS needed because the API and site share one Worker.
+ * Same-origin calls: no CORS needed because the API and site share one Worker.
  */
 
 export interface CartLine {
@@ -32,12 +32,12 @@ export async function startCardCheckout(
 /**
  * On /placanje/uspesno, poll until the verified postback flips the order to PAID
  * and the fiscal receipt link appears. The browser redirect alone is NOT proof of
- * payment — the callback is. Times out gracefully.
+ * payment; the callback is. Times out gracefully.
  */
 export interface OrderStatus {
   status: "PENDING" | "PAID" | "FAILED";
   receiptUrl: string | null;
-  /** Order total in integer RSD — the value for the Purchase conversion event. */
+  /** Order total in integer RSD, the value for the Purchase conversion event. */
   amountRsd: number | null;
 }
 

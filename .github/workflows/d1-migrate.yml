@@ -3,7 +3,7 @@ name: D1 migrate (manual)
 # Manually-triggered: applies ./schema.sql to the production para-orders D1.
 # The schema is idempotent (CREATE TABLE IF NOT EXISTS), so re-runs are safe.
 # Exists because local wrangler sessions are not authenticated against the
-# Cloudflare account — the API token lives only in Actions secrets.
+# Cloudflare account: the API token lives only in Actions secrets.
 
 on:
   workflow_dispatch:

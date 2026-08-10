@@ -10,7 +10,7 @@ import { site } from "@/data/site";
  * empty: no script injected, no network calls, track() no-ops.
  *
  * The App Router doesn't reload the document on navigation, so the pixel's
- * automatic PageView (fired once by init) misses client-side transitions —
+ * automatic PageView (fired once by init) misses client-side transitions, so
  * we fire PageView on every pathname change instead, and ViewContent on the
  * menu + phở content cluster.
  */

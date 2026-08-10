@@ -1,5 +1,5 @@
 /**
- * AllSecure Exchange (asxgw.com) — v3 JSON adapter.
+ * AllSecure Exchange (asxgw.com) v3 JSON adapter.
  *
  * This module is the ONLY place that knows the gateway's wire format. If AllSecure's
  * integration engineer hands you anything that differs from the public docs
@@ -161,7 +161,7 @@ export async function createDebit(cfg: AllSecureConfig, req: DebitRequest): Prom
 
 /**
  * Verify an incoming postback. Pass the RAW body text exactly as received
- * (do not re-stringify a parsed object — the hash must match byte-for-byte),
+ * (do not re-stringify a parsed object, the hash must match byte-for-byte),
  * plus the request's own headers and path.
  */
 export async function verifyPostbackSignature(args: {

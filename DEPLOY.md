@@ -52,7 +52,7 @@ serves the domain. DNS for para.rs is already on Cloudflare, so this is a couple
 
 ---
 
-## Option A — GitHub Actions (this repo: `.github/workflows/deploy.yml`)
+## Option A: GitHub Actions (this repo: `.github/workflows/deploy.yml`)
 
 The workflow runs on every push to `main`: `npm ci` → typecheck Worker → `next build` →
 `wrangler deploy`. You only need to give it two GitHub secrets.
@@ -63,7 +63,7 @@ Use the **"Edit Cloudflare Workers"** template, then ensure these permissions:
 - Account → **Workers Scripts**: Edit
 - Account → **D1**: Edit
 - Account → **Workers KV / Workers R2**: not needed
-- (Account → **Account Settings**: Read — usually included)
+- (Account → **Account Settings**: Read, usually included)
 
 Scope it to your account. Copy the token.
 
@@ -79,7 +79,7 @@ That's it. Push to `main` (or run the workflow manually from the **Actions** tab
 
 ---
 
-## Option B — Cloudflare Workers Builds (no Actions file)
+## Option B: Cloudflare Workers Builds (no Actions file)
 
 If you'd rather not manage a token in GitHub, let Cloudflare build from the repo:
 
@@ -97,11 +97,11 @@ Worker's **Settings → Variables and Secrets** / **Bindings**).
 
 ## Notes
 
-- **`npm ci` needs `package-lock.json`** — it's committed, so CI installs are reproducible.
+- **`npm ci` needs `package-lock.json`**, it's committed, so CI installs are reproducible.
 - The legacy [`.github/workflows/main.yml`](.github/workflows/main.yml) ("move files to
-  root") is from the old static-file setup and is **no longer needed** — it only runs on
+  root") is from the old static-file setup and is **no longer needed**, it only runs on
   manual dispatch, so it won't interfere, but you can delete it.
 - **Migrations:** if you change `schema.sql` later, re-run the `wrangler d1 execute … --remote`
-  command. CI does not run migrations automatically (intentional — schema changes are deliberate).
+  command. CI does not run migrations automatically (intentional, schema changes are deliberate).
 - **Rollback:** `npx wrangler rollback` reverts the Worker to the previous deployment.
 - **Custom domain TLS** is automatic once para.rs is attached to the Worker.

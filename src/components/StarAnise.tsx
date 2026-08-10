@@ -1,7 +1,7 @@
-// Vietnam motif: star anise (zvezdasti anis) — one of the five aromatics in the
+// Vietnam motif: star anise (zvezdasti anis), one of the five aromatics in the
 // broth. Drawn botanically as eight boat-shaped follicles radiating from a small
 // core, each with a faint seam and a seed pocket. Uses currentColor throughout so
-// it can be tinted gold/green and faded for use as a decorative accent.
+// it can be tinted and faded for use as a decorative accent.
 export default function StarAnise({ className = "" }: { className?: string }) {
   const pods = [0, 45, 90, 135, 180, 225, 270, 315];
   return (

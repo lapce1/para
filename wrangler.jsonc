@@ -10,7 +10,7 @@
   // through to these assets for everything else.
   //
   // run_worker_first: without it, requests matching a static asset are served
-  // by the asset layer WITHOUT invoking the Worker — so withSecurityHeaders()
+  // by the asset layer WITHOUT invoking the Worker, so withSecurityHeaders()
   // (CSP/HSTS/XFO) and the /opengraph-image content-type fix silently never
   // applied to pages in production. Worker-first costs one invocation per
   // asset request and buys correct headers on every response.

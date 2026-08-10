@@ -1,5 +1,5 @@
 /**
- * Security headers applied to every response the Worker emits — both the API and
+ * Security headers applied to every response the Worker emits, both the API and
  * the static site served through the ASSETS binding.
  *
  * CSP notes: the static Next.js export ships inline hydration scripts and the menu
@@ -17,7 +17,7 @@ const CSP = [
   "form-action 'self'",
   // www.facebook.com: the pixel's <img> fallback + event beacons.
   "img-src 'self' data: https://www.facebook.com",
-  // Fonts are self-hosted (public/fonts) — no third-party font origins.
+  // Fonts are self-hosted (public/fonts), no third-party font origins.
   "style-src 'self' 'unsafe-inline'",
   "font-src 'self'",
   // connect.facebook.net serves fbevents.js (Meta Pixel; inert until configured).

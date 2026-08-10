@@ -4,7 +4,7 @@
  */
 
 import { site } from "@/data/site";
-import { menu, addons, type MenuItem } from "@/data/menu";
+import { menu, type MenuItem } from "@/data/menu";
 import { faq, type Faq } from "@/data/faq";
 import { phoIntro, phoHowTo } from "@/data/pho";
 import { phoRamenFaq } from "@/data/phoRamen";
@@ -12,7 +12,7 @@ import { phoRamenFaq } from "@/data/phoRamen";
 const abs = (path: string) => `${site.url}${path.startsWith("/") ? path : `/${path}`}`;
 
 /**
- * Structured form of site.seo.openingHours ("Mo-Su 11:00-22:00") — the object
+ * Structured form of site.seo.openingHours ("Mo-Su 11:00-22:00"). The object
  * form is what Google's rich-result parser actually consumes. Parses the hours
  * out of the string so the two representations can't drift.
  */
@@ -26,7 +26,7 @@ function openingHoursSpec(): Record<string, unknown> {
   };
 }
 
-/** Restaurant / LocalBusiness — sitewide, lives in the root layout. */
+/** Restaurant / LocalBusiness, sitewide, lives in the root layout. */
 export function restaurantSchema(): Record<string, unknown> {
   const address: Record<string, string> = {
     "@type": "PostalAddress",
@@ -77,12 +77,12 @@ function faqPage(list: Faq[]): Record<string, unknown> {
   };
 }
 
-/** FAQ rich-results schema — lives on the home page, mirrors src/data/faq. */
+/** FAQ rich-results schema, lives on the home page, mirrors src/data/faq. */
 export function faqSchema(): Record<string, unknown> {
   return faqPage(faq);
 }
 
-/** FAQPage for /pho/pho-ili-ramen — mirrors the visible FAQ from src/data/phoRamen. */
+/** FAQPage for /pho/pho-ili-ramen, mirrors the visible FAQ from src/data/phoRamen. */
 export function phoRamenFaqSchema(): Record<string, unknown> {
   return faqPage(phoRamenFaq);
 }
@@ -101,12 +101,12 @@ export function breadcrumbSchema(items: { name: string; path: string }[]): Recor
   };
 }
 
-/** Article schema for the /pho guide — eligible for article rich results. */
+/** Article schema for the /pho guide, eligible for article rich results. */
 export function phoGuideSchema(): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: "Šta je phở — vodič kroz vijetnamsku supu",
+    headline: "Šta je phở: vodič kroz vijetnamsku supu",
     description: phoIntro,
     inLanguage: "sr-RS",
     mainEntityOfPage: abs("/pho"),
@@ -121,7 +121,7 @@ export function phoGuideSchema(): Record<string, unknown> {
   };
 }
 
-/** HowTo schema for assembling the delivered phở — lives on /pho. */
+/** HowTo schema for assembling the delivered phở, lives on /pho. */
 export function phoHowToSchema(): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
@@ -138,8 +138,7 @@ export function phoHowToSchema(): Record<string, unknown> {
   };
 }
 
-const sectionFor = (cat: MenuItem["category"]) =>
-  ({ supe: "Supe", prilozi: "Prilozi", pice: "Piće" }[cat]);
+const sectionFor = (cat: MenuItem["category"]) => ({ supe: "Supa", pice: "Piće" }[cat]);
 
 function menuItemNode(name: string, description: string, price: number): Record<string, unknown> {
   return {
@@ -150,9 +149,9 @@ function menuItemNode(name: string, description: string, price: number): Record<
   };
 }
 
-/** Menu schema — lives on /meni. */
+/** Menu schema, lives on /meni. */
 export function menuSchema(): Record<string, unknown> {
-  const cats: MenuItem["category"][] = ["supe", "prilozi", "pice"];
+  const cats: MenuItem["category"][] = ["supe", "pice"];
   const sections = cats
     .map((cat) => ({
       cat,
@@ -164,12 +163,6 @@ export function menuSchema(): Record<string, unknown> {
       name: sectionFor(s.cat),
       hasMenuItem: s.items.map((m) => menuItemNode(m.vi, m.desc, m.price)),
     }));
-
-  sections.push({
-    "@type": "MenuSection",
-    name: "Dodaci",
-    hasMenuItem: addons.map((a) => menuItemNode(a.name, "", a.price)),
-  });
 
   return {
     "@context": "https://schema.org",

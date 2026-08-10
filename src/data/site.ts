@@ -2,19 +2,21 @@
 export const site = {
   name: "PARA",
   tagline: "Supa koja se puši.",
-  support: "Supa se krčka 6 sati. Pojedi je za stolom dok se puši, ili stiže vrela na tvoja vrata.",
+  support: "Supa se krčka šest sati svakog jutra. Pojedeš je za stolom kod nas, poneseš ili ti stigne vrela na vrata.",
   city: "Novi Sad",
-  cityLoc: "Novom Sadu", // lokativ — "u Novom Sadu" (nikad "u Novi Sadu")
+  cityLoc: "Novom Sadu", // lokativ: "u Novom Sadu" (nikad "u Novi Sadu")
 
-  // Fizički lokal — mali prostor sa nekoliko stolova, centar, blizu fakulteta.
+  // Fizički lokal: mali prostor sa nekoliko stolova, centar, blizu fakulteta.
   address: "Stražilovska 10",
+  addressLoc: "Stražilovskoj 10", // lokativ: "u Stražilovskoj 10" (nikad "u Stražilovska 10")
 
   // Canonical origin (no trailing slash). Used for SEO metadata + structured data.
   url: "https://para.rs",
   description:
-    "PARA — vijetnamska phở kuhinja u centru Novog Sada, Stražilovska 10. Prava goveđa " +
-    "i pileća phở supa, krčkana 6 sati na govedoj kosti, đumbiru i anisu. Pojedi je za " +
-    "našim stolom ili poruči — stiže vrela. Plaćanje karticom ili pouzećem.",
+    "PARA je vijetnamska phở kuhinja u centru Novog Sada, u Stražilovskoj 10. Kuvamo " +
+    "jednu stvar: goveđu phở supu koja se krčka šest sati na kosti, đumbiru i anisu. " +
+    "Pojedeš je za našim stolom, poneseš ili ti stigne vrela na adresu. Plaćanje " +
+    "karticom ili pouzećem.",
 
   // --- replace these placeholders ---
   phone: "+381 60 1234567",
@@ -47,7 +49,7 @@ export const site = {
   // once the business address is registered; the schema omits anything left empty.
   seo: {
     cuisine: "Vietnamese",
-    priceRange: "800–1100 RSD",
+    priceRange: "350-650 RSD",
     openingHours: "Mo-Su 11:00-22:00", // matches `hours` above
     addressRegion: "Vojvodina",
     addressCountry: "RS",

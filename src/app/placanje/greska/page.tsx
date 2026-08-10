@@ -10,21 +10,21 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className="mx-auto max-w-xl px-5 py-[var(--section)]">
-      <h1 className="wordset text-4xl text-ink md:text-5xl">Došlo je do greške</h1>
-      <p className="mt-4 text-lg leading-relaxed text-ink/85">
+      <h1 className="wordset text-4xl text-chalk md:text-5xl">Došlo je do greške</h1>
+      <p className="mt-4 text-lg leading-relaxed text-chalk/85">
         Plaćanje nije moglo da se obradi. Ako je iznos rezervisan na tvojoj kartici, biće
-        vraćen. Pokušaj ponovo ili nas kontaktiraj i rado ćemo pomoći.
+        vraćen. Pokušaj ponovo ili nas pozovi pa ćemo rešiti.
       </p>
       <div className="mt-8 flex flex-wrap gap-3">
         <Link
           href="/poruci"
-          className="misreg bg-paprika px-7 py-4 font-display text-base font-extrabold uppercase tracking-tightest text-paper hover:bg-ink"
+          className="bg-chili px-7 py-4 font-display text-base font-extrabold uppercase tracking-tightest text-ground hover:bg-gold"
         >
           Pokušaj ponovo
         </Link>
         <a
           href={`tel:${site.phone.replace(/\s/g, "")}`}
-          className="misreg border-[3px] border-ink px-7 py-4 font-display text-base font-extrabold uppercase tracking-tightest text-ink hover:bg-lime"
+          className="border-[3px] border-chalk px-7 py-4 font-display text-base font-extrabold uppercase tracking-tightest text-chalk hover:bg-chalk hover:text-ground"
         >
           Pozovi {site.phone}
         </a>

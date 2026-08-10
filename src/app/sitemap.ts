@@ -4,7 +4,7 @@ import { site } from "@/data/site";
 // Static export: emit a real /sitemap.xml at build time.
 export const dynamic = "force-static";
 
-// Evergreen content pages carry the date their copy last actually changed —
+// Evergreen content pages carry the date their copy last actually changed,
 // bump these when you edit the page. Stamping `now` on everything told crawlers
 // the whole site changed on every deploy, which devalues the signal.
 const PHO_UPDATED = new Date("2026-08-10"); // dine-in pivot copy

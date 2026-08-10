@@ -17,33 +17,33 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b-[3px] border-ink bg-paper">
+    <header className="sticky top-0 z-50 border-b-[3px] border-chalk bg-ground">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
         <Link href="/" aria-label="PARA početna" className="shrink-0">
           <Logo />
         </Link>
 
         {/* the address sits in the masthead, the way a label prints its origin */}
-        <p className="stamp hidden text-inksoft lg:block">
+        <p className="stamp hidden text-chalksoft lg:block">
           {site.address} · {site.hours}
         </p>
 
         <nav className="hidden items-center gap-7 md:flex">
           {links.map((l) => (
-            <Link key={l.href} href={l.href} className="stamp py-3 text-ink hover:text-paprika">
+            <Link key={l.href} href={l.href} className="stamp py-3 text-chalk hover:text-jade">
               {l.label}
             </Link>
           ))}
           <Link
             href="/poruci"
-            className="misreg stamp bg-paprika px-4 py-2.5 text-paper hover:bg-ink"
+            className="stamp bg-chili px-4 py-2.5 text-ground hover:bg-gold"
           >
             Poruči{count > 0 ? ` · ${count}` : ""}
           </Link>
         </nav>
 
         <button
-          className="-mr-1 flex h-11 w-11 items-center justify-center text-ink md:hidden"
+          className="-mr-1 flex h-11 w-11 items-center justify-center text-chalk md:hidden"
           onClick={() => setOpen(!open)}
           aria-label={open ? "Zatvori meni" : "Otvori meni"}
           aria-expanded={open}
@@ -69,13 +69,13 @@ export default function Nav() {
       </div>
 
       {open && (
-        <div className="border-t-[3px] border-ink bg-board px-5 pb-5 pt-2 md:hidden">
+        <div className="border-t-[3px] border-chalk bg-raised px-5 pb-5 pt-2 md:hidden">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="wordset block border-b border-ink/15 py-3 text-2xl text-ink"
+              className="wordset block border-b border-chalk/15 py-3 text-2xl text-chalk"
             >
               {l.label}
             </Link>
@@ -83,11 +83,11 @@ export default function Nav() {
           <Link
             href="/poruci"
             onClick={() => setOpen(false)}
-            className="stamp mt-4 inline-block bg-paprika px-5 py-3 text-paper"
+            className="stamp mt-4 inline-block bg-chili px-5 py-3 text-ground"
           >
             Poruči{count > 0 ? ` · ${count}` : ""}
           </Link>
-          <p className="stamp mt-4 text-inksoft">
+          <p className="stamp mt-4 text-chalksoft">
             {site.address} · {site.hours}
           </p>
         </div>

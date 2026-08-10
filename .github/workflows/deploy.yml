@@ -2,7 +2,7 @@ name: Deploy to Cloudflare
 
 # Builds the static Next.js export and deploys the Worker (+ assets, + D1 binding)
 # on every push to main. App secrets (ALLSECURE_*, RESEND_API_KEY, FISCAL_*) are NOT
-# set here — they live in Cloudflare, set once via `wrangler secret put`. See DEPLOY.md.
+# set here: they live in Cloudflare, set once via `wrangler secret put`. See DEPLOY.md.
 
 on:
   push:

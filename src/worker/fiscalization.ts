@@ -4,7 +4,7 @@
  * A card sale on the site is a taxable retail turnover and must produce an
  * e-fiscal receipt issued through a CERTIFIED ESIR + PFR (local or virtual),
  * carrying a QR code + verification hyperlink, transmitted to Poreska uprava.
- * That receipt — not a plain confirmation email — is what you send the customer.
+ * That receipt, not a plain confirmation email, is what you send the customer.
  *
  * You do NOT build this yourself. You pick a licensed ESIR/PFR vendor that exposes
  * an HTTP API and implement issueReceipt() against it below. Until then the stub
