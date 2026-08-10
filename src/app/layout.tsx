@@ -8,7 +8,7 @@ import MetaPixel from "@/components/MetaPixel";
 import { site } from "@/data/site";
 import { restaurantSchema } from "@/lib/seo";
 
-const ogTitle = `${site.name} — Phở kuhinja i dostava · ${site.city}`;
+const ogTitle = `${site.name} — Phở kuhinja · ${site.city}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -26,6 +26,8 @@ export const metadata: Metadata = {
     "vijetnamska kuhinja",
     "vijetnamska hrana Novi Sad",
     "vijetnamski restoran Novi Sad",
+    "phở restoran Novi Sad",
+    "restoran Stražilovska",
     "dostava hrane Novi Sad",
     "goveđa supa dostava",
     "pirinčani rezanci",

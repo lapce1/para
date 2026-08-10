@@ -31,8 +31,9 @@ export default function OrderPage() {
           Uskoro krećemo
         </h1>
         <p className="mt-4 text-lg text-bone/70">
-          Kuhinja se zahuktava. Ostavi imejl i javljamo ti prvom čim otvorimo
-          dostavu u {site.cityLoc} — bez spama, samo jedna poruka.
+          Kuhinja se zahuktava. Otvaramo lokal na adresi {site.address} u {site.cityLoc},
+          uz dostavu za ceo grad. Ostavi imejl i javljamo ti prvom čim otvorimo vrata —
+          bez spama, samo jedna poruka.
         </p>
         <div className="mt-8">
           <WaitlistForm source="poruci" />

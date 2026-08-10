@@ -1,17 +1,20 @@
 // Brand + operational config. EDIT the contact/links before going live.
 export const site = {
   name: "PARA",
-  tagline: "Supa koja putuje.",
-  support: "Supa se krčka 6 sati. Stiže vrela, na tvoja vrata.",
+  tagline: "Supa koja se puši.",
+  support: "Supa se krčka 6 sati. Pojedi je za stolom dok se puši, ili stiže vrela na tvoja vrata.",
   city: "Novi Sad",
   cityLoc: "Novom Sadu", // lokativ — "u Novom Sadu" (nikad "u Novi Sadu")
+
+  // Fizički lokal — mali prostor sa nekoliko stolova, centar, blizu fakulteta.
+  address: "Stražilovska 10",
 
   // Canonical origin (no trailing slash). Used for SEO metadata + structured data.
   url: "https://para.rs",
   description:
-    "PARA — vijetnamska phở kuhinja u Novom Sadu. Prava goveđa i pileća phở supa, " +
-    "krčkana 6 sati na govedoj kosti, đumbiru i anisu, dostavljena vrela. Supa, " +
-    "pirinčani rezanci i sveže biljke putuju odvojeno. Plaćanje karticom ili pouzećem.",
+    "PARA — vijetnamska phở kuhinja u centru Novog Sada, Stražilovska 10. Prava goveđa " +
+    "i pileća phở supa, krčkana 6 sati na govedoj kosti, đumbiru i anisu. Pojedi je za " +
+    "našim stolom ili poruči — stiže vrela. Plaćanje karticom ili pouzećem.",
 
   // --- replace these placeholders ---
   phone: "+381 60 1234567",
@@ -48,7 +51,7 @@ export const site = {
     openingHours: "Mo-Su 11:00-22:00", // matches `hours` above
     addressRegion: "Vojvodina",
     addressCountry: "RS",
-    streetAddress: "", // e.g. "Bulevar oslobođenja 1" — leave empty until registered
-    postalCode: "", // e.g. "21000"
+    streetAddress: "Stražilovska 10",
+    postalCode: "21000",
   },
 };

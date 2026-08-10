@@ -51,6 +51,6 @@ export const phoRamenFaq: { q: string; a: string }[] = [
   },
   {
     q: "Gde mogu da probam phở u Novom Sadu?",
-    a: "PARA kuva goveđi, pileći i posni phở i dostavlja ga vrelog po Novom Sadu. Supa, pirinčani rezanci i sveže biljke putuju odvojeno, pa činiju sklapaš kod kuće za 90 sekundi.",
+    a: "U PARA lokalu u centru — Stražilovska 10, blizu fakulteta, nekoliko stolova bez rezervacije. Kuvamo goveđi, pileći i posni phở, a dostavljamo ga i vrelog na kućnu adresu širom Novog Sada.",
   },
 ];

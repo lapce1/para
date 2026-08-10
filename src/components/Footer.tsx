@@ -14,9 +14,13 @@ export default function Footer() {
 
         <div>
           <h4 className="font-display text-sm font-bold uppercase tracking-wider text-broth">
-            Kontakt
+            Lokal
           </h4>
           <ul className="mt-3 space-y-1 text-sm text-bone/70">
+            <li>
+              {site.address}, {site.city}
+            </li>
+            <li>{site.hours}</li>
             <li>
               <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="hover:text-broth">
                 {site.phone}
@@ -27,7 +31,6 @@ export default function Footer() {
                 {site.email}
               </a>
             </li>
-            <li>{site.hours}</li>
           </ul>
         </div>
 
@@ -45,8 +48,8 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/5 px-5 py-5 text-center text-xs text-bone/55">
-        © {new Date().getFullYear()} {site.name} — vijetnamska phở kuhinja i dostava, {site.city}.
-        Sva prava zadržana.
+        © {new Date().getFullYear()} {site.name} — vijetnamska phở kuhinja, {site.address},{" "}
+        {site.city}. Sva prava zadržana.
       </div>
     </footer>
   );

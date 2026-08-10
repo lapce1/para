@@ -63,7 +63,7 @@ export default function OpengraphImage() {
           Vijetnamska pho kuhinja - Novi Sad
         </div>
         <div style={{ display: "flex", fontSize: 34, marginTop: 26, color: "#F3E9D6" }}>
-          Supa koja putuje - krckana 6 sati, dostavljena vrela.
+          Krckana 6 sati - za stolom ili na dostavu, uvek vrela.
         </div>
       </div>
     ),

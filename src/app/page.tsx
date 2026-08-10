@@ -18,14 +18,26 @@ const accent: Record<string, string> = { broth: "text-broth", herb: "text-herb" 
 const trust = [
   { k: "6h", v: "supa se krčka", c: "broth" },
   { k: "0", v: "konzervanasa", c: "herb" },
-  { k: "vrelo", v: "na tvoja vrata", c: "broth" },
-  { k: "odvojeno", v: "supa i rezanci putuju posebno", c: "herb" },
+  { k: "centar", v: "Stražilovska 10, kod fakulteta", c: "broth" },
+  { k: "vrelo", v: "za stolom ili na tvoja vrata", c: "herb" },
 ];
 
 const steps = [
-  { n: "01", t: "Otvori", d: "Vrela supa, rezanci i sveže biljke stižu u odvojenim kutijama." },
-  { n: "02", t: "Sipaj", d: "Presipaš vrelu supu preko rezanaca. Rezanci ostaju savršeni, nikad raskuvani." },
-  { n: "03", t: "Para", d: "Dodaš nanu, bosiljak, limetu i čili. Diže se para — i to je tvoja činija." },
+  {
+    n: "01",
+    t: "Za stolom",
+    d: "Nekoliko stolova, bez rezervacije. Sedneš, činija stigne sklopljena i para se diže pred tobom.",
+  },
+  {
+    n: "02",
+    t: "Za poneti",
+    d: "Pokupiš usput — supa posebno, rezanci i sveže biljke posebno, da ništa ne omekša do prve kašike.",
+  },
+  {
+    n: "03",
+    t: "Dostava",
+    d: "Sve putuje odvojeno, ti spojiš činiju kod kuće za 90 sekundi. Otvori, sipaj — para.",
+  },
 ];
 
 const inBowl = [
@@ -37,7 +49,7 @@ const inBowl = [
   },
   {
     t: "Pirinčani rezanci",
-    d: "Svilenkasti pirinčani rezanci, pakovani odvojeno da nikad ne stignu raskuvani.",
+    d: "Svilenkasti pirinčani rezanci — u supu idu tek pred serviranje, pa nikad nisu raskuvani.",
     c: "broth",
   },
   {
@@ -46,8 +58,8 @@ const inBowl = [
     c: "herb",
   },
   {
-    t: "Ti spajaš",
-    d: "Presipaš, dodaš biljke, udahneš paru. Restoranska činija — sklopljena kod tebe.",
+    t: "Para",
+    d: "Vrela supa preko rezanaca — za stolom je sklapamo mi, kod kuće ti. Para se diže isto.",
     c: "herb",
   },
 ];
@@ -73,11 +85,11 @@ export default function Home() {
 
       <section className="mx-auto max-w-6xl px-5 py-20">
         <h2 className="font-display text-3xl font-extrabold text-steam md:text-4xl">
-          Otvori. Sipaj. <span className="text-herb">Para.</span>
+          Kod nas ili <span className="text-herb">kod tebe</span>
         </h2>
         <p className="mt-2 max-w-lg text-bone/60">
-          Phở ne podnosi da rezanci čame u supi. Zato ništa ne mešamo unapred — ti
-          spajaš činiju, sveže, kod kuće.
+          Ista činija, tri načina. Phở ne podnosi da rezanci čame u supi — za stolom
+          je sklapamo mi, na dostavi je spojiš ti.
         </p>
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {steps.map((s) => (
@@ -165,9 +177,15 @@ export default function Home() {
 
       <section className="mx-auto max-w-6xl px-5 pb-24 text-center">
         <h2 className="font-display text-2xl font-bold text-bone">
-          Dostavljamo u <span className="text-herb">{site.cityLoc}</span>
+          Nađi nas: <span className="text-broth">{site.address}</span>, centar
         </h2>
-        <p className="mx-auto mt-3 max-w-lg text-bone/60">{site.zones.join(" · ")}</p>
+        <p className="mx-auto mt-2 max-w-lg text-bone/60">
+          Nekoliko stolova, blizu fakulteta. {site.hours}.
+        </p>
+        <p className="mx-auto mt-4 max-w-lg text-sm text-bone/60">
+          Dostavljamo u <span className="text-herb">{site.cityLoc}</span>:{" "}
+          {site.zones.join(" · ")}
+        </p>
         <Link
           href="/poruci"
           className="mt-6 inline-block rounded-full bg-broth px-8 py-3 font-semibold text-char hover:bg-steam"
