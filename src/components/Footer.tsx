@@ -35,6 +35,11 @@ export default function Footer() {
                 {site.email}
               </a>
             </li>
+            <li>
+              <a href={site.instagram} target="_blank" rel="noreferrer" className={linkStyle}>
+                @para.pho
+              </a>
+            </li>
           </ul>
         </div>
 
@@ -49,6 +54,12 @@ export default function Footer() {
             </Link>
             <Link href="/pho" className="stamp inline-block py-1.5 text-chalk hover:text-jade">
               Šta je phở
+            </Link>
+            <Link
+              href="/pho/pho-ili-ramen"
+              className="stamp inline-block py-1.5 text-chalk hover:text-jade"
+            >
+              Phở ili ramen
             </Link>
             <Link href="/poruci" className="stamp inline-block py-1.5 text-chalk hover:text-jade">
               Poruči
