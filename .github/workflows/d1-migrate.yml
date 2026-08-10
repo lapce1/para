@@ -1,0 +1,30 @@
+name: D1 migrate (manual)
+
+# Manually-triggered: applies ./schema.sql to the production para-orders D1.
+# The schema is idempotent (CREATE TABLE IF NOT EXISTS), so re-runs are safe.
+# Exists because local wrangler sessions are not authenticated against the
+# Cloudflare account — the API token lives only in Actions secrets.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Apply schema.sql to remote D1
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: d1 execute para-orders --remote --file=./schema.sql
