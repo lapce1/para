@@ -5,27 +5,35 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        char: "#0E0F12", // deepest neutral tone — nav, footer, insets
-        charsoft: "#1E2024", // raised surface (neutral graphite, steps clearly above body)
-        broth: "#E8B24A", // signature gold (≈ Pantone 142/143 C)
-        brothlight: "#F6D488",
-        ember: "#D85A33", // terracotta accent (≈ Pantone 7416 C)
-        emberdark: "#B5471F", // solid CTA surface — steam text passes AA (5.1:1)
-        emberlight: "#F07F5A", // a11y tint of ember for small/error text on dark (6:1+)
-        herb: "#57C77B", // fresh jade-leaf green — clean accent, not olive
-        herblight: "#86E0A3",
-        lime: "#A7D84F", // bright lime — citrus garnish pop
-        chili: "#E2533B", // chili red — heat / "ljuto" accent
-        bone: "#F3E9D6",
-        steam: "#FCF8F0",
+        // Printed-label world: uncoated board stock + flat process inks.
+        // No gradients, no glow — every colour is a solid plate.
+        paper: "#EDE2CE", // oat board, the ground
+        board: "#E2D4BB", // deeper board, alternating panels
+        ink: "#241B14", // espresso brown-black, all type (never pure #000)
+        inksoft: "#5B4B3C", // secondary type on paper — tinted from ink, not grey
+        paprika: "#A8371F", // committed field colour; paper text on it = 5.07:1
+        paprikabright: "#C0442A", // brighter plate: illustration + misregistration shift
+        lime: "#C9F23F", // the sharp accent — acid, not herbal
+        amber: "#E8A33C", // broth tone, illustration only — never UI chrome
       },
       fontFamily: {
-        display: ['"Bricolage Grotesque"', "system-ui", "sans-serif"],
-        body: ["Inter", "system-ui", "sans-serif"],
+        // Display: heavy expanded grotesque, the packaging voice.
+        display: ["Archivo", "system-ui", "sans-serif"],
+        // Text: workhorse grotesque with real character.
+        body: ["Chivo", "system-ui", "sans-serif"],
+        // Data: prices, weights, lot codes — measurement, not costume.
+        data: ["Chivo Mono", "ui-monospace", "monospace"],
+        // The wordmark keeps its original face; the logo is unchanged brand.
+        mark: ['"Bricolage Grotesque"', "system-ui", "sans-serif"],
+      },
+      letterSpacing: {
+        tightest: "-0.04em",
+        stamp: "0.18em",
       },
       boxShadow: {
-        glow: "0 0 60px -12px rgba(232,178,74,0.5)",
-        lift: "0 18px 40px -20px rgba(0,0,0,0.7)",
+        // Depth comes from print: offset + blur, ink-tinted, never a halo.
+        panel: "0 14px 30px -18px rgba(36,27,20,0.55)",
+        lift: "0 22px 44px -24px rgba(36,27,20,0.6)",
       },
     },
   },

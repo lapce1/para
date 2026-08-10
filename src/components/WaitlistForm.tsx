@@ -35,8 +35,11 @@ export default function WaitlistForm({ source = "site" }: { source?: string }) {
 
   if (state === "done") {
     return (
-      <p role="status" className="rounded-xl border border-herb/30 bg-herb/10 px-4 py-3 text-sm text-herb">
-        Upisan si. Javljamo ti čim krene dostava.
+      <p role="status" className="border-[3px] border-ink bg-lime px-5 py-4 text-ink">
+        <span className="stamp block">Upisano</span>
+        <span className="mt-1 block text-[0.9375rem]">
+          Javljamo ti čim otvorimo vrata.
+        </span>
       </p>
     );
   }
@@ -54,19 +57,22 @@ export default function WaitlistForm({ source = "site" }: { source?: string }) {
         inputMode="email"
         autoComplete="email"
         required
+        aria-invalid={email !== "" && !emailValid}
         placeholder="tvoj@imejl.rs"
-        className="min-h-[48px] flex-1 rounded-full border border-white/10 bg-charsoft px-5 py-3 text-bone placeholder:text-bone/30 focus:border-broth focus:outline-none"
+        className={`min-h-[52px] flex-1 border-[3px] bg-paper px-4 py-3 text-ink placeholder:text-inksoft/70 focus:border-paprika focus:outline-none ${
+          email !== "" && !emailValid ? "border-paprikabright" : "border-ink"
+        }`}
       />
       <button
         type="submit"
         disabled={!emailValid || state === "sending"}
-        className="min-h-[48px] rounded-full bg-emberdark px-7 py-3 font-semibold text-steam transition hover:bg-broth hover:text-char disabled:cursor-not-allowed disabled:opacity-60"
+        className="misreg min-h-[52px] bg-paprika px-7 font-display text-base font-extrabold uppercase tracking-tightest text-paper hover:bg-ink disabled:cursor-not-allowed disabled:opacity-55"
       >
-        {state === "sending" ? "Upisivanje…" : "Upiši se"}
+        {state === "sending" ? "Šaljem…" : "Upiši se"}
       </button>
       {state === "error" && (
-        <p role="alert" className="text-sm text-emberlight sm:self-center">
-          Nije prošlo. Pokušaj ponovo.
+        <p role="alert" className="stamp text-paprikabright sm:self-center">
+          Nije prošlo — probaj ponovo
         </p>
       )}
     </form>

@@ -18,20 +18,20 @@ export const metadata: Metadata = {
 };
 
 const groups = [
-  { key: "supe", title: "Supe", sub: "Phở — srce svega" },
+  { key: "supe", title: "Supe", sub: "Phở" },
   { key: "prilozi", title: "Prilozi", sub: "Uz činiju" },
   { key: "pice", title: "Piće", sub: "Da zaokružiš obrok" },
 ] as const;
 
 export default function MenuPage() {
   return (
-    <div className="mx-auto max-w-6xl px-5 py-14">
+    <div className="mx-auto max-w-5xl px-5 py-[var(--section)]">
       <JsonLd data={menuSchema()} />
-      <header className="mb-10">
-        <h1 className="font-display text-4xl font-extrabold text-steam md:text-5xl">Meni</h1>
-        <p className="mt-2 text-bone/60">
-          Sve sveže, sve vrelo. Za našim stolom, za poneti ili na{" "}
-          <span className="text-herb">dostavu</span> — ista činija, ista supa.
+
+      <header className="border-b-[3px] border-ink pb-8">
+        <h1 className="wordset text-5xl text-ink md:text-7xl">Meni</h1>
+        <p className="mt-4 max-w-[60ch] text-lg leading-relaxed text-ink/85">
+          Cene važe u lokalu, za poneti i na dostavi. Rezanci se kuvaju po porudžbini.
         </p>
       </header>
 
@@ -39,12 +39,12 @@ export default function MenuPage() {
         const items = menu.filter((m) => m.category === g.key);
         if (items.length === 0) return null;
         return (
-          <section key={g.key} className="mb-14">
-            <div className="mb-5 flex items-baseline gap-3">
-              <h2 className="font-display text-2xl font-bold text-broth">{g.title}</h2>
-              <span className="text-sm text-bone/55">{g.sub}</span>
+          <section key={g.key} className="mt-14">
+            <div className="flex flex-wrap items-baseline gap-x-4">
+              <h2 className="wordset text-3xl text-ink md:text-4xl">{g.title}</h2>
+              <span className="stamp text-inksoft">{g.sub}</span>
             </div>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-6">
               {items.map((m) => (
                 <MenuCard key={m.id} item={m} />
               ))}
@@ -53,16 +53,19 @@ export default function MenuPage() {
         );
       })}
 
-      <section className="rounded-2xl border border-white/5 bg-charsoft p-6">
-        <h2 className="font-display text-xl font-bold text-broth">Dodaci</h2>
-        <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+      <section className="mt-14 border-[3px] border-ink bg-board p-6 md:p-8">
+        <h2 className="wordset text-2xl text-ink md:text-3xl">Dodaci</h2>
+        <ul className="mt-5">
           {addons.map((a) => (
             <li
               key={a.id}
-              className="flex justify-between border-b border-white/5 py-2 text-sm text-bone/70"
+              className="flex items-baseline gap-3 border-b border-ink/25 py-2.5 last:border-0"
             >
-              <span>{a.name}</span>
-              <span className="text-bone">{a.price === 0 ? "gratis" : `+ ${rsd(a.price)}`}</span>
+              <span className="text-[0.9375rem] text-ink">{a.name}</span>
+              <span aria-hidden="true" className="h-px min-w-4 flex-1 self-center bg-ink/30" />
+              <span className="font-data text-sm font-bold tabular-nums text-ink">
+                {a.price === 0 ? "gratis" : `+ ${rsd(a.price)}`}
+              </span>
             </li>
           ))}
         </ul>

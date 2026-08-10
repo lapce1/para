@@ -70,9 +70,29 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#141619",
-  colorScheme: "dark",
+  themeColor: "#EDE2CE",
+  colorScheme: "light",
 };
+
+/**
+ * The direction contract. Emitted as a real HTML comment so it survives the
+ * production build and can be audited against the rendered page.
+ */
+const CONTRACT = `
+THESIS: The bowl is presented as a packaged good, not a plated dish — a label sells
+food without a photograph, which is exactly this project's constraint. Refuses the
+category default (dark page, gold accent, big food photo) and its minimal opposite.
+OWN-WORLD: Oat board stock, espresso-brown ink, one committed paprika field, acid-lime
+accent. Flat process inks only: no gradients, no glow, no glass. Archivo expanded caps
+for display, Chivo for text, Chivo Mono for prices and lot codes. Heavy 3px rules.
+STORY: The visitor learns the broth is cooked six hours from bones, believes it because
+the contents are printed as contents, and goes to Stražilovska 10 or orders.
+FIRST VIEWPORT: Asymmetric — headline plate left (7 cols), drawn bowl on a bordered
+board panel right (5 cols) bleeding off-edge, specification panel beneath the rule.
+Primary action sits under the deck.
+FORM: Printed food label; candidate 6 of the grounded list; seed key ed4c0ba7.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+`;
 
 export default function RootLayout({
   children,
@@ -87,20 +107,21 @@ export default function RootLayout({
             subsets stream in via unicode-range as their glyphs appear. */}
         <link
           rel="preload"
-          href="/fonts/bricolage-latin.woff2"
+          href="/fonts/archivo-latin.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
-          href="/fonts/inter-latin.woff2"
+          href="/fonts/chivo-latin.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
         />
       </head>
       <body>
+        <div hidden dangerouslySetInnerHTML={{ __html: `<!--${CONTRACT}-->` }} />
         <JsonLd data={restaurantSchema()} />
         <MetaPixel />
         <CartProvider>

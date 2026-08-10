@@ -1,55 +1,63 @@
+import Link from "next/link";
 import { site } from "@/data/site";
 import Logo from "./Logo";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/5 bg-charsoft">
-      <div className="mx-auto grid max-w-6xl gap-8 px-5 py-12 md:grid-cols-4">
-        <div className="md:col-span-2">
+    <footer className="border-t-[3px] border-ink bg-board">
+      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-12">
+        <div className="md:col-span-5">
           <Logo />
-          <p className="mt-4 max-w-xs text-sm text-bone/60">
-            {site.tagline} {site.support}
+          <p className="mt-4 max-w-[38ch] text-[0.9375rem] leading-relaxed text-ink/80">
+            Vijetnamska phở kuhinja u {site.cityLoc}. Čorba se krčka šest sati, svakog
+            dana.
           </p>
         </div>
 
-        <div>
-          <h4 className="font-display text-sm font-bold uppercase tracking-wider text-broth">
-            Lokal
-          </h4>
-          <ul className="mt-3 space-y-1 text-sm text-bone/70">
+        <div className="md:col-span-3">
+          <h2 className="stamp text-paprika">Lokal</h2>
+          <address className="mt-3 space-y-1 text-[0.9375rem] not-italic text-ink/80">
+            <p className="font-semibold text-ink">{site.address}</p>
+            <p>{site.city}</p>
+            <p className="font-data tabular-nums">{site.hours}</p>
+          </address>
+          <ul className="mt-3 space-y-1 text-[0.9375rem]">
             <li>
-              {site.address}, {site.city}
-            </li>
-            <li>{site.hours}</li>
-            <li>
-              <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="hover:text-broth">
+              <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="inline-block py-1 text-ink underline decoration-paprika decoration-2 underline-offset-4 hover:text-paprika">
                 {site.phone}
               </a>
             </li>
             <li>
-              <a href={`mailto:${site.email}`} className="hover:text-broth">
+              <a href={`mailto:${site.email}`} className="inline-block py-1 text-ink underline decoration-paprika decoration-2 underline-offset-4 hover:text-paprika">
                 {site.email}
               </a>
             </li>
           </ul>
         </div>
 
-        <div>
-          <h4 className="font-display text-sm font-bold uppercase tracking-wider text-broth">
-            Dostava
-          </h4>
-          <p className="mt-3 text-sm text-bone/70">{site.zones.join(" · ")}</p>
-          <div className="mt-3 flex gap-3 text-sm">
-            <a href={site.aggregators.wolt} className="text-bone/70 hover:text-broth">Wolt</a>
-            <a href={site.aggregators.glovo} className="text-bone/70 hover:text-broth">Glovo</a>
-            <a href={site.aggregators.mrd} className="text-bone/70 hover:text-broth">mr.D</a>
+        <div className="md:col-span-4">
+          <h2 className="stamp text-paprika">Dostava</h2>
+          <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink/80">
+            {site.zones.join(" · ")}
+          </p>
+          <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+            <Link href="/meni" className="stamp inline-block py-1.5 text-ink hover:text-paprika">
+              Meni
+            </Link>
+            <Link href="/pho" className="stamp inline-block py-1.5 text-ink hover:text-paprika">
+              Šta je phở
+            </Link>
+            <Link href="/poruci" className="stamp inline-block py-1.5 text-ink hover:text-paprika">
+              Poruči
+            </Link>
           </div>
         </div>
       </div>
 
-      <div className="border-t border-white/5 px-5 py-5 text-center text-xs text-bone/55">
-        © {new Date().getFullYear()} {site.name} — vijetnamska phở kuhinja, {site.address},{" "}
-        {site.city}. Sva prava zadržana.
+      <div className="border-t border-ink/25">
+        <p className="stamp mx-auto max-w-6xl px-5 py-5 text-inksoft">
+          © {new Date().getFullYear()} {site.name} — {site.address}, {site.city}
+        </p>
       </div>
     </footer>
   );

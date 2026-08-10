@@ -21,26 +21,34 @@ const PAY_ERRORS: Record<string, string> = {
 const payErrorText = (code: string) =>
   PAY_ERRORS[code] ?? "Plaćanje nije uspelo. Pokušajte ponovo ili nas kontaktirajte.";
 
+const field =
+  "min-h-[52px] w-full border-[3px] border-ink bg-paper px-4 py-3 text-ink placeholder:text-inksoft/70 focus:border-paprika focus:outline-none";
+
 export default function OrderPage() {
   // Waitlist gate: until ordering is live, /poruci is only the signup — none of
   // the payment paths (card, Viber, WhatsApp, phone) are rendered or reachable.
   if (!site.orderingLive) {
     return (
-      <div className="mx-auto max-w-2xl px-5 py-24">
-        <h1 className="font-display text-4xl font-extrabold text-steam md:text-5xl">
-          Uskoro krećemo
-        </h1>
-        <p className="mt-4 text-lg text-bone/70">
-          Kuhinja se zahuktava. Otvaramo lokal na adresi {site.address} u {site.cityLoc},
-          uz dostavu za ceo grad. Ostavi imejl i javljamo ti prvom čim otvorimo vrata —
+      <div className="mx-auto max-w-2xl px-5 py-[var(--section)]">
+        <h1 className="wordset text-5xl text-ink md:text-7xl">Uskoro krećemo</h1>
+        <p className="mt-5 text-lg leading-relaxed text-ink/85">
+          Kuhinja se zahuktava. Otvaramo lokal u {site.address} u {site.cityLoc}, uz
+          dostavu za ceo grad. Ostavi imejl i javljamo ti prvom čim otvorimo vrata —
           bez spama, samo jedna poruka.
         </p>
         <div className="mt-8">
           <WaitlistForm source="poruci" />
         </div>
-        <p className="mt-6 text-sm text-bone/50">
-          Dotle: pogledaj <a href="/meni" className="text-broth hover:text-steam">meni</a> ili
-          pročitaj <a href="/pho" className="text-broth hover:text-steam">šta je phở</a>.
+        <p className="mt-8 border-t-[3px] border-ink pt-5 text-[0.9375rem] text-ink/80">
+          Dotle: pogledaj{" "}
+          <Link href="/meni" className="font-semibold text-ink underline decoration-paprika decoration-2 underline-offset-4 hover:text-paprika">
+            meni
+          </Link>{" "}
+          ili pročitaj{" "}
+          <Link href="/pho" className="font-semibold text-ink underline decoration-paprika decoration-2 underline-offset-4 hover:text-paprika">
+            šta je phở
+          </Link>
+          .
         </p>
       </div>
     );
@@ -59,6 +67,9 @@ function OrderForm() {
   const [payError, setPayError] = useState<string | null>(null);
 
   const emailValid = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+
+  const fee = subtotal >= site.freeDeliveryOver || subtotal === 0 ? 0 : site.deliveryFee;
+  const total = subtotal + fee;
 
   const onPayCard = async () => {
     setPayError(null);
@@ -81,9 +92,6 @@ function OrderForm() {
     }
   };
 
-  const fee = subtotal >= site.freeDeliveryOver || subtotal === 0 ? 0 : site.deliveryFee;
-  const total = subtotal + fee;
-
   const message = useMemo(() => {
     const items = lines.map((l) => `- ${l.qty}x ${l.name} — ${rsd(l.qty * l.price)}`).join("\n");
     return [
@@ -105,12 +113,12 @@ function OrderForm() {
 
   if (count === 0) {
     return (
-      <div className="mx-auto max-w-2xl px-5 py-24 text-center">
-        <h1 className="font-display text-3xl font-extrabold text-steam">Korpa je prazna</h1>
-        <p className="mt-3 text-bone/60">Dodaj činiju i vrati se ovde da poručiš.</p>
+      <div className="mx-auto max-w-2xl px-5 py-[var(--section)]">
+        <h1 className="wordset text-4xl text-ink md:text-6xl">Korpa je prazna</h1>
+        <p className="mt-4 text-lg text-ink/85">Dodaj činiju i vrati se ovde da poručiš.</p>
         <Link
           href="/meni"
-          className="mt-6 inline-block rounded-full bg-broth px-7 py-3 font-semibold text-char"
+          className="misreg mt-8 inline-block bg-paprika px-8 py-4 font-display text-base font-extrabold uppercase tracking-tightest text-paper hover:bg-ink"
         >
           Pogledaj meni
         </Link>
@@ -119,65 +127,85 @@ function OrderForm() {
   }
 
   return (
-    <div className="mx-auto grid max-w-5xl gap-10 px-5 py-14 lg:grid-cols-[1.2fr_1fr]">
+    <div className="mx-auto grid max-w-5xl gap-12 px-5 py-[var(--section)] lg:grid-cols-[1.15fr_1fr]">
       <div>
-        <h1 className="font-display text-3xl font-extrabold text-steam">Tvoja porudžbina</h1>
-        <ul className="mt-6 divide-y divide-white/5">
+        <h1 className="wordset text-4xl text-ink md:text-5xl">Tvoja porudžbina</h1>
+
+        <ul className="mt-8">
           {lines.map((l) => (
-            <li key={l.id} className="flex items-center gap-3 py-4">
-              <div className="flex-1">
-                <p className="font-display font-semibold text-bone">{l.name}</p>
-                <p className="text-sm text-bone/50">{rsd(l.price)}</p>
+            <li
+              key={l.id}
+              className="flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-ink/25 py-4 first:border-t first:border-ink/25"
+            >
+              <div className="min-w-0 flex-1">
+                <p className="font-display text-base font-extrabold tracking-tightest text-ink">
+                  {l.name}
+                </p>
+                <p className="font-data text-xs tabular-nums text-inksoft">{rsd(l.price)}</p>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center border-[3px] border-ink">
                 <button
                   onClick={() => setQty(l.id, l.qty - 1)}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-bone"
-                  aria-label="Manje"
+                  className="flex h-11 w-11 items-center justify-center text-lg text-ink hover:bg-lime"
+                  aria-label={`Manje: ${l.name}`}
                 >
                   –
                 </button>
-                <span className="w-6 text-center text-bone">{l.qty}</span>
+                <span className="w-9 text-center font-data text-sm font-bold tabular-nums text-ink">
+                  {l.qty}
+                </span>
                 <button
                   onClick={() => setQty(l.id, l.qty + 1)}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-bone"
-                  aria-label="Više"
+                  className="flex h-11 w-11 items-center justify-center text-lg text-ink hover:bg-lime"
+                  aria-label={`Više: ${l.name}`}
                 >
                   +
                 </button>
               </div>
-              <span className="w-24 text-right font-semibold text-bone">
+              <span className="w-24 text-right font-data text-sm font-bold tabular-nums text-ink">
                 {rsd(l.qty * l.price)}
               </span>
               <button
                 onClick={() => remove(l.id)}
-                className="flex h-11 w-11 items-center justify-center text-bone/60 hover:text-emberlight"
-                aria-label="Ukloni stavku"
+                className="flex h-11 w-11 items-center justify-center text-inksoft hover:text-paprika"
+                aria-label={`Ukloni: ${l.name}`}
               >
-                ✕
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M6 6l12 12M18 6L6 18"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  />
+                </svg>
               </button>
             </li>
           ))}
         </ul>
 
-        <div className="mt-6 grid gap-3">
+        <div className="mt-8 grid gap-3">
+          <h2 className="stamp text-paprika">Podaci za dostavu</h2>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Ime i prezime"
-            className="rounded-xl border border-white/10 bg-charsoft px-4 py-3 text-bone placeholder:text-bone/30 focus:border-broth focus:outline-none"
+            autoComplete="name"
+            className={field}
           />
           <input
             value={addr}
             onChange={(e) => setAddr(e.target.value)}
             placeholder="Adresa za dostavu"
-            className="rounded-xl border border-white/10 bg-charsoft px-4 py-3 text-bone placeholder:text-bone/30 focus:border-broth focus:outline-none"
+            autoComplete="street-address"
+            className={field}
           />
           <input
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             placeholder="Telefon"
-            className="rounded-xl border border-white/10 bg-charsoft px-4 py-3 text-bone placeholder:text-bone/30 focus:border-broth focus:outline-none"
+            type="tel"
+            autoComplete="tel"
+            className={field}
           />
           <input
             value={email}
@@ -187,102 +215,101 @@ function OrderForm() {
             autoComplete="email"
             placeholder="Imejl (za fiskalni račun)"
             aria-invalid={email !== "" && !emailValid}
-            className={`rounded-xl border bg-charsoft px-4 py-3 text-bone placeholder:text-bone/30 focus:border-broth focus:outline-none ${
-              email !== "" && !emailValid ? "border-emberlight/60" : "border-white/10"
-            }`}
+            className={`${field} ${email !== "" && !emailValid ? "border-paprikabright" : ""}`}
           />
         </div>
       </div>
 
-      <aside className="h-fit rounded-2xl border border-white/5 bg-charsoft p-6">
-        <div className="space-y-2 text-sm">
-          <div className="flex justify-between text-bone/70">
-            <span>Međuzbir</span>
-            <span>{rsd(subtotal)}</span>
-          </div>
-          <div className="flex justify-between text-bone/70">
-            <span>Dostava</span>
-            <span>{fee === 0 ? "besplatno" : rsd(fee)}</span>
-          </div>
-          {fee > 0 && (
-            <p className="text-xs text-herb">
-              Dodaj još {rsd(site.freeDeliveryOver - subtotal)} za besplatnu dostavu.
+      <aside className="h-fit border-[3px] border-ink bg-board">
+        <div className="p-6">
+          <dl className="space-y-2 text-[0.9375rem]">
+            <div className="flex justify-between text-ink/80">
+              <dt>Međuzbir</dt>
+              <dd className="font-data tabular-nums">{rsd(subtotal)}</dd>
+            </div>
+            <div className="flex justify-between text-ink/80">
+              <dt>Dostava</dt>
+              <dd className="font-data tabular-nums">{fee === 0 ? "besplatno" : rsd(fee)}</dd>
+            </div>
+            {fee > 0 && (
+              <p className="stamp !normal-case text-paprika">
+                Dodaj još {rsd(site.freeDeliveryOver - subtotal)} za besplatnu dostavu.
+              </p>
+            )}
+            <div className="flex justify-between border-t-[3px] border-ink pt-3">
+              <dt className="font-display text-lg font-extrabold uppercase tracking-tightest text-ink">
+                Ukupno
+              </dt>
+              <dd className="font-data text-lg font-bold tabular-nums text-ink">{rsd(total)}</dd>
+            </div>
+          </dl>
+
+          <div className="mt-6 border-t-[3px] border-ink pt-5">
+            <h2 className="stamp text-paprika">Plati karticom</h2>
+            <p className="mt-2 text-[0.8125rem] leading-relaxed text-ink/75">
+              Visa, Mastercard i DinaCard uz 3-D Secure. Fiskalni račun stiže na imejl
+              odmah po uspešnom plaćanju.
             </p>
-          )}
-          <div className="flex justify-between border-t border-white/10 pt-3 font-display text-lg font-bold text-bone">
-            <span>Ukupno</span>
-            <span>{rsd(total)}</span>
+            <button
+              onClick={onPayCard}
+              disabled={paying || count === 0}
+              className="misreg mt-4 w-full bg-paprika px-5 py-4 font-display text-sm font-extrabold uppercase tracking-tightest text-paper hover:bg-ink disabled:cursor-not-allowed disabled:opacity-55"
+            >
+              {paying ? "Povezivanje sa bankom…" : `Plati ${rsd(total)}`}
+            </button>
+            {payError && (
+              <p role="alert" className="mt-3 text-[0.8125rem] font-semibold text-paprika">
+                {payError}
+              </p>
+            )}
+            <p className="mt-3 text-xs leading-relaxed text-inksoft">
+              Bićeš preusmeren na zaštićenu stranicu banke. PARA ne čuva podatke o kartici.
+            </p>
           </div>
         </div>
 
-        <div className="mt-5 rounded-xl border border-broth/30 bg-broth-ambient p-4">
-          <p className="text-sm font-semibold text-steam">Plati karticom online</p>
-          <p className="mt-1 text-xs text-bone/60">
-            Sigurno plaćanje (Visa, Mastercard, DinaCard) uz 3-D Secure. Fiskalni račun
-            stiže na tvoj imejl odmah po uspešnom plaćanju.
+        <div className="border-t-[3px] border-ink bg-paper p-6">
+          <h2 className="stamp text-paprika">Direktno — 15% jeftinije</h2>
+          <p className="mt-2 text-[0.8125rem] leading-relaxed text-ink/75">
+            Preko Vibera ili WhatsApp-a. Plaćanje pouzećem ili karticom kuriru.
           </p>
-          <button
-            onClick={onPayCard}
-            disabled={paying || count === 0}
-            className="mt-3 w-full rounded-full bg-emberdark px-5 py-3 text-center font-semibold text-steam transition hover:bg-broth hover:text-char disabled:cursor-not-allowed disabled:opacity-60"
-          >
-            {paying ? "Povezivanje sa bankom…" : `Plati ${rsd(total)} karticom`}
-          </button>
-          {payError && (
-            <p role="alert" className="mt-2 text-xs text-emberlight">
-              {payError}
-            </p>
-          )}
-          <p className="mt-2 text-[11px] text-bone/55">
-            Bićeš preusmeren na zaštićenu stranicu banke. PARA ne čuva podatke o kartici.
-          </p>
-        </div>
-
-        <div className="mt-4 rounded-xl bg-char p-4">
-          <p className="text-sm font-semibold text-broth">Poruči direktno — 15% jeftinije</p>
-          <p className="mt-1 text-xs text-bone/50">
-            Direktna porudžbina ide preko Vibera ili WhatsApp-a. Plaćanje pouzećem ili
-            karticom kuriru.
-          </p>
-          <div className="mt-3 grid gap-2">
+          <div className="mt-4 grid gap-2">
             <a
               href={wa}
               target="_blank"
               rel="noreferrer"
-              className="rounded-full bg-herb px-5 py-3 text-center font-semibold text-char"
+              className="misreg border-[3px] border-ink px-5 py-3 text-center font-display text-sm font-extrabold uppercase tracking-tightest text-ink hover:bg-lime"
             >
-              Pošalji preko WhatsApp
+              WhatsApp
             </a>
             <a
               href={viber}
-              className="rounded-full bg-broth px-5 py-3 text-center font-semibold text-char"
+              className="misreg border-[3px] border-ink px-5 py-3 text-center font-display text-sm font-extrabold uppercase tracking-tightest text-ink hover:bg-lime"
             >
-              Pošalji preko Viber
+              Viber
             </a>
             <a
               href={`tel:${site.phone.replace(/\s/g, "")}`}
-              className="rounded-full border border-white/10 px-5 py-3 text-center font-semibold text-bone"
+              className="misreg border-[3px] border-ink px-5 py-3 text-center font-display text-sm font-extrabold uppercase tracking-tightest text-ink hover:bg-lime"
             >
-              Pozovi {site.phone}
+              {site.phone}
             </a>
           </div>
-        </div>
 
-        <div className="mt-4">
-          <p className="text-xs uppercase tracking-wider text-bone/55">Ili preko aplikacije</p>
-          <div className="mt-2 flex gap-2">
-            <a href={site.aggregators.wolt} className="flex-1 rounded-full border border-white/10 py-2 text-center text-sm text-bone/80 hover:border-broth">Wolt</a>
-            <a href={site.aggregators.glovo} className="flex-1 rounded-full border border-white/10 py-2 text-center text-sm text-bone/80 hover:border-broth">Glovo</a>
-            <a href={site.aggregators.mrd} className="flex-1 rounded-full border border-white/10 py-2 text-center text-sm text-bone/80 hover:border-broth">mr.D</a>
+          <h2 className="stamp mt-6 text-inksoft">Ili preko aplikacije</h2>
+          <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+            <a href={site.aggregators.wolt} className="stamp text-ink hover:text-paprika">Wolt</a>
+            <a href={site.aggregators.glovo} className="stamp text-ink hover:text-paprika">Glovo</a>
+            <a href={site.aggregators.mrd} className="stamp text-ink hover:text-paprika">mr.D</a>
           </div>
-        </div>
 
-        <button
-          onClick={clear}
-          className="mt-4 w-full min-h-[44px] text-center text-xs text-bone/55 hover:text-emberlight"
-        >
-          Isprazni korpu
-        </button>
+          <button
+            onClick={clear}
+            className="stamp mt-6 min-h-[44px] w-full text-inksoft hover:text-paprika"
+          >
+            Isprazni korpu
+          </button>
+        </div>
       </aside>
     </div>
   );

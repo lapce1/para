@@ -21,3 +21,10 @@ id_*
 
 # local reference material handed to Claude (zips, patches, extracts)
 /Files_for_claude/
+
+# impeccable design plugin (local tooling, not project source)
+.claude/skills/impeccable/
+.claude/hooks/
+.github/agents/
+.github/hooks/
+.github/skills/
