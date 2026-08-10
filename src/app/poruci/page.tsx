@@ -32,7 +32,7 @@ export default function OrderPage() {
       <div className="mx-auto max-w-2xl px-5 py-[var(--section)]">
         <h1 className="wordset text-5xl text-ink md:text-7xl">Uskoro krećemo</h1>
         <p className="mt-5 text-lg leading-relaxed text-ink/85">
-          Kuhinja se zahuktava. Otvaramo lokal u {site.address} u {site.cityLoc}, uz
+          Kuhinja se zahuktava. Otvaramo lokal u {site.addressLoc} u {site.cityLoc}, uz
           dostavu za ceo grad. Ostavi imejl i javljamo ti prvom čim otvorimo vrata —
           bez spama, samo jedna poruka.
         </p>

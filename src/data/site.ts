@@ -8,6 +8,7 @@ export const site = {
 
   // Fizički lokal — mali prostor sa nekoliko stolova, centar, blizu fakulteta.
   address: "Stražilovska 10",
+  addressLoc: "Stražilovskoj 10", // lokativ — "u Stražilovskoj 10" (nikad "u Stražilovska 10")
 
   // Canonical origin (no trailing slash). Used for SEO metadata + structured data.
   url: "https://para.rs",

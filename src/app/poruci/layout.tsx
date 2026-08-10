@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
+import { site } from "@/data/site";
 
 // /poruci is a client component (the cart), so its metadata lives here in a
-// segment layout. Indexable, but the page is mostly interactive.
+// segment layout. The description follows site.orderingLive so the search
+// snippet never advertises card/Viber ordering while the page is a waitlist.
 export const metadata: Metadata = {
-  title: "Poruči",
-  description: "Tvoja PARA korpa — poruči phở online uz plaćanje karticom, ili direktno preko Vibera/WhatsApp-a.",
+  title: site.orderingLive ? "Poruči" : "Uskoro krećemo",
+  description: site.orderingLive
+    ? "Tvoja PARA korpa — poruči phở online uz plaćanje karticom, ili direktno preko Vibera/WhatsApp-a."
+    : `PARA otvara vijetnamsku phở kuhinju u ${site.addressLoc}, ${site.cityLoc}. Ostavi imejl i javljamo ti čim otvorimo vrata.`,
   alternates: { canonical: "/poruci" },
 };
 

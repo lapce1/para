@@ -28,7 +28,7 @@ export default function Hero() {
           <p className="mt-6 max-w-[62ch] text-lg leading-relaxed text-ink/85 md:text-xl">
             Prava vijetnamska <span className="font-semibold">phở</span> — čorba se krčka
             od jutra, bistri se i skida joj se pena dok ne postane providna. Kuvamo je
-            u {site.address}, i služimo je vrelu za stolom, za poneti i na dostavu.
+            u {site.addressLoc}, i služimo je vrelu za stolom, za poneti i na dostavu.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
