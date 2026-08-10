@@ -8,22 +8,22 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className="mx-auto max-w-xl px-5 py-24 text-center">
-      <h1 className="font-display text-3xl font-extrabold text-steam">Plaćanje otkazano</h1>
-      <p className="mt-3 text-bone/60">
+    <div className="mx-auto max-w-xl px-5 py-[var(--section)]">
+      <h1 className="wordset text-4xl text-ink md:text-5xl">Plaćanje otkazano</h1>
+      <p className="mt-4 text-lg leading-relaxed text-ink/85">
         Prekinuo si plaćanje i ništa nije naplaćeno. Tvoja korpa je sačuvana — možeš
         pokušati ponovo kad budeš spreman.
       </p>
-      <div className="mt-6 flex flex-wrap justify-center gap-3">
+      <div className="mt-8 flex flex-wrap gap-3">
         <Link
           href="/poruci"
-          className="rounded-full bg-emberdark px-7 py-3 font-semibold text-steam hover:bg-broth hover:text-char"
+          className="misreg bg-paprika px-7 py-4 font-display text-base font-extrabold uppercase tracking-tightest text-paper hover:bg-ink"
         >
           Nazad na korpu
         </Link>
         <Link
           href="/meni"
-          className="rounded-full border border-white/10 px-7 py-3 font-semibold text-bone"
+          className="misreg border-[3px] border-ink px-7 py-4 font-display text-base font-extrabold uppercase tracking-tightest text-ink hover:bg-lime"
         >
           Pogledaj meni
         </Link>

@@ -8,18 +8,22 @@ import type { MenuItem } from "@/data/menu";
 const tagLabel: Record<string, string> = {
   signature: "Specijalitet",
   push: "Omiljeno",
-  vegan: "Vegan",
+  vegan: "Posno",
   spicy: "Ljuto",
 };
 
-// Each tag gets its own accent so the menu reads colourful at a glance.
-const tagColor: Record<string, string> = {
-  signature: "text-broth",
-  push: "text-emberlight",
-  vegan: "text-herb",
-  spicy: "text-chili",
+// Each mark is its own ink plate, so the list reads at a glance.
+const tagPlate: Record<string, string> = {
+  signature: "bg-ink text-paper",
+  push: "bg-paprika text-paper",
+  vegan: "bg-lime text-ink",
+  spicy: "bg-paprikabright text-paper",
 };
 
+/**
+ * One line of a printed price list: name, contents, then the price set in
+ * tabular figures with a leader rule running out to meet it.
+ */
 export default function MenuCard({ item }: { item: MenuItem }) {
   const { add } = useCart();
   const [added, setAdded] = useState(false);
@@ -27,46 +31,41 @@ export default function MenuCard({ item }: { item: MenuItem }) {
   const onAdd = () => {
     add({ id: item.id, name: item.vi, price: item.price });
     setAdded(true);
-    window.setTimeout(() => setAdded(false), 1100);
+    window.setTimeout(() => setAdded(false), 1200);
   };
 
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl border border-white/5 bg-charsoft transition duration-300 hover:-translate-y-1 hover:border-broth/40 hover:shadow-lift">
-      <div
-        className="relative aspect-[4/3] overflow-hidden"
-        style={{
-          background: `radial-gradient(70% 70% at 50% 40%, ${item.swatch[0]}, ${item.swatch[1]})`,
-        }}
-      >
-        <div
-          className="absolute left-1/2 top-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-black/10 transition group-hover:scale-105"
-          style={{
-            background: `radial-gradient(circle at 50% 35%, #F0C26B, ${item.swatch[0]})`,
-            boxShadow: "inset 0 -8px 20px rgba(0,0,0,0.25)",
-          }}
-        />
+    <article className="group border-b border-ink/25 py-6 first:border-t first:border-ink/25">
+      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-2">
+        <h3 className="wordset text-2xl text-ink md:text-[1.75rem]">{item.vi}</h3>
         {item.tag && (
-          <span
-            className={`absolute left-3 top-3 rounded-full bg-char/70 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide ${tagColor[item.tag] ?? "text-broth"}`}
-          >
+          <span className={`stamp px-2 py-1 ${tagPlate[item.tag] ?? "bg-ink text-paper"}`}>
             {tagLabel[item.tag]}
           </span>
         )}
+        {/* leader rule: runs from the name out to the price */}
+        <span
+          aria-hidden="true"
+          className="mx-1 hidden h-px min-w-6 flex-1 self-center bg-ink/30 sm:block"
+        />
+        <span className="font-data text-xl font-bold tabular-nums text-ink">
+          {rsd(item.price)}
+        </span>
       </div>
 
-      <div className="flex flex-1 flex-col p-5">
-        <h3 className="font-display text-xl font-bold text-steam">{item.vi}</h3>
-        <p className="text-sm text-broth/90">{item.sr}</p>
-        <p className="mt-2 flex-1 text-sm leading-relaxed text-bone/60">{item.desc}</p>
-        <div className="mt-4 flex items-center justify-between">
-          <span className="font-display text-lg font-bold text-bone">{rsd(item.price)}</span>
-          <button
-            onClick={onAdd}
-            className="min-h-[44px] rounded-full bg-broth px-5 py-2.5 text-sm font-semibold text-char transition hover:bg-steam"
-          >
-            {added ? "Dodato ✓" : "Dodaj"}
-          </button>
-        </div>
+      <p className="stamp mt-1.5 text-paprika">{item.sr}</p>
+
+      <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
+        <p className="max-w-[62ch] text-[0.9375rem] leading-relaxed text-ink/80">
+          {item.desc}
+        </p>
+        <button
+          onClick={onAdd}
+          aria-live="polite"
+          className="misreg shrink-0 border-[3px] border-ink px-5 py-2.5 font-display text-sm font-extrabold uppercase tracking-tightest text-ink transition-colors hover:bg-lime"
+        >
+          {added ? "Dodato" : "Dodaj"}
+        </button>
       </div>
     </article>
   );

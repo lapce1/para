@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import HerbSprig from "@/components/HerbSprig";
 import JsonLd from "@/components/JsonLd";
 import { site } from "@/data/site";
 import { phoIntro, phoSections, phoTypes, phoHowTo } from "@/data/pho";
@@ -19,80 +18,81 @@ export const metadata: Metadata = {
 
 export default function Pho() {
   return (
-    <div className="relative mx-auto max-w-3xl px-5 py-16">
+    <div className="mx-auto max-w-3xl px-5 py-[var(--section)]">
       <JsonLd data={phoGuideSchema()} />
       <JsonLd data={phoHowToSchema()} />
-      <HerbSprig className="pointer-events-none absolute -right-6 top-10 h-40 w-40 text-herb/[0.1] md:-right-16 md:h-52 md:w-52" />
 
-      <h1 className="font-display text-4xl font-extrabold text-steam md:text-5xl">
-        Šta je <span className="text-broth">phở</span>?
-      </h1>
-      <p className="mt-4 text-lg text-bone/70">{phoIntro}</p>
+      <header className="border-b-[3px] border-ink pb-8">
+        <h1 className="wordset text-5xl text-ink md:text-7xl">Šta je phở?</h1>
+        <p className="mt-5 text-lg leading-relaxed text-ink/85">{phoIntro}</p>
+      </header>
 
       <div className="mt-12 space-y-10">
         {phoSections.map((s) => (
           <section key={s.h}>
-            <h2 className="font-display text-2xl font-bold text-broth">{s.h}</h2>
-            <p className="mt-3 leading-relaxed text-bone/70">{s.p}</p>
+            <h2 className="wordset text-2xl text-ink md:text-3xl">{s.h}</h2>
+            <p className="mt-3 max-w-[68ch] leading-relaxed text-ink/85">{s.p}</p>
           </section>
         ))}
       </div>
 
-      <section className="mt-12">
-        <h2 className="font-display text-2xl font-bold text-broth">Vrste phở-a</h2>
-        <div className="mt-5 grid gap-5 sm:grid-cols-3">
+      <section className="mt-14">
+        <h2 className="wordset text-2xl text-ink md:text-3xl">Vrste phở-a</h2>
+        <dl className="mt-6">
           {phoTypes.map((t) => (
-            <div key={t.vi} className="rounded-2xl border border-white/5 bg-charsoft p-5">
-              <h3 className="font-display font-bold text-bone">{t.vi}</h3>
-              <p className="text-xs uppercase tracking-wider text-herb">{t.sr}</p>
-              <p className="mt-2 text-sm text-bone/60">{t.d}</p>
+            <div
+              key={t.vi}
+              className="border-b border-ink/25 py-4 first:border-t first:border-ink/25 sm:flex sm:gap-6"
+            >
+              <dt className="sm:w-44 sm:shrink-0">
+                <span className="font-display text-lg font-extrabold tracking-tightest text-ink">
+                  {t.vi}
+                </span>
+                <span className="stamp mt-1 block text-paprika">{t.sr}</span>
+              </dt>
+              <dd className="mt-2 text-[0.9375rem] leading-relaxed text-ink/80 sm:mt-0">
+                {t.d}
+              </dd>
             </div>
           ))}
-        </div>
+        </dl>
       </section>
 
-      <section className="mt-12">
-        <h2 className="font-display text-2xl font-bold text-broth">{phoHowTo.name}</h2>
+      <section className="mt-14 border-[3px] border-ink bg-board p-6 md:p-8">
+        <h2 className="wordset text-2xl text-ink md:text-3xl">{phoHowTo.name}</h2>
         <ol className="mt-5 space-y-4">
-          {phoHowTo.steps.map((step, i) => (
-            <li
-              key={step.name}
-              className="flex gap-4 rounded-2xl border border-white/5 bg-charsoft p-5"
-            >
-              <span className="font-display text-lg font-extrabold text-emberlight">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div>
-                <h3 className="font-display font-bold text-bone">{step.name}</h3>
-                <p className="mt-1 text-sm text-bone/60">{step.text}</p>
-              </div>
+          {phoHowTo.steps.map((step) => (
+            <li key={step.name} className="border-b border-ink/25 pb-4 last:border-0 last:pb-0">
+              <p className="stamp text-paprika">{step.name}</p>
+              <p className="mt-1.5 text-[0.9375rem] leading-relaxed text-ink/85">
+                {step.text}
+              </p>
             </li>
           ))}
         </ol>
       </section>
 
-      <section className="mt-12 rounded-2xl border border-white/5 bg-charsoft p-5">
-        <h2 className="text-xs font-semibold uppercase tracking-wider text-bone/50">
-          Dalje čitanje
-        </h2>
-        <p className="mt-2 text-sm text-bone/70">
-          <Link href="/pho/pho-ili-ramen" className="text-broth hover:text-steam">
+      <section className="mt-12 border-t-[3px] border-ink pt-5">
+        <h2 className="stamp text-inksoft">Dalje čitanje</h2>
+        <p className="mt-2 text-[0.9375rem] text-ink/85">
+          <Link
+            href="/pho/pho-ili-ramen"
+            className="font-semibold text-ink underline decoration-paprika decoration-2 underline-offset-4 hover:text-paprika"
+          >
             Phở ili ramen — u čemu je razlika
           </Link>{" "}
-          — poreklo, supa, rezanci i dodaci, jedno pored drugog.
+          — poreklo, čorba, rezanci i dodaci, jedno pored drugog.
         </p>
       </section>
 
-      <div className="mt-14 text-center">
+      <div className="mt-12">
         <Link
           href="/poruci"
-          className="inline-block rounded-full bg-emberdark px-8 py-3 font-semibold text-steam hover:bg-broth hover:text-char"
+          className="misreg inline-block bg-paprika px-8 py-4 font-display text-base font-extrabold uppercase tracking-tightest text-paper hover:bg-ink"
         >
           {site.orderingLive ? "Poruči phở" : "Uskoro — upiši se"}
         </Link>
-        <p className="mt-4 text-sm text-bone/55">
-          <span className="text-herb">Chúc ngon miệng</span> — prijatno.
-        </p>
+        <p className="stamp mt-4 text-inksoft">Chúc ngon miệng — prijatno</p>
       </div>
     </div>
   );
