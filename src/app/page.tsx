@@ -12,6 +12,13 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
+// Keyless embed: no Google Cloud project or API key needed. Query includes the
+// name so a claimed Google Business Profile resolves to the real pin, not just
+// a geocoded street address.
+const mapQuery = encodeURIComponent(`${site.name}, ${site.address}, ${site.city}`);
+const mapEmbedSrc = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
+const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
+
 const service: { k: string; v: string }[] = [
   {
     k: "Za stolom",
@@ -110,24 +117,48 @@ export default function Home() {
 
       {/* the close: where to actually go */}
       <section className="border-t-[3px] border-chalk bg-jade text-ground">
-        <div className="mx-auto max-w-6xl px-5 py-[var(--section)]">
-          {/* fluid base: "STRAŽILOVSKA" is long and the display face is wide, so a
-              fixed mobile size overflows narrow viewports. */}
-          <h2 className="wordset text-[clamp(1.75rem,7.5vw,2.5rem)] leading-[0.95] sm:text-6xl md:text-7xl">
-            {site.address}
-            <br />
-            {site.city}
-          </h2>
-          <p className="mt-6 max-w-[54ch] text-[1.0625rem] leading-relaxed">
-            U centru smo, blizu fakulteta, i otvoreni smo {site.hours.toLowerCase()}.
-            Dostavljamo u: {site.zones.join(", ")}.
-          </p>
-          <Link
-            href="/poruci"
-            className="mt-8 inline-block bg-ground px-8 py-4 font-display text-base font-extrabold uppercase tracking-tightest text-chalk hover:bg-chili hover:text-ground"
-          >
-            {site.orderingLive ? "Poruči činiju" : "Javi mi kad otvorite"}
-          </Link>
+        <div className="mx-auto max-w-6xl px-5 py-[var(--section)] md:grid md:grid-cols-12 md:items-start md:gap-12">
+          <div className="min-w-0 md:col-span-7">
+            {/* fluid base: "STRAŽILOVSKA" is long and the display face is wide, so a
+                fixed mobile size overflows narrow viewports. */}
+            <h2 className="wordset text-[clamp(1.75rem,7.5vw,2.5rem)] leading-[0.95] sm:text-6xl md:text-7xl">
+              {site.address}
+              <br />
+              {site.city}
+            </h2>
+            <p className="mt-6 max-w-[54ch] text-[1.0625rem] leading-relaxed">
+              U centru smo, blizu fakulteta, i otvoreni smo {site.hours.toLowerCase()}.
+              Dostavljamo u: {site.zones.join(", ")}.
+            </p>
+            <Link
+              href="/poruci"
+              className="mt-8 inline-block bg-ground px-8 py-4 font-display text-base font-extrabold uppercase tracking-tightest text-chalk hover:bg-chili hover:text-ground"
+            >
+              {site.orderingLive ? "Poruči činiju" : "Javi mi kad otvorite"}
+            </Link>
+          </div>
+
+          {/* the map, boxed like every other panel on the site rather than
+              floated as a card: a flat window, not a widget. */}
+          <div className="min-w-0 mt-10 md:col-span-5 md:mt-0">
+            <p className="stamp">Kako do nas</p>
+            <div className="mt-3 h-64 border-[3px] border-ground sm:h-80 md:h-96">
+              <iframe
+                src={mapEmbedSrc}
+                title={`Mapa: ${site.name}, ${site.address}, ${site.city}`}
+                loading="lazy"
+                className="h-full w-full border-0"
+              />
+            </div>
+            <a
+              href={mapsUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="stamp mt-3 inline-block border-b-[3px] border-ground py-1 hover:border-chalk"
+            >
+              Otvori u Google mapama
+            </a>
+          </div>
         </div>
       </section>
     </>
