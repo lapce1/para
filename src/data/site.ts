@@ -23,8 +23,8 @@ export const site = {
   viber: "381601234567",      // digits only, country code, no +
   whatsapp: "381601234567",   // digits only, country code, no +
   email: "zdravo@para.rs",
-  instagram: "https://instagram.com/para.phokuhinja",
   // -----------------------------------
+  instagram: "https://www.instagram.com/para.pho/", // real handle
 
   // Meta Pixel id. Empty string = analytics fully inert (no script, no calls).
   // GO-LIVE LEVER: set the real pixel id only when ads/tracking should start.

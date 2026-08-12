@@ -17,6 +17,8 @@ const CSP = [
   "form-action 'self'",
   // www.facebook.com: the pixel's <img> fallback + event beacons.
   "img-src 'self' data: https://www.facebook.com",
+  // www.google.com: the keyless Maps embed in the landing page's address section.
+  "frame-src https://www.google.com",
   // Fonts are self-hosted (public/fonts), no third-party font origins.
   "style-src 'self' 'unsafe-inline'",
   "font-src 'self'",
