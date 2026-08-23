@@ -69,9 +69,17 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-chalk/25">
-        <p className="stamp mx-auto max-w-6xl px-5 py-5 text-chalksoft">
-          © {new Date().getFullYear()} {site.name} · {site.address}, {site.city}
-        </p>
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-5 gap-y-2 px-5 py-5">
+          <p className="stamp text-chalksoft">
+            © {new Date().getFullYear()} {site.name} · {site.address}, {site.city}
+          </p>
+          <Link href="/uslovi-koriscenja" className="stamp text-chalksoft hover:text-jade">
+            Uslovi korišćenja
+          </Link>
+          <Link href="/politika-privatnosti" className="stamp text-chalksoft hover:text-jade">
+            Politika privatnosti
+          </Link>
+        </div>
       </div>
     </footer>
   );

@@ -50,14 +50,14 @@ export default function PhoIliRamen() {
             className="border-b border-chalk/25 py-6 first:border-t first:border-chalk/25"
           >
             <h2 className="stamp text-chalksoft">{r.dim}</h2>
-            <div className="mt-3 grid gap-5 sm:grid-cols-2">
-              <div className="border-l-[3px] border-jade pl-4">
+            <div className="mt-3 grid gap-x-8 gap-y-4 sm:grid-cols-2">
+              <div>
                 <p className="font-display text-base font-extrabold uppercase tracking-tightest text-jade">
                   Phở
                 </p>
                 <p className="mt-1.5 text-[0.9375rem] leading-relaxed text-chalk/85">{r.pho}</p>
               </div>
-              <div className="border-l-[3px] border-chalk/30 pl-4">
+              <div>
                 <p className="font-display text-base font-extrabold uppercase tracking-tightest text-chalksoft">
                   Ramen
                 </p>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Hero from "@/components/Hero";
+import Gallery from "@/components/Gallery";
 import MenuCard from "@/components/MenuCard";
 import JsonLd from "@/components/JsonLd";
 import { menu } from "@/data/menu";
@@ -64,6 +65,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* real photography, once it exists. Renders nothing until then. */}
+      <Gallery />
+
       {/* the menu, printed as a price list */}
       <section className="mx-auto max-w-6xl px-5 py-[var(--section)]">
         <div className="flex flex-wrap items-end justify-between gap-4">
@@ -82,14 +86,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* how you get it. Small on purpose: it is logistics, not the product. */}
+      {/* how you get it. Small on purpose: it is logistics, not the product.
+          A ruled list, label left and description right, not a row of cards. */}
       <section className="border-y-[3px] border-chalk bg-raised">
         <div className="mx-auto max-w-6xl px-5 py-12">
-          <dl className="grid gap-x-10 gap-y-6 sm:grid-cols-3">
+          <dl className="border-t border-chalk/25">
             {service.map((s) => (
-              <div key={s.k}>
+              <div
+                key={s.k}
+                className="grid gap-1.5 border-b border-chalk/25 py-5 sm:grid-cols-[13rem_1fr] sm:gap-8"
+              >
                 <dt className="stamp text-jade">{s.k}</dt>
-                <dd className="mt-2 text-[0.9375rem] leading-relaxed text-chalk/80">{s.v}</dd>
+                <dd className="text-[0.9375rem] leading-relaxed text-chalk/80">{s.v}</dd>
               </div>
             ))}
           </dl>
