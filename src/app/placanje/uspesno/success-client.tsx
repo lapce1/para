@@ -13,6 +13,22 @@ function Shell({ children }: { children: React.ReactNode }) {
   return <div className="mx-auto max-w-xl px-5 py-[var(--section)]">{children}</div>;
 }
 
+/**
+ * Content-shaped placeholder shown while the order status resolves. Blocks are
+ * raised panels on the ground (no grey pastel), and the pulse respects
+ * motion-reduce. Mirrors the paid view so the layout does not shift on resolve.
+ */
+function StatusSkeleton() {
+  return (
+    <div className="mt-8 animate-pulse space-y-4 motion-reduce:animate-none" aria-hidden="true">
+      <div className="h-12 w-32 bg-raised" />
+      <div className="h-4 w-full bg-raised" />
+      <div className="h-4 w-5/6 bg-raised" />
+      <div className="mt-6 h-14 w-56 bg-raised" />
+    </div>
+  );
+}
+
 function Inner() {
   const params = useSearchParams();
   const mtx = params.get("mtx");
@@ -54,9 +70,13 @@ function Inner() {
   if (view === "loading") {
     return (
       <Shell>
-        <h1 className="wordset text-4xl text-chalk md:text-5xl">Potvrđujemo plaćanje…</h1>
-        <p className="mt-4 text-lg leading-relaxed text-chalk/85">Sačekaj trenutak, proveravamo status sa bankom.</p>
-        <div className="mt-8 h-9 w-9 animate-spin border-[3px] border-chalk/25 border-t-chili motion-reduce:animate-none" />
+        <h1 className="wordset text-4xl text-chalk md:text-5xl">Potvrđujemo plaćanje</h1>
+        <p className="mt-4 text-lg leading-relaxed text-chalk/85">
+          Sačekaj trenutak, proveravamo status sa bankom.
+        </p>
+        {/* Skeleton of the settled-receipt view below, so the layout does not
+            jump when the status resolves. Pulse is disabled under motion-reduce. */}
+        <StatusSkeleton />
       </Shell>
     );
   }
@@ -64,9 +84,9 @@ function Inner() {
   if (view === "paid") {
     return (
       <Shell>
-        <div className="mb-5 flex h-16 w-16 items-center justify-center border-[3px] border-chalk bg-jade text-3xl text-ground">
-          ✓
-        </div>
+        <p className="mb-5 inline-block bg-jade px-4 py-2 font-display text-sm font-extrabold uppercase tracking-tightest text-ground">
+          Plaćeno
+        </p>
         <h1 className="wordset text-4xl text-chalk md:text-5xl">Plaćanje uspešno</h1>
         <p className="mt-4 text-lg leading-relaxed text-chalk/85">
           Hvala! Tvoja porudžbina je primljena i kreće u pripremu. Fiskalni račun stiže na
@@ -84,7 +104,7 @@ function Inner() {
         )}
         <div className="mt-6">
           <Link href="/meni" className="stamp text-jade hover:text-chalk">
-            Nazad na meni →
+            Nazad na meni
           </Link>
         </div>
       </Shell>
@@ -132,7 +152,8 @@ export default function SuccessClient() {
     <Suspense
       fallback={
         <Shell>
-          <h1 className="wordset text-4xl text-chalk md:text-5xl">Učitavanje…</h1>
+          <h1 className="wordset text-4xl text-chalk md:text-5xl">Učitavanje</h1>
+          <StatusSkeleton />
         </Shell>
       }
     >

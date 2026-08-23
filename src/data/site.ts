@@ -56,4 +56,16 @@ export const site = {
     streetAddress: "Stražilovska 10",
     postalCode: "21000",
   },
+
+  // Legal entity details for /uslovi-koriscenja and /politika-privatnosti.
+  // GO-LIVE: fill these from the APR registration before ordering goes live.
+  // Empty fields render a visible "dopuniti pre objave" placeholder on the page.
+  legal: {
+    entity: "",        // pun poslovni naziv, npr. "PARA DOO Novi Sad"
+    regNumber: "",     // matični broj
+    taxId: "",         // PIB
+    seat: "",          // sedište, ako se razlikuje od lokala
+    court: "Novi Sad", // stvarno i mesno nadležni sud
+    effectiveDate: "", // datum stupanja na snagu, npr. "2026-09-01"
+  },
 };
