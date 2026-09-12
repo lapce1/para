@@ -84,17 +84,30 @@ Vietnamese subset is mandatory, the brand word `phở` lives in it.
 transition, no transform, no shadow, no outline offset. This is a deliberate
 constraint, not an oversight; do not reintroduce hover transitions.
 
-The only animation in the build is the payment spinner on
-`/placanje/uspesno`, which already respects `motion-reduce`. Smooth scrolling is
-disabled under `prefers-reduced-motion`.
+The payment spinner on `/placanje/uspesno` and the payment-status skeleton both
+respect `motion-reduce`. Smooth scrolling is disabled under
+`prefers-reduced-motion`.
+
+**Exception, owner-requested (the homepage 3D hero).** The homepage opens with a
+live WebGL bowl (`PhoCanvas.tsx`, rendered inside `Hero3D.tsx`): a procedural phở
+bowl with rising steam and floating spices, lit in the brand inks. It animates
+only within the hero's own height (the scene parks once you scroll past it, it is
+not a full-page scroll-jack) and freezes entirely under `prefers-reduced-motion`.
+This is the single deliberate break from the no-motion rule; the hover rule above
+still holds everywhere, including on the hero's buttons.
 
 ## Imagery
 
-**There is none, and that is the point.** The drawn bowl was removed at the
-owner's direction. `StarAnise.tsx` survives as the ingredients-list mark (owner
-preference) and is the only drawn element left. When real photography eventually
-arrives it should sit full-bleed and high-contrast, never as a rounded card
-thumbnail.
+**No photography, and that is still the point.** There are no photographs, and
+the flat pages carry the product through type and colour. `StarAnise.tsx` is the
+ingredients-list mark. When real photography arrives it should sit full-bleed and
+high-contrast (see `Gallery.tsx`, which stays hidden until real files exist),
+never as a rounded card thumbnail.
+
+The one authored 3D element is the homepage hero bowl (`PhoCanvas.tsx`), added at
+the owner's request. It is procedural geometry lit in the brand inks, not a photo
+and not stock, so it does not fabricate a picture of the real kitchen. It is the
+only illustration on the site.
 
 ## Copy
 
