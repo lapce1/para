@@ -46,6 +46,9 @@ export interface Env {
   FISCAL_API_KEY?: string;
   // config
   PUBLIC_BASE_URL: string; // e.g. https://para.rs
+  // KILL SWITCH: "true" takes the whole site offline behind a 503 maintenance
+  // page. Set in wrangler.jsonc vars; flip to "false" (or remove) to go live.
+  SITE_OFFLINE?: string;
 }
 
 /** Largest checkout body we'll read (defensive cap against abuse). */
@@ -57,6 +60,47 @@ const json = (data: unknown, status = 200) =>
   new Response(JSON.stringify(data), {
     status,
     headers: { "Content-Type": "application/json", "Cache-Control": "no-store" },
+  });
+
+/**
+ * Maintenance page served while SITE_OFFLINE is on. Returns 503 so search
+ * engines treat the outage as temporary and keep the indexed pages (a 404/410
+ * or a removed route would drop rankings); Retry-After nudges them to come back.
+ * No-store so flipping the switch back on is visible immediately, not cached.
+ */
+const OFFLINE_PAGE = `<!doctype html>
+<html lang="sr"><head><meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PARA · privremeno ne radimo</title>
+<style>
+  :root { color-scheme: dark; }
+  html, body { margin: 0; height: 100%; }
+  body { background: #0A0A0A; color: #FFFFFF; display: flex; align-items: center;
+    justify-content: center; text-align: center; padding: 24px;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .wrap { max-width: 32rem; }
+  .mark { font-weight: 800; letter-spacing: 0.04em; font-size: 2.6rem; text-transform: uppercase; }
+  .bar { height: 4px; width: 64px; background: #FF3B30; margin: 18px auto; }
+  h1 { font-size: 1.3rem; font-weight: 700; margin: 0 0 12px; }
+  p { color: #A6A09A; line-height: 1.6; margin: 0 0 6px; }
+  a { color: #00E676; text-decoration: none; }
+</style></head>
+<body><div class="wrap">
+  <div class="mark">PARA</div>
+  <div class="bar"></div>
+  <h1>Privremeno ne radimo</h1>
+  <p>Sređujemo nešto iza šanka i vraćamo se uskoro.</p>
+  <p>Za sve ostalo pišite na <a href="mailto:zdravo@para.rs">zdravo@para.rs</a>.</p>
+</div></body></html>`;
+
+const maintenanceResponse = () =>
+  new Response(OFFLINE_PAGE, {
+    status: 503,
+    headers: {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "no-store",
+      "Retry-After": "86400",
+    },
   });
 
 function allsecureConfig(env: Env): AllSecureConfig {
@@ -96,6 +140,11 @@ function sameOriginOk(request: Request, env: Env, selfOrigin: string): boolean {
 
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    // KILL SWITCH: when SITE_OFFLINE is on, every request gets the 503
+    // maintenance page before any routing, assets, or API handling runs.
+    if (env.SITE_OFFLINE === "true") {
+      return withSecurityHeaders(maintenanceResponse());
+    }
     const res = withSecurityHeaders(await route(request, env, ctx));
     // API responses must never end up in an index; assets are governed by robots.txt.
     if (new URL(request.url).pathname.startsWith("/api/")) {
