@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import Placeholder from "@/components/Placeholder";
 import { site } from "@/data/site";
 import { phoRamenIntro, phoRamenRows, phoRamenFaq } from "@/data/phoRamen";
 import { phoRamenFaqSchema, breadcrumbSchema } from "@/lib/seo";
@@ -41,6 +42,12 @@ export default function PhoIliRamen() {
         <h1 className="wordset text-5xl text-chalk md:text-7xl">Phở ili ramen?</h1>
         <p className="mt-5 text-lg leading-relaxed text-chalk/85">{phoRamenIntro}</p>
       </header>
+
+      {/* side-by-side shots so the two soups read at a glance */}
+      <div className="mt-10 grid gap-4 sm:grid-cols-2">
+        <Placeholder label="Slika: phở" ratio="aspect-[4/3]" note="~1200 x 900" />
+        <Placeholder label="Slika: ramen" ratio="aspect-[4/3]" note="~1200 x 900" />
+      </div>
 
       {/* the comparison, printed as a ruled table */}
       <div className="mt-12">

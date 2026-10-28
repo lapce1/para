@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import Placeholder from "@/components/Placeholder";
 import { site } from "@/data/site";
 import { phoIntro, phoSections, phoTypes, phoHowTo } from "@/data/pho";
 import { phoGuideSchema, phoHowToSchema } from "@/lib/seo";
@@ -26,6 +27,13 @@ export default function Pho() {
         <h1 className="wordset text-5xl text-chalk md:text-7xl">Šta je phở?</h1>
         <p className="mt-5 text-lg leading-relaxed text-chalk/85">{phoIntro}</p>
       </header>
+
+      <Placeholder
+        label="Slika: činija phở bò"
+        ratio="aspect-[16/9]"
+        note="~1600 x 900"
+        className="mt-10"
+      />
 
       <div className="mt-12 space-y-10">
         {phoSections.map((s) => (
