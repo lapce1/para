@@ -35,6 +35,6 @@
     "ALLSECURE_SIGN_OUTGOING": "false",
     // KILL SWITCH: "true" serves a 503 maintenance page for the whole site.
     // Set to "false" (or delete this line) and deploy to bring the site back.
-    "SITE_OFFLINE": "true"
+    "SITE_OFFLINE": "false"
   }
 }
