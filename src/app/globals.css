@@ -184,8 +184,28 @@ body {
   outline-offset: 3px;
 }
 
+/* Hero stage (the one motion exception, see DESIGN.md): the 3D scene fades in
+   over the static steam mark once it has drawn its first frame. */
+.stage-canvas {
+  opacity: 0;
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.stage[data-live] .stage-canvas {
+  opacity: 1;
+}
+.stage-fallback {
+  transition: opacity 0.4s linear;
+}
+.stage[data-live] .stage-fallback {
+  opacity: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  .stage-canvas,
+  .stage-fallback {
+    transition: none;
   }
 }

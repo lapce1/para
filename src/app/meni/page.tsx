@@ -61,12 +61,14 @@ export default function MenuPage() {
           koliko ljuto i koliko kiselo hoćeš, zalogaj po zalogaj. Ako nešto od toga ne
           želiš, samo reci kad poručuješ.
         </p>
-        <Placeholder
-          label="Slika: prilozi sa strane (nana, bosiljak, limeta, čili)"
-          ratio="aspect-[16/9]"
-          note="~1600 x 900"
-          className="mt-6"
-        />
+        {site.showPlaceholders && (
+          <Placeholder
+            label="Slika: prilozi sa strane (nana, bosiljak, limeta, čili)"
+            ratio="aspect-[16/9]"
+            note="~1600 x 900"
+            className="mt-6"
+          />
+        )}
       </section>
     </div>
   );

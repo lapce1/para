@@ -15,6 +15,11 @@ const links = [
 export default function Nav() {
   const { count } = useCart();
   const [open, setOpen] = useState(false);
+  // Same promise as every other CTA: an order while ordering is live, the
+  // opening-day signup while it is not. The cart count only means something live.
+  const cta = site.orderingLive
+    ? `Poruči${count > 0 ? ` · ${count}` : ""}`
+    : "Javi mi kad otvorite";
 
   return (
     <header className="sticky top-0 z-50 border-b-[3px] border-chalk bg-ground">
@@ -38,7 +43,7 @@ export default function Nav() {
             href="/poruci"
             className="stamp bg-chili px-4 py-2.5 text-ground hover:bg-gold"
           >
-            Poruči{count > 0 ? ` · ${count}` : ""}
+            {cta}
           </Link>
         </nav>
 
@@ -85,7 +90,7 @@ export default function Nav() {
             onClick={() => setOpen(false)}
             className="stamp mt-4 inline-block bg-chili px-5 py-3 text-ground"
           >
-            Poruči{count > 0 ? ` · ${count}` : ""}
+            {cta}
           </Link>
           <p className="stamp mt-4 text-chalksoft">
             {site.address} · {site.hours}

@@ -44,10 +44,12 @@ export default function PhoIliRamen() {
       </header>
 
       {/* side-by-side shots so the two soups read at a glance */}
-      <div className="mt-10 grid gap-4 sm:grid-cols-2">
-        <Placeholder label="Slika: phở" ratio="aspect-[4/3]" note="~1200 x 900" />
-        <Placeholder label="Slika: ramen" ratio="aspect-[4/3]" note="~1200 x 900" />
-      </div>
+      {site.showPlaceholders && (
+        <div className="mt-10 grid gap-4 sm:grid-cols-2">
+          <Placeholder label="Slika: phở" ratio="aspect-[4/3]" note="~1200 x 900" />
+          <Placeholder label="Slika: ramen" ratio="aspect-[4/3]" note="~1200 x 900" />
+        </div>
+      )}
 
       {/* the comparison, printed as a ruled table */}
       <div className="mt-12">

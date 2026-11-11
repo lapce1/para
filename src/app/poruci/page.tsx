@@ -288,9 +288,11 @@ function OrderForm() {
             <a href={viber} className={ghostButton}>
               Viber
             </a>
-            <a href={`tel:${site.phone.replace(/\s/g, "")}`} className={ghostButton}>
-              {site.phone}
-            </a>
+            {site.phone && (
+              <a href={`tel:${site.phone.replace(/\s/g, "")}`} className={ghostButton}>
+                {site.phone}
+              </a>
+            )}
           </div>
 
           <h2 className="stamp mt-6 text-chalksoft">Ili preko aplikacije</h2>

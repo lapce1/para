@@ -1,14 +1,16 @@
 import { photos } from "@/data/photos";
+import { site } from "@/data/site";
 import Placeholder from "./Placeholder";
 
 /**
- * Full-bleed photography band. Until real photos exist in src/data/photos.ts it
- * shows placeholder frames marking where the shots go; once photos are listed it
- * renders them. Images sit in hard 3px chalk frames, high contrast, no rounded
+ * Full-bleed photography band. Renders real photos once they are listed in
+ * src/data/photos.ts. With none, it renders nothing on the public site, or the
+ * placeholder frames when site.showPlaceholders is on (a design aid). Images sit in hard 3px chalk frames, high contrast, no rounded
  * corners or shadows, per DESIGN.md. First shot spans the row; more fall 2-up.
  */
 export default function Gallery() {
   const empty = photos.length === 0;
+  if (empty && !site.showPlaceholders) return null;
 
   return (
     <section className="border-b-[3px] border-chalk">

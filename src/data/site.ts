@@ -18,12 +18,16 @@ export const site = {
     "Pojedeš je za našim stolom, poneseš ili ti stigne vrela na adresu. Plaćanje " +
     "karticom ili pouzećem.",
 
-  // --- replace these placeholders ---
-  phone: "+381 60 1234567",
+  // Public phone number, e.g. "+381 60 000 0000". EMPTY ON PURPOSE: the old value
+  // was a made-up placeholder that real visitors could tap and call. While this is
+  // empty the number is left out everywhere (footer, legal pages, JSON-LD). Put the
+  // real number here and it appears in all of those at once.
+  phone: "",
+  // --- replace these placeholders before orderingLive goes true ---
   viber: "381601234567",      // digits only, country code, no +
   whatsapp: "381601234567",   // digits only, country code, no +
-  email: "zdravo@para.rs",
   // -----------------------------------
+  email: "zdravo@para.rs",
   instagram: "https://www.instagram.com/para.pho/", // real handle
 
   // Meta Pixel id. Empty string = analytics fully inert (no script, no calls).
@@ -33,6 +37,12 @@ export const site = {
   // GO-LIVE LEVER: while false, /poruci shows the waitlist instead of the order
   // form (no payment/Viber/WhatsApp paths) and CTAs advertise the signup.
   orderingLive: false,
+
+  // Design aid: true draws a dashed "Slika: ..." box wherever a real photo belongs
+  // (menu rows, gallery band, the guide pages). Keep false on the public site, an
+  // empty box is not something a customer should see. Real photos listed in
+  // src/data/photos.ts show regardless of this flag.
+  showPlaceholders: false,
 
   hours: "Svaki dan 11–22h",
   deliveryFee: 200,           // RSD, direktna dostava

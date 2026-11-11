@@ -2,40 +2,40 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/data/site";
 
+// Same rule as the terms page: trading name and no indexing until site.legal
+// carries the registered entity; the company line and date then appear on their own.
+const complete = Boolean(site.legal.entity && site.legal.effectiveDate);
+
 export const metadata: Metadata = {
   title: "Politika privatnosti",
   description:
     "Kako PARA prikuplja, koristi i štiti tvoje podatke o ličnosti pri porudžbini, plaćanju i dostavi. Tvoja prava i kontakt.",
   alternates: { canonical: "/politika-privatnosti" },
+  ...(complete ? {} : { robots: { index: false, follow: true } }),
 };
 
-const fill = (v: string, label: string) => v || `[${label}, dopuniti pre objave]`;
-
 export default function PrivacyPage() {
-  const entity = fill(site.legal.entity, "pun poslovni naziv");
-  const effective = fill(site.legal.effectiveDate, "datum");
-  const draft = !site.legal.entity || !site.legal.effectiveDate;
+  const entity = site.legal.entity || site.name;
+  const company = [
+    site.legal.regNumber && `matični broj ${site.legal.regNumber}`,
+    site.legal.taxId && `PIB ${site.legal.taxId}`,
+  ].filter(Boolean);
 
   return (
     <div className="mx-auto max-w-3xl px-5 py-[var(--section)]">
       <header className="border-b-[3px] border-chalk pb-8">
         <h1 className="wordset text-5xl text-chalk md:text-7xl">Politika privatnosti</h1>
-        <p className="stamp mt-4 text-chalksoft">Stupa na snagu: {effective}</p>
+        {site.legal.effectiveDate && (
+          <p className="stamp mt-4 text-chalksoft">Stupa na snagu: {site.legal.effectiveDate}</p>
+        )}
       </header>
-
-      {draft && (
-        <p className="mt-8 border-[3px] border-gold bg-raised px-5 py-4 text-[0.9375rem] leading-relaxed text-chalk/85">
-          Radna verzija. Pre objave treba uneti podatke rukovaoca (pun poslovni naziv,
-          matični broj, PIB) i datum stupanja na snagu u{" "}
-          <code className="font-data text-gold">site.legal</code>.
-        </p>
-      )}
 
       <div className="mt-10 space-y-10">
         <section>
           <h2 className="wordset text-2xl text-chalk md:text-3xl">Rukovalac podacima</h2>
           <p className="mt-3 leading-relaxed text-chalk/85">
-            Rukovalac tvojim podacima o ličnosti je {entity}, sa lokalom u{" "}
+            Rukovalac tvojim podacima o ličnosti je {entity}
+            {company.length > 0 && ` (${company.join(", ")})`}, sa lokalom u{" "}
             {site.addressLoc}, {site.city}. Za sva pitanja o privatnosti piši na{" "}
             <a href={`mailto:${site.email}`} className="text-jade hover:text-chalk">
               {site.email}

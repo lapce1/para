@@ -73,10 +73,18 @@ Vietnamese subset is mandatory, the brand word `phở` lives in it.
 - Sections separated by full-width `border-y-[3px] border-chalk`, not shadows.
 - Vertical rhythm from `--section: clamp(4.5rem, 9vw, 8rem)`. More space above a
   heading than below it.
-- Asymmetry is the compositional law: the hero is a 7/5 split, headline and deck
-  left, the contents panel boxed right.
+- Asymmetry is the compositional law: the hero sets headline and deck left and
+  the bowl right. On phones the bowl takes a band of its own above the copy.
+  **Type never runs across the bowl**, at any width.
 - Lists over cards. The menu is a **printed price list** with leader rules and
-  right-aligned tabular prices in `gold`, not a photo grid.
+  right-aligned tabular prices in `gold`, not a photo grid. Prices stay pinned to
+  the right edge on phones too.
+- Homepage order follows "lunch decides": hero, then the menu with prices, then
+  the chili broth panel (why one dish, and the contents list set in black on the
+  chili field), then service, questions, and the jade address panel with the map.
+- Controls follow the go-live lever. While `site.orderingLive` is false there is
+  no "Dodaj" on menu rows and every CTA, the nav one included, reads
+  "Javi mi kad otvorite". A cart nobody can check out is a dead end.
 
 ## Motion
 
@@ -84,17 +92,46 @@ Vietnamese subset is mandatory, the brand word `phở` lives in it.
 transition, no transform, no shadow, no outline offset. This is a deliberate
 constraint, not an oversight; do not reintroduce hover transitions.
 
-The only animation in the build is the payment spinner on
-`/placanje/uspesno`, which already respects `motion-reduce`. Smooth scrolling is
-disabled under `prefers-reduced-motion`.
+The payment spinner on `/placanje/uspesno` and the payment-status skeleton both
+respect `motion-reduce`. Smooth scrolling is disabled under
+`prefers-reduced-motion`.
+
+**Exception, owner-requested (the homepage 3D hero).** The homepage opens with a
+live WebGL bowl: `Hero3D.tsx` lays out the stage and the copy, `PhoCanvas.tsx` is
+the mount point, and the scene itself lives in `src/lib/phoScene.ts`. It animates
+only within the hero's own height (the camera lifts away as you scroll past, it is
+not a full-page scroll-jack), stops drawing once the hero is off screen, and under
+`prefers-reduced-motion` renders one composed still instead of animating. This is
+the single deliberate break from the no-motion rule; the hover rule above still
+holds everywhere, including on the hero's buttons.
+
+The scene is loaded with a dynamic import, so three.js stays out of the page's
+first-load JavaScript. Until it draws, and whenever WebGL is unavailable, the
+stage shows the static steam mark. The two scrims in the hero (the fade under the
+phone stage, the left-hand one behind the desktop copy) are the only gradients on
+the site and exist to keep type legible over the scene; they are not a licence
+for gradients elsewhere.
 
 ## Imagery
 
-**There is none, and that is the point.** The drawn bowl was removed at the
-owner's direction. `StarAnise.tsx` survives as the ingredients-list mark (owner
-preference) and is the only drawn element left. When real photography eventually
-arrives it should sit full-bleed and high-contrast, never as a rounded card
-thumbnail.
+**No photography, and that is still the point.** There are no photographs, and
+the flat pages carry the product through type and colour. `StarAnise.tsx` is the
+ingredients-list mark. When real photography arrives it should sit full-bleed and
+high-contrast (see `Gallery.tsx`, which stays hidden until real files exist),
+never as a rounded card thumbnail.
+
+The one authored 3D element is the homepage hero bowl (`src/lib/phoScene.ts`),
+added at the owner's request. It is procedural geometry, not a photo and not
+stock, so it does not fabricate a picture of the real kitchen. It is the only
+illustration on the site. Its colour is carried by the food and mapped to the
+inks: `chili` is the rim and the chilies, `jade` is the herbs and scallions,
+`gold` is the broth. The light is neutral and warm so the broth reads as broth;
+do not tint the lights with the inks (a jade light turns the soup green).
+
+`Placeholder.tsx` draws dashed "Slika: ..." boxes where photos belong. It is a
+design aid behind `site.showPlaceholders`, off on the public site: a customer
+should never see an empty box. Real photos listed in `src/data/photos.ts` render
+regardless of the flag.
 
 ## Copy
 
