@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Hero from "@/components/Hero";
+import Hero3D from "@/components/Hero3D";
 import Gallery from "@/components/Gallery";
 import MenuCard from "@/components/MenuCard";
 import JsonLd from "@/components/JsonLd";
@@ -39,7 +39,7 @@ export default function Home() {
   return (
     <>
       <JsonLd data={faqSchema()} />
-      <Hero />
+      <Hero3D />
 
       {/* the one thing worth explaining at length */}
       <section className="border-b-[3px] border-chalk bg-chili text-ground">
