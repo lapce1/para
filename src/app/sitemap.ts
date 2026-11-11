@@ -20,7 +20,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.url}/pho`, lastModified: PHO_UPDATED, changeFrequency: "monthly", priority: 0.6 },
     { url: `${site.url}/pho/pho-ili-ramen`, lastModified: PHO_RAMEN_UPDATED, changeFrequency: "monthly", priority: 0.5 },
     { url: `${site.url}/poruci`, lastModified: PORUCI_UPDATED, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${site.url}/uslovi-koriscenja`, lastModified: LEGAL_UPDATED, changeFrequency: "yearly", priority: 0.2 },
-    { url: `${site.url}/politika-privatnosti`, lastModified: LEGAL_UPDATED, changeFrequency: "yearly", priority: 0.2 },
+    // The legal pages are noindex until site.legal names the registered entity,
+    // so they only enter the sitemap once that is filled in.
+    ...(site.legal.entity && site.legal.effectiveDate
+      ? [
+          { url: `${site.url}/uslovi-koriscenja`, lastModified: LEGAL_UPDATED, changeFrequency: "yearly" as const, priority: 0.2 },
+          { url: `${site.url}/politika-privatnosti`, lastModified: LEGAL_UPDATED, changeFrequency: "yearly" as const, priority: 0.2 },
+        ]
+      : []),
   ];
 }

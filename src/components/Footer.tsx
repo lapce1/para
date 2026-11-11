@@ -25,11 +25,13 @@ export default function Footer() {
             <p className="font-data tabular-nums">{site.hours}</p>
           </address>
           <ul className="mt-3 space-y-1 text-[0.9375rem]">
-            <li>
-              <a href={`tel:${site.phone.replace(/\s/g, "")}`} className={linkStyle}>
-                {site.phone}
-              </a>
-            </li>
+            {site.phone && (
+              <li>
+                <a href={`tel:${site.phone.replace(/\s/g, "")}`} className={linkStyle}>
+                  {site.phone}
+                </a>
+              </li>
+            )}
             <li>
               <a href={`mailto:${site.email}`} className={linkStyle}>
                 {site.email}

@@ -28,6 +28,9 @@ Explicit owner direction (2026-08-10): **the separate-packaging / assemble-at-ho
 - Hours: every day 11–22.
 - Delivery across Novi Sad: Centar, Liman, Grbavica, Novo Naselje, Detelinara, Podbara. 200 RSD fee, free over 1800 RSD. Aggregators (Wolt, Glovo, mr.D) also listed.
 - Pre-launch as of writing: ordering is gated behind a waitlist (`site.orderingLive: false`); the Meta Pixel is inert (`site.metaPixelId: ""`). Both are the owner's levers and must never be flipped by an agent.
+- Contact: `site.phone` is empty on purpose. The earlier value was a made-up placeholder that visitors could tap; while empty, the number is omitted everywhere (footer, legal pages, JSON-LD). `site.viber` and `site.whatsapp` are still placeholders and only surface once ordering is live. The owner supplies all three.
+- Legal pages (`/uslovi-koriscenja`, `/politika-privatnosti`) name the operator by trading name and are `noindex`, out of the sitemap, until `site.legal` carries the registered entity and an effective date.
+- Open item for the owner: the waitlist page says the lokal is not open yet ("Još ne radimo"), while the homepage and footer state the hours in the present tense. Only the owner knows which is true today; the copy was left as found.
 
 ## Capabilities and Constraints
 

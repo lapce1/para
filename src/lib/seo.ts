@@ -49,7 +49,7 @@ export function restaurantSchema(): Record<string, unknown> {
     priceRange: site.seo.priceRange,
     currenciesAccepted: "RSD",
     paymentAccepted: "Cash, Credit Card",
-    telephone: site.phone,
+    ...(site.phone ? { telephone: site.phone } : {}),
     email: site.email,
     address,
     areaServed: site.zones.map((z) => ({ "@type": "City", name: `${z}, ${site.city}` })),

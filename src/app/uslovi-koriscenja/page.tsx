@@ -3,47 +3,47 @@ import Link from "next/link";
 import { site } from "@/data/site";
 import { rsd } from "@/lib/format";
 
+// Until site.legal carries the registered entity, the page names the operator by
+// its trading name and stays out of search indexes. Fill site.legal (entity,
+// regNumber, taxId, effectiveDate) from the APR registration before ordering goes
+// live; the full company line and the effective date then appear on their own.
+const complete = Boolean(site.legal.entity && site.legal.effectiveDate);
+
 export const metadata: Metadata = {
   title: "Uslovi korišćenja",
   description:
     "Uslovi korišćenja sajta i uslovi porudžbine, plaćanja i dostave za PARA, vijetnamsku phở kuhinju u Novom Sadu.",
   alternates: { canonical: "/uslovi-koriscenja" },
+  ...(complete ? {} : { robots: { index: false, follow: true } }),
 };
 
-// Empty legal fields render a visible note so a draft is never mistaken for
-// finalized text. Fill site.legal from the APR registration before launch.
-const fill = (v: string, label: string) => v || `[${label}, dopuniti pre objave]`;
-
 export default function TermsPage() {
-  const entity = fill(site.legal.entity, "pun poslovni naziv");
-  const effective = fill(site.legal.effectiveDate, "datum");
-  const draft = !site.legal.entity || !site.legal.effectiveDate;
+  const entity = site.legal.entity || site.name;
+  const company = [
+    site.legal.regNumber && `matični broj ${site.legal.regNumber}`,
+    site.legal.taxId && `PIB ${site.legal.taxId}`,
+  ].filter(Boolean);
 
   return (
     <div className="mx-auto max-w-3xl px-5 py-[var(--section)]">
       <header className="border-b-[3px] border-chalk pb-8">
         <h1 className="wordset text-5xl text-chalk md:text-7xl">Uslovi korišćenja</h1>
-        <p className="stamp mt-4 text-chalksoft">Stupa na snagu: {effective}</p>
+        {site.legal.effectiveDate && (
+          <p className="stamp mt-4 text-chalksoft">Stupa na snagu: {site.legal.effectiveDate}</p>
+        )}
       </header>
-
-      {draft && (
-        <p className="mt-8 border-[3px] border-gold bg-raised px-5 py-4 text-[0.9375rem] leading-relaxed text-chalk/85">
-          Radna verzija. Pre objave treba uneti pun poslovni naziv, matični broj, PIB i
-          datum stupanja na snagu u <code className="font-data text-gold">site.legal</code>.
-        </p>
-      )}
 
       <div className="mt-10 space-y-10">
         <section>
           <h2 className="wordset text-2xl text-chalk md:text-3xl">Ko smo mi</h2>
           <p className="mt-3 leading-relaxed text-chalk/85">
-            Sajt {site.url.replace("https://", "")} vodi {entity} (u nastavku „PARA“),
-            vijetnamska phở kuhinja sa lokalom u {site.addressLoc}, {site.city}. Za sve
-            što ti nije jasno piši nam na{" "}
+            Sajt {site.url.replace("https://", "")} vodi {entity}
+            {company.length > 0 && ` (${company.join(", ")})`}, vijetnamska phở kuhinja sa
+            lokalom u {site.addressLoc}, {site.city}. Za sve što ti nije jasno piši nam na{" "}
             <a href={`mailto:${site.email}`} className="text-jade hover:text-chalk">
               {site.email}
-            </a>{" "}
-            ili pozovi {site.phone}.
+            </a>
+            {site.phone && ` ili pozovi ${site.phone}`}.
           </p>
         </section>
 
@@ -101,9 +101,9 @@ export default function TermsPage() {
             potrošača. Ako sa porudžbinom nešto nije u redu, javi nam odmah na{" "}
             <a href={`mailto:${site.email}`} className="text-jade hover:text-chalk">
               {site.email}
-            </a>{" "}
-            ili na {site.phone} i rešićemo to. Reklamaciju čuvamo i odgovaramo u zakonskom
-            roku.
+            </a>
+            {site.phone && ` ili na ${site.phone}`} i rešićemo to. Reklamaciju čuvamo i
+            odgovaramo u zakonskom roku.
           </p>
         </section>
 
@@ -127,7 +127,7 @@ export default function TermsPage() {
           <h2 className="wordset text-2xl text-chalk md:text-3xl">Merodavno pravo</h2>
           <p className="mt-3 leading-relaxed text-chalk/85">
             Na ove uslove primenjuje se pravo Republike Srbije. Za sve sporove nadležan je
-            sud u {fill(site.legal.court, "grad")}.
+            stvarno nadležni sud ({site.legal.court}).
           </p>
         </section>
       </div>
