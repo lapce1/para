@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Hero3D from "@/components/Hero3D";
 import Gallery from "@/components/Gallery";
+import StarAnise from "@/components/StarAnise";
 import MenuCard from "@/components/MenuCard";
 import JsonLd from "@/components/JsonLd";
 import { menu } from "@/data/menu";
@@ -19,6 +20,15 @@ export const metadata: Metadata = {
 const mapQuery = encodeURIComponent(`${site.name}, ${site.address}, ${site.city}`);
 const mapEmbedSrc = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
 const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
+
+/** What actually goes into the pot, printed the way a label prints contents. */
+const spec: { k: string; v: string }[] = [
+  { k: "Osnova", v: "Goveđa kost, oxtail i juneći grudni deo" },
+  { k: "Aromati", v: "Pečeni đumbir i crni luk" },
+  { k: "Začini", v: "Anis, cimet, karanfilić, kardamom i đumbir" },
+  { k: "Kuvanje", v: "Šest sati, od jutra, svakog dana" },
+  { k: "Bez", v: "Kocki, pojačivača ukusa i konzervanasa" },
+];
 
 const service: { k: string; v: string }[] = [
   {
@@ -41,8 +51,26 @@ export default function Home() {
       <JsonLd data={faqSchema()} />
       <Hero3D />
 
-      {/* the one thing worth explaining at length */}
-      <section className="border-b-[3px] border-chalk bg-chili text-ground">
+      {/* the menu first: what it is and what it costs, before any story */}
+      <section className="mx-auto max-w-6xl px-5 py-[var(--section)]">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <h2 className="wordset text-4xl text-chalk md:text-5xl">Meni, ceo</h2>
+          <Link
+            href="/meni"
+            className="stamp border-b-[3px] border-jade py-2 text-jade hover:border-chalk hover:text-chalk"
+          >
+            Detaljnije
+          </Link>
+        </div>
+        <div className="mt-10">
+          {menu.map((m) => (
+            <MenuCard key={m.id} item={m} />
+          ))}
+        </div>
+      </section>
+
+      {/* the broth panel: why there is one dish, then exactly what is in it */}
+      <section className="border-y-[3px] border-chalk bg-chili text-ground">
         <div className="mx-auto max-w-6xl px-5 py-[var(--section)]">
           <div className="md:grid md:grid-cols-12 md:gap-12">
             <h2 className="wordset col-span-6 text-[2.5rem] sm:text-5xl md:text-[3.5rem]">
@@ -62,33 +90,31 @@ export default function Home() {
               </p>
             </div>
           </div>
+
+          <h3 className="stamp mt-14">Šta je u čorbi</h3>
+          <dl className="mt-4 border-t-[3px] border-ground">
+            {spec.map((s) => (
+              <div
+                key={s.k}
+                className="grid gap-1 border-b border-ground/30 py-4 sm:grid-cols-[13rem_1fr] sm:gap-8"
+              >
+                <dt className="stamp flex items-center gap-1.5">
+                  {s.k === "Začini" && <StarAnise className="h-3.5 w-3.5 shrink-0" />}
+                  {s.k}
+                </dt>
+                <dd className="text-[1.0625rem] font-medium leading-snug">{s.v}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 
       {/* real photography, once it exists. Renders nothing until then. */}
       <Gallery />
 
-      {/* the menu, printed as a price list */}
-      <section className="mx-auto max-w-6xl px-5 py-[var(--section)]">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <h2 className="wordset text-4xl text-chalk md:text-5xl">Meni, ceo</h2>
-          <Link
-            href="/meni"
-            className="stamp border-b-[3px] border-jade py-2 text-jade hover:border-chalk hover:text-chalk"
-          >
-            Detaljnije
-          </Link>
-        </div>
-        <div className="mt-10">
-          {menu.map((m) => (
-            <MenuCard key={m.id} item={m} />
-          ))}
-        </div>
-      </section>
-
       {/* how you get it. Small on purpose: it is logistics, not the product.
           A ruled list, label left and description right, not a row of cards. */}
-      <section className="border-y-[3px] border-chalk bg-raised">
+      <section className="border-b-[3px] border-chalk bg-raised">
         <div className="mx-auto max-w-6xl px-5 py-12">
           <dl className="border-t border-chalk/25">
             {service.map((s) => (
@@ -147,7 +173,8 @@ export default function Home() {
           </div>
 
           {/* the map, boxed like every other panel on the site rather than
-              floated as a card: a flat window, not a widget. */}
+              floated as a card: a flat window, not a widget. Desaturated so the
+              only colour in this panel is the jade field itself. */}
           <div className="min-w-0 mt-10 md:col-span-5 md:mt-0">
             <p className="stamp">Kako do nas</p>
             <div className="mt-3 h-64 border-[3px] border-ground sm:h-80 md:h-96">
@@ -155,7 +182,7 @@ export default function Home() {
                 src={mapEmbedSrc}
                 title={`Mapa: ${site.name}, ${site.address}, ${site.city}`}
                 loading="lazy"
-                className="h-full w-full border-0"
+                className="h-full w-full border-0 grayscale contrast-125"
               />
             </div>
             <a
